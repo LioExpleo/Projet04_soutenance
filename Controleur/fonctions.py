@@ -28,7 +28,8 @@ def tournoi_exist(id_tournoi_select):
     from tinydb import TinyDB, Query, where
     Todo = Query()
     db_tournois = TinyDB('tournois.json')
-    print("db_tournois.search(where('id_tournoi')==id_tournoi_select")
+
+    #print("db_tournois.search(where('id_tournoi')==id_tournoi_select")
     int_tournoi_select = int(id_tournoi_select)
 
     # charger le tournoi selectionné à partir de la table dans tournoi
