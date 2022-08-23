@@ -504,22 +504,12 @@ def creat_match_r2(tournoi, round):
                               liste_paire1_j1[1],
                               liste_paire1_j2[0],
                               liste_paire1_j2[1]))
-    #print("globals()[nom_tuple1]")
-    #print(globals()[nom_tuple1])
-    #print("nom du tuple pour le développement :")
+
     str_nom_tuple1 = str(nom_tuple1)
-    #print(str_nom_tuple1)
-    # print tuple avec le nom créé avec globals
-    #print("nom créé avec globals :" + str_nom_tuple1)
-    #print(globals()[nom_tuple1])
-    #print(str_nom_tuple1)
-    #print("my_tuple")
     my_tuple = ((liste_paire1_j1[0],
                  liste_paire1_j1[1],
                  liste_paire1_j2[0],
                  liste_paire1_j2[1]))
-    #print(my_tuple)
-    #print("")
 
     # Saisie des scores de la paire 2
     str_liste_liste_joueur1 = str(List_de_liste_joueur[2][0])
@@ -554,14 +544,11 @@ def creat_match_r2(tournoi, round):
     nom_tuple2 = "IdTournoi" + str(tournoi_select) + "_" + \
                  "Round" + str(round_en_cours) + "_" + \
                  "Match" + "2"
-    #print(nom_tuple2)
+
     globals()[nom_tuple2] = ((liste_paire2_j1[0],
                               liste_paire2_j1[1],
                               liste_paire2_j2[0],
                               liste_paire2_j2[1]))
-    #print("globals()[nom_tuple2]")
-    #print(globals()[nom_tuple2])
-    #print("")
 
     # Saisie des scores de la paire 3
     str_liste_liste_j1 = str(List_de_liste_joueur[3][0])
@@ -593,14 +580,10 @@ def creat_match_r2(tournoi, round):
     nom_tuple3 = "IdTournoi" + str(tournoi_select) + "_" \
                  + "Round" + str(round_en_cours) + "_" + \
                  "Match" + "3"
-    #print(nom_tuple3)
     globals()[nom_tuple3] = ((liste_paire3_j1[0],
                               liste_paire3_j1[1],
                               liste_paire3_j2[0],
                               liste_paire3_j2[1]))
-    #print("globals()[nom_tuple3]")
-    #print(globals()[nom_tuple3])
-    #print("")
 
     # Saisie des scores de la paire 4
     str_liste_liste_j1 = str(List_de_liste_joueur[4][0])
@@ -633,14 +616,11 @@ def creat_match_r2(tournoi, round):
     nom_tuple4 = "IdTournoi" + str(tournoi_select) + \
                  "_" + "Round" + str(round_en_cours) + \
                  "_" + "Match" + "4"
-    #print(nom_tuple4)
+
     globals()[nom_tuple4] = ((liste_paire4_j1[0],
                               liste_paire4_j1[1],
                               liste_paire4_j2[0],
                               liste_paire4_j2[1]))
-    #print("globals()[nom_tuple4]")
-    #print(globals()[nom_tuple4])
-    #print("")
 
     from tinydb import TinyDB
     db_tournois = TinyDB('tournois.json')
@@ -748,5 +728,5 @@ def creat_match_r2(tournoi, round):
 
     db_tournois.update({nom_donnees: liste_4matchs},
                        Todo.id_tournoi == int_tournoi_select)
-    print( "Fin prog saisie des scores")
+    print("Fin prog saisie des scores")
     print()
