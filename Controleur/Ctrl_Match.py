@@ -3,6 +3,7 @@ from Vue.affichage import ClassVueAffichage
 from tinydb import TinyDB, Query, where
 from datetime import datetime
 from Controleur.Ctrl_Tournoi import select_tournoi
+from Modele.Tournoi import ClassTournoi
 Todo = Query()
 
 
@@ -155,22 +156,6 @@ def creat_match_r1(tournoi, round):
                               liste_paire1_j1[1],
                               liste_paire1_j2[0],
                               liste_paire1_j2[1]))
-    #print("globals()[nom_tuple1]")
-    #print(globals()[nom_tuple1])
-    #print("nom du tuple pour le développement :")
-    str_nom_tuple1 = str(nom_tuple1)
-    #print(str_nom_tuple1)
-    # print tuple avec le nom créé avec globals
-    #print("nom créé avec globals :" + str_nom_tuple1)
-    #print(globals()[nom_tuple1])
-    #print(str_nom_tuple1)
-    #print("my_tuple")
-    my_tuple = ((liste_paire1_j1[0],
-                 liste_paire1_j1[1],
-                 liste_paire1_j2[0],
-                 liste_paire1_j2[1]))
-    #print(my_tuple)
-    #print("")
 
     # Saisie des scores de la paire 2
     str_liste_liste_joueur1 = str(List_de_liste_joueur[2][0])
@@ -205,14 +190,11 @@ def creat_match_r1(tournoi, round):
     nom_tuple2 = "IdTournoi" + str(tournoi_select) + "_" + \
                  "Round" + str(round_en_cours) + "_" + \
                  "Match" + "2"
-    #print(nom_tuple2)
+
     globals()[nom_tuple2] = ((liste_paire2_j1[0],
                               liste_paire2_j1[1],
                               liste_paire2_j2[0],
                               liste_paire2_j2[1]))
-    #print("globals()[nom_tuple2]")
-    #print(globals()[nom_tuple2])
-    #print("")
 
     # Saisie des scores de la paire 3
     str_liste_liste_joueur1 = str(List_de_liste_joueur[3][0])
@@ -247,14 +229,11 @@ def creat_match_r1(tournoi, round):
     nom_tuple3 = "IdTournoi" + str(tournoi_select) + "_" + \
                  "Round" + str(round_en_cours) + "_"  \
                  + "Match" + "3"
-    #print(nom_tuple3)
+
     globals()[nom_tuple3] = ((liste_paire3_j1[0],
                               liste_paire3_j1[1],
                               liste_paire3_j2[0],
                               liste_paire3_j2[1]))
-    #print("globals()[nom_tuple3]")
-    #print(globals()[nom_tuple3])
-    #print("")
 
     # Saisie des scores de la paire 4
     str_liste_liste_joueur1 = str(List_de_liste_joueur[4][0])
@@ -286,14 +265,11 @@ def creat_match_r1(tournoi, round):
     nom_tuple4 = "IdTournoi" + str(tournoi_select) + "_" + \
                  "Round" + str(round_en_cours) + "_" + \
                  "Match" + "4"
-    #print(nom_tuple4)
+
     globals()[nom_tuple4] = ((liste_paire4_j1[0],
                               liste_paire4_j1[1],
                               liste_paire4_j2[0],
                               liste_paire4_j2[1]))
-    #print("globals()[nom_tuple4]")
-    #print(globals()[nom_tuple4])
-    #print("")
 
     from tinydb import TinyDB, Query, where
     db_tournois = TinyDB('tournois.json')
@@ -398,8 +374,15 @@ def creat_match_r1(tournoi, round):
     liste_4matchs.append(liste_paire4_j1)
     liste_4matchs.append(liste_paire4_j2)
 
-    db_tournois.update({nom_donnees: liste_4matchs},
-                       Todo.id_tournoi == int_tournoi_select)
+    # Appel du modele pour updater les donnees des matchs
+    # dans la base de donnée
+    ClassTournoi.UpdateMatchTournois(self=True,
+                                     nom_donnees=nom_donnees,
+                                     donnees=liste_4matchs,
+                                     numero_tournoi=int_tournoi_select)
+
+    # db_tournois.update({nom_donnees: liste_4matchs},
+    #                   Todo.id_tournoi == int_tournoi_select)
 
 
 def creat_match_r2(tournoi, round):
@@ -504,12 +487,6 @@ def creat_match_r2(tournoi, round):
                               liste_paire1_j1[1],
                               liste_paire1_j2[0],
                               liste_paire1_j2[1]))
-
-    str_nom_tuple1 = str(nom_tuple1)
-    my_tuple = ((liste_paire1_j1[0],
-                 liste_paire1_j1[1],
-                 liste_paire1_j2[0],
-                 liste_paire1_j2[1]))
 
     # Saisie des scores de la paire 2
     str_liste_liste_joueur1 = str(List_de_liste_joueur[2][0])
@@ -705,7 +682,7 @@ def creat_match_r2(tournoi, round):
           str(round_en_cours) +
           " : " + str_date_heure_fin)
 
-    # chargment dans la base de données
+    # chargement dans la base de données
     # de la fin de match du round en cours
     nom_donne_fin_match = ("fin round " + str(round_en_cours))
     donne_fin_match = str_date_heure_fin
