@@ -44,6 +44,7 @@ https://github.com/LioExpleo/Projet04_soutenance.git
 
 Mettre tous le contenu de ce qui vient d'être récupéré sous le répertoire que l'on vient de créer.
 
+De mon côté, j'ai effectué la commande " pip freeze > requirements.txt", vous pouvez donc
 Lancer la commande "pip install -r requirements.txt" pour installer les packages nécessaires.
 
 Lancer la commande "python3 main.py
