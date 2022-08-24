@@ -76,8 +76,7 @@ def creat_match_r1(tournoi, round):
     int_tournoi_select = tournoi
     tournoi_select = tournoi
 
-    tournoi = (db_tournois.search(where('id_tournoi') ==
-                                  int_tournoi_select))
+    tournoi = (db_tournois.search(where('id_tournoi') == int_tournoi_select))
 
     # Récupération des informations du fichier
     # JSON du tournoi pour vérifier le round en cours
@@ -100,7 +99,7 @@ def creat_match_r1(tournoi, round):
         os._exit(0)
 
     List_de_liste_joueur = (tournoi[0]['round_en_cours'])
-    round_select = "round_"+str(round_en_cours) + "+match"
+    round_select = "round_" + str(round_en_cours) + "+match"
 
     # aller chercher les listes en fonction du round en cours
     List_de_liste_joueur = (tournoi[0][round_select])
@@ -163,15 +162,10 @@ def creat_match_r1(tournoi, round):
     self = ""
     texteJ1 = "saisissez le score pour le 1er joueur du 2ème Match"
     texteJ2 = "saisissez le score pour le 2eme joueur du 2ème Match"
-    saisie_score3, saisie_score4 = ClassVueAffichage.SaisieScore(
-        self,
-        str_liste_liste_joueur1,
-        str_liste_liste_joueur2,
-        texteJ1,
-        texteJ2)
-    print('saisie score 1 et 2 du match 2: ' +
-          (saisie_score3) + " - " +
-          saisie_score4)
+    saisie_score3, saisie_score4 = ClassVueAffichage.SaisieScore(self, str_liste_liste_joueur1,
+                                                                 str_liste_liste_joueur2,
+                                                                 texteJ1, texteJ2)
+    print('saisie score 1 et 2 du match 2: ' + (saisie_score3) + " - " + saisie_score4)
 
     # Ajout dans la liste de l'id du joueur et de son score
     # joueur 1
@@ -202,15 +196,11 @@ def creat_match_r1(tournoi, round):
     self = ""
     texteJ1 = "saisissez le score pour le 1er joueur du 3ème Match"
     texteJ2 = "saisissez le score pour le 2eme joueur du 3ème Match"
-    saisie_score5, saisie_score6 = ClassVueAffichage.SaisieScore(
-        self,
-        str_liste_liste_joueur1,
-        str_liste_liste_joueur2,
-        texteJ1,
-        texteJ2)
-    print('saisie score 1 et 2 du match 3: ' +
-          (saisie_score5) + " - " +
-          saisie_score6)
+    saisie_score5, saisie_score6 = ClassVueAffichage.SaisieScore(self,
+                                                                 str_liste_liste_joueur1,
+                                                                 str_liste_liste_joueur2,
+                                                                 texteJ1, texteJ2)
+    print('saisie score 1 et 2 du match 3: ' + (saisie_score5) + " - " + saisie_score6)
 
     # Ajout dans la liste de l'id du joueur et de son score
     # joueur 1
@@ -241,12 +231,11 @@ def creat_match_r1(tournoi, round):
     self = ""
     texteJ1 = "saisissez le score pour le 1er joueur du 4ème Match"
     texteJ2 = "saisissez le score pour le 2eme joueur du 4ème Match"
-    saisie_score7, saisie_score8 = ClassVueAffichage.SaisieScore(
-        self, str_liste_liste_joueur1,
-        str_liste_liste_joueur2, texteJ1, texteJ2)
-    print('saisie score 1 et 2 du match 4: ' +
-          (saisie_score7) + " - " +
-          saisie_score8)
+    saisie_score7, saisie_score8 = ClassVueAffichage.SaisieScore(self,
+                                                                 str_liste_liste_joueur1,
+                                                                 str_liste_liste_joueur2,
+                                                                 texteJ1, texteJ2)
+    print('saisie score 1 et 2 du match 4: ' + (saisie_score7) + " - " + saisie_score8)
 
     # Ajout dans la liste de l'id du joueur et de son score
     # joueur 1
@@ -350,8 +339,7 @@ def creat_match_r1(tournoi, round):
     char = '.'
     PositChar = str_date_heure_fin.find(char)
     str_date_heure_fin = str_date_heure_fin[0:(PositChar)]
-    print("fin round en cours " + str(round_en_cours) +
-          " : " + str_date_heure_fin)
+    print("fin round en cours " + str(round_en_cours) + " : " + str_date_heure_fin)
 
     # chargment dans la base de données de
     # la fin de match du round en cours
@@ -401,8 +389,7 @@ def creat_match_r2(tournoi, round):
     print(int_tournoi_select)
 
     # va chercher l'id du tournoi dans la base de donnée
-    tournoi = (db_tournois.search(where('id_tournoi') ==
-                                  int_tournoi_select))
+    tournoi = (db_tournois.search(where('id_tournoi') == int_tournoi_select))
     print(tournoi)
 
     # Récupération des informations du fichier JSON
@@ -449,15 +436,11 @@ def creat_match_r2(tournoi, round):
     self = ""
     texteJ1 = "saisissez le score pour le 1er joueur du 1er Match"
     texteJ2 = "saisissez le score pour le 2eme joueur du 1er Match"
-    saisie_score1, saisie_score2 = ClassVueAffichage.SaisieScore(
-            self,
-            str_liste_liste_joueur1,
-            str_liste_liste_joueur2,
-            texteJ1,
-            texteJ2)
-    print('saisie score 1 et 2 du match 1: ' +
-          (saisie_score1) + " - " +
-          saisie_score2)
+    saisie_score1, saisie_score2 = ClassVueAffichage.SaisieScore(self,
+                                                                 str_liste_liste_joueur1,
+                                                                 str_liste_liste_joueur2,
+                                                                 texteJ1, texteJ2)
+    print('saisie score 1 et 2 du match 1: ' + (saisie_score1) + " - " + saisie_score2)
 
     # Ajout dans la liste de l'id du joueur et de son score
     # joueur 1
@@ -494,15 +477,11 @@ def creat_match_r2(tournoi, round):
     self = ""
     texteJ1 = "saisissez le score pour le 1er joueur du 2ème Match"
     texteJ2 = "saisissez le score pour le 2eme joueur du 2ème Match"
-    saisie_score3, saisie_score4 = ClassVueAffichage.SaisieScore(
-            self,
-            str_liste_liste_joueur1,
-            str_liste_liste_joueur2,
-            texteJ1,
-            texteJ2)
-    print('saisie score 1 et 2 du match 2: ' +
-          (saisie_score3) + " - "
-          + saisie_score4)
+    saisie_score3, saisie_score4 = ClassVueAffichage.SaisieScore(self,
+                                                                 str_liste_liste_joueur1,
+                                                                 str_liste_liste_joueur2,
+                                                                 texteJ1, texteJ2)
+    print('saisie score 1 et 2 du match 2: ' + (saisie_score3) + " - " + saisie_score4)
 
     # Ajout dans la liste de l'id du joueur et de son score
     # joueur 1
@@ -518,8 +497,7 @@ def creat_match_r2(tournoi, round):
 
     # Chaque match génèrera 1 tuple avec comme nom,
     # « Tuple_ « Id_tournoi » & n°round & « idMatch(n°paire)» de 2 listes
-    nom_tuple2 = "IdTournoi" + str(tournoi_select) + "_" + \
-                 "Round" + str(round_en_cours) + "_" + \
+    nom_tuple2 = "IdTournoi" + str(tournoi_select) + "_" + "Round" + str(round_en_cours) + "_" + \
                  "Match" + "2"
 
     globals()[nom_tuple2] = ((liste_paire2_j1[0],
@@ -533,12 +511,12 @@ def creat_match_r2(tournoi, round):
     self = ""
     texteJ1 = "saisissez le score pour le 1er joueur du 3ème Match"
     texteJ2 = "saisissez le score pour le 2eme joueur du 3ème Match"
-    saisie_score5, saisie_score6 = ClassVueAffichage.SaisieScore(
-            self, str_liste_liste_j1,
-            str_liste_liste_j2, texteJ1, texteJ2)
-    print('saisie score 1 et 2 du match 3: ' +
-          (saisie_score5) + " - "
-          + saisie_score6)
+    saisie_score5, saisie_score6 = ClassVueAffichage.SaisieScore(self,
+                                                                 str_liste_liste_j1,
+                                                                 str_liste_liste_j2,
+                                                                 texteJ1,
+                                                                 texteJ2)
+    print('saisie score 1 et 2 du match 3: ' + (saisie_score5) + " - " + saisie_score6)
 
     # Ajout dans la liste de l'id du joueur et de son score
     # joueur 1
@@ -569,11 +547,12 @@ def creat_match_r2(tournoi, round):
     texteJ1 = "saisissez le score pour le 1er joueur du 4ème Match"
     texteJ2 = "saisissez le score pour le 2eme joueur du 4ème Match"
 
-    saisie_score7, saisie_score8 = ClassVueAffichage.SaisieScore(
-            self, str_liste_liste_j1, str_liste_liste_j2, texteJ1, texteJ2)
+    saisie_score7, saisie_score8 = ClassVueAffichage.SaisieScore(self,
+                                                                 str_liste_liste_j1,
+                                                                 str_liste_liste_j2,
+                                                                 texteJ1, texteJ2)
 
-    print('saisie score 1 et 2 du match 4: ' +
-          (saisie_score7) + " - " + saisie_score8)
+    print('saisie score 1 et 2 du match 4: ' + (saisie_score7) + " - " + saisie_score8)
 
     # Ajout dans la liste de l'id du joueur et de son score
     # joueur 1
@@ -590,9 +569,7 @@ def creat_match_r2(tournoi, round):
 
     # Chaque match génèrera 1 tuple avec comme nom,
     # « Tuple_ « Id_tournoi » & n°round & « idMatch(n°paire)» de 2 listes
-    nom_tuple4 = "IdTournoi" + str(tournoi_select) + \
-                 "_" + "Round" + str(round_en_cours) + \
-                 "_" + "Match" + "4"
+    nom_tuple4 = "IdTournoi" + str(tournoi_select) + "_" + "Round" + str(round_en_cours) + "_" + "Match" + "4"
 
     globals()[nom_tuple4] = ((liste_paire4_j1[0],
                               liste_paire4_j1[1],
@@ -678,9 +655,7 @@ def creat_match_r2(tournoi, round):
     char = '.'
     PositChar = str_date_heure_fin.find(char)
     str_date_heure_fin = str_date_heure_fin[0:(PositChar)]
-    print("fin round en cours " +
-          str(round_en_cours) +
-          " : " + str_date_heure_fin)
+    print("fin round en cours " + str(round_en_cours) + " : " + str_date_heure_fin)
 
     # chargement dans la base de données
     # de la fin de match du round en cours

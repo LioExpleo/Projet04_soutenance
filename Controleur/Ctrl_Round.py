@@ -174,8 +174,7 @@ def creat_round_1(tournoi_select):
                   "chargés pour créer des rounds")
             os._exit(0)
 
-        joueur = (db_joueurs.search(where('id_joueur') ==
-                                    int_id_joueur_en_cours))
+        joueur = (db_joueurs.search(where('id_joueur') == int_id_joueur_en_cours))
         dict_joueur = creat_dict(joueur)
 
         print("identifiant joueur :")
@@ -234,20 +233,21 @@ def creat_round_1(tournoi_select):
     print(joueur_class_croissant)
 
     print("Affichage des paires de joueurs par identifiant du round 1 \n")
+
     liste_paire_1 = []
     liste_paire_1.append(joueur_class_croissant[0])
     liste_paire_1.append(joueur_class_croissant[4])
     # print(liste_paire_1)
+
+    str_poubl = ""
     print("Paire 1, par ordre de classement, 1er joueur contre 5ème")
-    print("ID: " + str(liste_paire_1[0][0]) +
-          " , Nom:" + str(liste_paire_1[0][2]) +
-          " , Prénom : " + str(
-            liste_paire_1[0][3]))
+    str_poubl = ("ID: " + str(liste_paire_1[0][0]) + " , Nom:" + str(liste_paire_1[0][2]))
+    print(str_poubl + " , Prénom : " + str(liste_paire_1[0][3]))
+    str_poubl = ""
     print("VS")
-    print("ID: " + str(liste_paire_1[1][0]) +
-          " , Nom:" + str(liste_paire_1[1][2]) +
-          " , Prénom : " + str(
-            liste_paire_1[1][3]))
+    str_poubl = ("ID: " + str(liste_paire_1[1][0]) + " , Nom:" + str(liste_paire_1[1][2]))
+    print(str_poubl + " , Prénom : " + str(liste_paire_1[1][3]))
+    str_poubl = ""
     print()
 
     liste_paire_2 = []
@@ -255,15 +255,13 @@ def creat_round_1(tournoi_select):
     liste_paire_2.append(joueur_class_croissant[5])
     # print(liste_paire_2)
     print("Paire 2, par ordre de classement, 2eme joueur contre 6ème")
-    print("ID: " + str(liste_paire_2[0][0]) +
-          " , Nom:" + str(liste_paire_2[0][2]) +
-          " , Prénom : " + str(
-            liste_paire_2[0][3]))
+    str_poubl = ("ID: " + str(liste_paire_2[0][0]) + " , Nom:" + str(liste_paire_2[0][2]))
+    print(str_poubl + " , Prénom : " + str(liste_paire_2[0][3]))
+    str_poubl = ""
     print("VS")
-    print("ID: " + str(liste_paire_2[1][0]) +
-          " , Nom:" + str(liste_paire_2[1][2]) +
-          " , Prénom : " + str(
-            liste_paire_2[1][3]))
+    str_poubl = ("ID: " + str(liste_paire_2[1][0]) + " , Nom:" + str(liste_paire_2[1][2]))
+    print(str_poubl + " , Prénom : " + str(liste_paire_2[1][3]))
+    str_poubl = ""
     print()
 
     liste_paire_3 = []
@@ -271,15 +269,13 @@ def creat_round_1(tournoi_select):
     liste_paire_3.append(joueur_class_croissant[6])
     # print(liste_paire_3)
     print("Paire 3, par ordre de classement, 3eme joueur contre 7ème")
-    print("ID: " + str(liste_paire_3[0][0]) +
-          " , Nom:" + str(liste_paire_3[0][2]) +
-          " , Prénom : " + str(
-            liste_paire_3[0][3]))
+    str_poubl = ("ID: " + str(liste_paire_3[0][0]) + " , Nom:" + str(liste_paire_3[0][2]))
+    print(str_poubl + " , Prénom : " + str(liste_paire_3[0][3]))
+    str_poubl = ""
     print("VS")
-    print("ID: " + str(liste_paire_3[1][0]) +
-          " , Nom:" + str(liste_paire_3[1][2]) +
-          " , Prénom : " + str(
-            liste_paire_3[1][3]))
+    str_poubl = ("ID: " + str(liste_paire_3[1][0]) + " , Nom:" + str(liste_paire_3[1][2]))
+    print(str_poubl + " , Prénom : " + str(liste_paire_3[1][3]))
+    str_poubl = ""
     print()
 
     liste_paire_4 = []
@@ -287,13 +283,13 @@ def creat_round_1(tournoi_select):
     liste_paire_4.append(joueur_class_croissant[7])
     # print(liste_paire_4)
     print("Paire 4, par ordre de classement, 4eme joueur contre 8ème")
-    print("ID: " + str(liste_paire_4[0][0]) +
-          " , Nom:" + str(liste_paire_4[0][2]) +
-          " , Prénom : " + str(liste_paire_4[0][3]))
+    str_poubl = ("ID: " + str(liste_paire_4[0][0]) + " , Nom:" + str(liste_paire_4[0][2]))
+    print(str_poubl + " , Prénom : " + str(liste_paire_4[0][3]))
+    str_poubl = ""
     print("ID")
-    print("identifiant: " + str(liste_paire_4[1][0]) +
-          " , Nom:" + str(liste_paire_4[1][2]) +
-          " , Prénom : " + str(liste_paire_4[1][3]))
+    str_poubl = ("identifiant: " + str(liste_paire_4[1][0]) + " , Nom:" + str(liste_paire_4[1][2]))
+    print(str_poubl + " , Prénom : " + str(liste_paire_4[1][3]))
+    str_poubl = ""
     print()
     print("*** FIN DE RECUPERATION DES JOUEURS POUR LES ROUNDS ***")
 
@@ -418,8 +414,7 @@ def creat_round_2(tournoi_select):
                   "sont chargés pour créer des rounds Y")
             os._exit(0)
 
-        joueur = (db_joueurs.search(where('id_joueur') ==
-                                    int_id_joueur_en_cours))
+        joueur = (db_joueurs.search(where('id_joueur') == int_id_joueur_en_cours))
         dict_joueur = creat_dict(joueur)
 
         # identifiant joueur
@@ -671,8 +666,7 @@ def creat_round_2(tournoi_select):
         # Tant que tous les 7 partenaires non testés
         list_part = []
         list_list_part = []
-        while index_partenaire < nbr_part_rest_a_tester and \
-                nbr_part_rest_a_tester != 0:
+        while index_partenaire < nbr_part_rest_a_tester and nbr_part_rest_a_tester != 0:
             index_nbr_part_affront = 0
 
             # tant que tous les partenaires testés n'ont pas vérifié
@@ -682,19 +676,10 @@ def creat_round_2(tournoi_select):
             # test les joueurs affrontés précédemment, le nombre de fois
             # correspondant au nombre de round précédent
             partenaire_libre = ""
-            while (index_nbr_part_affront < Tournoi_round_en_cours and
-                   nbr_part_rest_a_tester != 0):
-                # print("joueur à qui trouver un partenaire " +
-                # str(list_jy_temp[index_list_jy_temp][0]))
-                # print("partenaire recherché " +
-                # str(list_jy_temp[index_partenaire][0]))
-                # print("partenaire testé " +
-                # str(list_jy_temp[0][index_joueur_affront]))
-                joueur_1_test = \
-                    joueur_class_score_croissant_temp[index_partenaire][0]
+            while index_nbr_part_affront < Tournoi_round_en_cours and nbr_part_rest_a_tester != 0:
+                joueur_1_test = joueur_class_score_croissant_temp[index_partenaire][0]
 
-                if list_jy_temp[index_partenaire][0] == \
-                        list_jy_temp[0][index_joueur_affront]:
+                if list_jy_temp[index_partenaire][0] == list_jy_temp[0][index_joueur_affront]:
 
                     test_joueur_affront = test_joueur_affront + 1
                 else:

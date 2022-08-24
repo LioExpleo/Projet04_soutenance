@@ -188,21 +188,19 @@ def creat_new_tournois():
 
     # Insertion du joueur saisi dans la base de donnée
     ClassTournoi.CreatNewTournois(self=True, tournoi=tournoi)
+    str_poubl = ""
+    str_poubl = "Tournoi " + nom + ", avec id tournoi " + "\"" + str(id_tournoi) + "\"" + ", créé."
     ClassVueAffichage.Affichage(self=True,
-                                texte1="Tournoi " +
-                                       nom +
-                                       ", avec comme identifiant tournoi " +
-                                       "\"" + str(id_tournoi) + "\"" +
-                                       ", créé.",
+                                texte1=str_poubl,
                                 texte2="Date du tournoi : " + str(date),
                                 texte3="")
+    str_poubl = ""
     return ()
 
 
 def lect_tournois():
 
     serialised_tournois = db_tournois.all()
-
     index = 0
     for i in serialised_tournois:
         print(serialised_tournois[index])
@@ -226,6 +224,7 @@ def purge_tournois():
 def select_tournoi():
     id_tournoi_select = ""
     list_tournoi = []
+    str_poubl = ""
 
     # SELECTION DU TOURNOI
     serialised_tournoi = db_tournois.all()
@@ -278,8 +277,7 @@ def select_tournoi():
     while (tournoi_a_charger < 2):
         # saisie d'un Id de joueur existant pour le joueur
         id_a_charger = ClassVueAffichage.Input(self=True,
-                                               texte1="saisie Id ou n° "
-                                                      "du tournoi existant "
+                                               texte1="saisie Id ou n° du tournoi existant "
                                                       "à sélectionner")
 
         if id_a_charger == "E" or id_a_charger == "e":
@@ -295,11 +293,11 @@ def select_tournoi():
 
             # Appel de la méthode vue du modèle VMC pour affichage de
             # la résultante de la base de données
+            str_poubl = ("Le tournoi " + id_tournoi_select + " est sélectionné")
             ClassVueAffichage.Affichage(self=True, texte1="",
-                                        texte2="Le tournoi " +
-                                               id_tournoi_select +
-                                               " est sélectionné",
+                                        texte2=str_poubl,
                                         texte3="")
+            str_poubl = ""
 
         else:
             # Appel de la méthode vue du modèle VMC pour affichage de la
@@ -320,11 +318,10 @@ def charge_joueurs_tournoi():
     id_tournoi_select = select_tournoi()
     # Appel de la méthode vue du modèle VMC pour affichage de la
     # résultante de la base de données
-    ClassVueAffichage.Affichage(self=True,
-                                texte1="Chargment des joueurs "
-                                       "dans le tournoi " +
-                                       id_tournoi_select,
-                                texte2="", texte3="")
+    str_poubl = ""
+    str_poubl = "Chargment des joueurs dans le tournoi " + id_tournoi_select
+    ClassVueAffichage.Affichage(self=True, texte1=str_poubl, texte2="", texte3="")
+    str_poubl = ""
     list_joueurs = []
 
     db_joueurs = TinyDB('joueurs.json')
@@ -352,12 +349,11 @@ def charge_joueurs_tournoi():
 
         id_joueur = str_joueurs[(PositDebNbre + 12): (PositFinNbre - 3)]
 
-        # Supprimer le 1er joueur traité de la trame du dictionnaire car
-        # il ne peut être chargé deux fois
+        # Supprimer le 1er joueur traité de la trame du dictionnaire car il ne peut être chargé deux fois
         char = '}'
         PositDebNbre = (str_joueurs.find(char))
 
-        str_joueurs = str_joueurs[(PositDebNbre+2):-1]
+        str_joueurs = str_joueurs[(PositDebNbre + 2):-1]
         list_joueurs.append(id_joueur)
         joueur_cherche = joueur_cherche + 1
 
@@ -378,11 +374,8 @@ def charge_joueurs_tournoi():
     joueur_a_charger = 1
     while (joueur_a_charger < 9):
         # saisie d'un Id de joueur existant pour le joueur n°"
-        id_a_charger = ClassVueAffichage.Input(self=True,
-                                               texte1="saisie Id ou n° de "
-                                                      "joueur existant pour le"
-                                                      " joueur n°" +
-                                                      str(joueur_a_charger))
+        str_poubl = "saisie Id ou n° de joueur existant pour le joueur n°" + str(joueur_a_charger)
+        id_a_charger = ClassVueAffichage.Input(self=True, texte1=str_poubl)
 
         if id_a_charger == "E" or id_a_charger == "e":
             os._exit(0)
@@ -390,12 +383,8 @@ def charge_joueurs_tournoi():
         if id_a_charger in list_joueurs:
             # Appel de la méthode vue du modèle VMC pour affichage de la
             # résultante de la base de données
-            ClassVueAffichage.Affichage(self=True,
-                                        texte1="joueur n°" +
-                                               id_a_charger +
-                                               " sélectionné pour le tournoi",
-                                        texte2="",
-                                        texte3="")
+            str_poubl = "joueur n°" + id_a_charger + " sélectionné pour le tournoi"
+            ClassVueAffichage.Affichage(self=True, texte1=str_poubl, texte2="", texte3="")
 
             list_joueurs.remove(id_a_charger)
             str_list_joueurs = str(list_joueurs)
@@ -455,70 +444,50 @@ def lecture_match_tournoi():
 
     try:
         score_round1 = (tournoi[0]['ScoreMatchRound1'])
-        print("Score des joueurs round 1 - ID joueur + score : " +
-              str(score_round1[0]) + str(score_round1[1]))
-        print("Score des joueurs round 1 - ID joueur + score : " +
-              str(score_round1[2]) + str(score_round1[3]))
-        print("Score des joueurs round 1 - ID joueur + score : " +
-              str(score_round1[4]) + str(score_round1[5]))
-        print("Score des joueurs round 1 - ID joueur + score : " +
-              str(score_round1[6]) + str(score_round1[7]))
+        print("Score round 1 - ID joueur + score : " + str(score_round1[0]) + str(score_round1[1]))
+        print("Score round 1 - ID joueur + score : " + str(score_round1[2]) + str(score_round1[3]))
+        print("Score round 1 - ID joueur + score : " + str(score_round1[4]) + str(score_round1[5]))
+        print("Score round 1 - ID joueur + score : " + str(score_round1[6]) + str(score_round1[7]))
         print()
     except KeyError:
         print("pas de score pour le round 1")
 
     try:
         score_round2 = (tournoi[0]['ScoreMatchRound2'])
-        print("Score des joueurs round 2 - ID joueur + score : " +
-              str(score_round2[0]) + str(score_round2[1]))
-        print("Score des joueurs round 2 - ID joueur + score : " +
-              str(score_round2[2]) + str(score_round2[3]))
-        print("Score des joueurs round 2 - ID joueur + score : " +
-              str(score_round2[4]) + str(score_round2[5]))
-        print("Score des joueurs round 2 - ID joueur + score : " +
-              str(score_round2[6]) + str(score_round2[7]))
+        print("Score round 2 - ID joueur + score : " + str(score_round2[0]) + str(score_round2[1]))
+        print("Score round 2 - ID joueur + score : " + str(score_round2[2]) + str(score_round2[3]))
+        print("Score round 2 - ID joueur + score : " + str(score_round2[4]) + str(score_round2[5]))
+        print("Score round 2 - ID joueur + score : " + str(score_round2[6]) + str(score_round2[7]))
         print()
     except KeyError:
         print("pas de score pour le round 2")
 
     try:
         score_round3 = (tournoi[0]['ScoreMatchRound3'])
-        print("Score des joueurs round 3 - ID joueur + score : " +
-              str(score_round3[0]) + str(score_round3[1]))
-        print("Score des joueurs round 3 - ID joueur + score : " +
-              str(score_round3[2]) + str(score_round3[3]))
-        print("Score des joueurs round 3 - ID joueur + score : " +
-              str(score_round3[4]) + str(score_round3[5]))
-        print("Score des joueurs round 3 - ID joueur + score : " +
-              str(score_round3[6]) + str(score_round3[7]))
+        print("Score round 3 - ID joueur + score : " + str(score_round3[0]) + str(score_round3[1]))
+        print("Score round 3 - ID joueur + score : " + str(score_round3[2]) + str(score_round3[3]))
+        print("Score round 3 - ID joueur + score : " + str(score_round3[4]) + str(score_round3[5]))
+        print("Score round 3 - ID joueur + score : " + str(score_round3[6]) + str(score_round3[7]))
         print()
     except KeyError:
         print("pas de score pour le round 3")
 
     try:
         score_round4 = (tournoi[0]['ScoreMatchRound4'])
-        print("Score des joueurs round 4 - ID joueur + score : " +
-              str(score_round4[0]) + str(score_round4[1]))
-        print("Score des joueurs round 4 - ID joueur + score : " +
-              str(score_round4[2]) + str(score_round4[3]))
-        print("Score des joueurs round 4 - ID joueur + score : " +
-              str(score_round4[4]) + str(score_round4[5]))
-        print("Score des joueurs round 4 - ID joueur + score : " +
-              str(score_round4[6]) + str(score_round4[7]))
+        print("Score round 4 - ID joueur + score : " + str(score_round4[0]) + str(score_round4[1]))
+        print("Score round 4 - ID joueur + score : " + str(score_round4[2]) + str(score_round4[3]))
+        print("Score round 4 - ID joueur + score : " + str(score_round4[4]) + str(score_round4[5]))
+        print("Score round 4 - ID joueur + score : " + str(score_round4[6]) + str(score_round4[7]))
         print()
     except KeyError:
         print("pas de score pour le round 4")
 
     try:
         score_round5 = (tournoi[0]['ScoreMatchRound5'])
-        print("Score des joueurs round 5 - ID joueur + score : " +
-              str(score_round5[0]) + str(score_round5[1]))
-        print("Score des joueurs round 5 - ID joueur + score : " +
-              str(score_round5[2]) + str(score_round5[3]))
-        print("Score des joueurs round 5 - ID joueur + score : " +
-              str(score_round5[4]) + str(score_round5[5]))
-        print("Score des joueurs round 5 - ID joueur + score : " +
-              str(score_round5[6]) + str(score_round5[7]))
+        print("Score round 5 - ID joueur + score : " + str(score_round5[0]) + str(score_round5[1]))
+        print("Score round 5 - ID joueur + score : " + str(score_round5[2]) + str(score_round5[3]))
+        print("Score round 5 - ID joueur + score : " + str(score_round5[4]) + str(score_round5[5]))
+        print("Score round 5 - ID joueur + score : " + str(score_round5[6]) + str(score_round5[7]))
         print()
     except KeyError:
         print("pas de score pour le round 5")
@@ -559,16 +528,19 @@ def lecture_round_tournoi():
         index = 1
         if round1 != "":
             while index < 5:
-                print("Round 1 - Paire" + str(index) +
-                      " - Joueur 1 : " + "ID : " +
-                      str(round1[index][0][0]) + " - " +
-                      str(round1[index][0][2]) + " - : " +
-                      str(round1[index][0][3]))
-                print("Round 1 - Paire" + str(index) +
-                      " - Joueur 2 : " + "ID : " +
-                      str(round1[index][1][0]) + " - " +
-                      str(round1[index][1][2]) + " - : " +
-                      str(round1[index][1][3]))
+                str_poubl = "Round 1 - Paire" + str(index) + " - Joueur 1 : " + "ID : "
+                str_poubl = str_poubl + str(round1[index][0][0]) + " - "
+                str_poubl = str_poubl + str(round1[index][0][2]) + " - : "
+                str_poubl = str_poubl + str(round1[index][0][3])
+                print(str_poubl)
+                str_poubl = ""
+
+                str_poubl = "Round 1 - Paire" + str(index) + " - Joueur 2 : " + "ID : "
+                str_poubl = str_poubl + str(round1[index][1][0]) + " - "
+                str_poubl = str_poubl + str(round1[index][1][2]) + " - : "
+                str_poubl = str_poubl + str(round1[index][1][3])
+                print(str_poubl)
+                str_poubl = ""
                 index = index + 1
                 print()
     except KeyError:
@@ -580,21 +552,17 @@ def lecture_round_tournoi():
         round_bd = "round_" + str(index_round) + "+match"
         roundx = (tournoi[0][round_bd])
         try:
-            print("Round" +
-                  str(index_round) +
-                  " - Date du tournoi : " +
-                  str(roundx[0]))
+            print("Round" + str(index_round) + " - Date du tournoi : " + str(roundx[0]))
 
             index = 1
             while index < 5:
-                print("Round" + str(index_round) +
-                      " - Paire" + str(index) +
-                      " - Joueur 1 : " + "ID : " +
-                      str(roundx[index][0]))
-                print("Round" + str(index_round) +
-                      " - Paire" + str(index) +
-                      " - Joueur 2 : " +
-                      "ID : " + str(roundx[index][1]))
+                str_poubl = "Round" + str(index_round) + " - Paire" + str(index)
+                print(str_poubl + " - Joueur 1 : " + "ID : " + str(roundx[index][0]))
+                str_poubl = ""
+
+                str_poubl = "Round" + str(index_round) + " - Paire" + str(index)
+                print(str_poubl + " - Joueur 2 : " + "ID : " + str(roundx[index][1]))
+                str_poubl = ""
                 index = index + 1
                 print()
         except IndexError:
@@ -685,85 +653,54 @@ def lecture_joueur_tournoi():
         joueur_charge = "False"
 
     if joueur_charge == "True":
-        id_j, nom_j, prenom_j, date_j, sexe_j, classement_j = \
-            liste_joueur_tournoi(joueur1)
-        print("JOUEUR 1 DU TOURNOI : Identifiant n°" +
-              str(id_j) + " - " +
-              str(nom_j) + " - " +
-              str(prenom_j) + " - " +
-              str(date_j) + " - " +
-              str(sexe_j) + " - Classé," +
-              str(classement_j))
+        id_j, nom_j, prenom_j, date_j, sexe_j, classement_j = liste_joueur_tournoi(joueur1)
 
-        id_j, nom_j, prenom_j, date_j, sexe_j, classement_j = \
-            liste_joueur_tournoi(joueur2)
-        print("JOUEUR 2 DU TOURNOI : Identifiant n°" +
-              str(id_j) + " - " +
-              str(nom_j) + " - " +
-              str(prenom_j) + " - " +
-              str(date_j) + " - " +
-              str(sexe_j) + " - Classé," +
-              str(classement_j))
+        str_poubl = "JOUEUR 1 DU TOURNOI : Identifiant n°" + str(id_j) + " - "
+        str_poubl = str_poubl + str(nom_j) + " - " + str(prenom_j) + " - "
+        print(str_poubl + str(date_j) + " - " + str(sexe_j) + " - Classé," + str(classement_j))
+        str_poubl = ""
 
-        id_j, nom_j, prenom_j, date_j, sexe_j, classement_j = \
-            liste_joueur_tournoi(joueur3)
-        print("JOUEUR 3 DU TOURNOI : Identifiant n°" +
-              str(id_j) + " - " +
-              str(nom_j) + " - " +
-              str(prenom_j) + " - " +
-              str(date_j) + " - " +
-              str(sexe_j) + " - Classé," +
-              str(classement_j))
+        id_j, nom_j, prenom_j, date_j, sexe_j, classement_j = liste_joueur_tournoi(joueur2)
+        str_poubl = "JOUEUR 2 DU TOURNOI : Identifiant n°" + str(id_j) + " - "
+        str_poubl = str_poubl + str(nom_j) + " - " + str(prenom_j) + " - "
+        print(str_poubl + str(date_j) + " - " + str(sexe_j) + " - Classé," + str(classement_j))
+        str_poubl = ""
 
-        id_j, nom_j, prenom_j, date_j, sexe_j, classement_j = \
-            liste_joueur_tournoi(joueur4)
-        print("JOUEUR 4 DU TOURNOI : Identifiant n°" +
-              str(id_j) + " - " +
-              str(nom_j) + " - " +
-              str(prenom_j) + " - " +
-              str(date_j) + " - " +
-              str(sexe_j) + " - Classé," +
-              str(classement_j))
+        id_j, nom_j, prenom_j, date_j, sexe_j, classement_j = liste_joueur_tournoi(joueur3)
+        str_poubl = "JOUEUR 3 DU TOURNOI : Identifiant n°" + str(id_j) + " - "
+        str_poubl = str_poubl + str(nom_j) + " - " + str(prenom_j) + " - "
+        print(str_poubl + str(date_j) + " - " + str(sexe_j) + " - Classé," + str(classement_j))
+        str_poubl = ""
 
-        id_j, nom_j, prenom_j, date_j, sexe_j, classement_j = \
-            liste_joueur_tournoi(joueur5)
-        print("JOUEUR 5 DU TOURNOI : Identifiant n°" +
-              str(id_j) + " - " +
-              str(nom_j) + " - " +
-              str(prenom_j) + " - " +
-              str(date_j) + " - " +
-              str(sexe_j) + " - Classé," +
-              str(classement_j))
+        id_j, nom_j, prenom_j, date_j, sexe_j, classement_j = liste_joueur_tournoi(joueur4)
+        str_poubl = "JOUEUR 4 DU TOURNOI : Identifiant n°" + str(id_j) + " - "
+        str_poubl = str_poubl + str(nom_j) + " - " + str(prenom_j) + " - "
+        print(str_poubl + str(date_j) + " - " + str(sexe_j) + " - Classé," + str(classement_j))
+        str_poubl = ""
 
-        id_j, nom_j, prenom_j, date_j, sexe_j, classement_j = \
-            liste_joueur_tournoi(joueur6)
-        print("JOUEUR 6 DU TOURNOI : Identifiant n°" +
-              str(id_j) + " - " +
-              str(nom_j) + " - " +
-              str(prenom_j) + " - " +
-              str(date_j) + " - " +
-              str(sexe_j) + " - Classé," +
-              str(classement_j))
+        id_j, nom_j, prenom_j, date_j, sexe_j, classement_j = liste_joueur_tournoi(joueur5)
+        str_poubl = "JOUEUR 5 DU TOURNOI : Identifiant n°" + str(id_j) + " - "
+        str_poubl = str_poubl + str(nom_j) + " - " + str(prenom_j) + " - "
+        print(str_poubl + str(date_j) + " - " + str(sexe_j) + " - Classé," + str(classement_j))
+        str_poubl = ""
 
-        id_j, nom_j, prenom_j, date_j, sexe_j, classement_j = \
-            liste_joueur_tournoi(joueur7)
-        print("JOUEUR 7 DU TOURNOI : Identifiant n°" +
-              str(id_j) + " - " +
-              str(nom_j) + " - " +
-              str(prenom_j) + " - " +
-              str(date_j) + " - " +
-              str(sexe_j) + " - Classé," +
-              str(classement_j))
+        id_j, nom_j, prenom_j, date_j, sexe_j, classement_j = liste_joueur_tournoi(joueur6)
+        str_poubl = "JOUEUR 6 DU TOURNOI : Identifiant n°" + str(id_j) + " - "
+        str_poubl = str_poubl + str(nom_j) + " - " + str(prenom_j) + " - "
+        print(str_poubl + str(date_j) + " - " + str(sexe_j) + " - Classé," + str(classement_j))
+        str_poubl = ""
 
-        id_j, nom_j, prenom_j, date_j, sexe_j, classement_j = \
-            liste_joueur_tournoi(joueur8)
-        print("JOUEUR 8 DU TOURNOI : Identifiant n°" +
-              str(id_j) + " - " +
-              str(nom_j) + " - " +
-              str(prenom_j) + " - " +
-              str(date_j) + " - " +
-              str(sexe_j) + " - Classé," +
-              str(classement_j))
+        id_j, nom_j, prenom_j, date_j, sexe_j, classement_j = liste_joueur_tournoi(joueur7)
+        str_poubl = "JOUEUR 7 DU TOURNOI : Identifiant n°" + str(id_j) + " - "
+        str_poubl = str_poubl + str(nom_j) + " - " + str(prenom_j) + " - "
+        print(str_poubl + str(date_j) + " - " + str(sexe_j) + " - Classé," + str(classement_j))
+        str_poubl = ""
+
+        id_j, nom_j, prenom_j, date_j, sexe_j, classement_j = liste_joueur_tournoi(joueur8)
+        str_poubl = "JOUEUR 8 DU TOURNOI : Identifiant n°" + str(id_j) + " - "
+        str_poubl = str_poubl + str(nom_j) + " - " + str(prenom_j) + " - "
+        print(str_poubl + str(date_j) + " - " + str(sexe_j) + " - Classé," + str(classement_j))
+        str_poubl = ""
 
 
 def lecturetournoi():
@@ -771,18 +708,16 @@ def lecturetournoi():
     # créer les rounds
     from tinydb import TinyDB
     db_tournois = TinyDB('tournois.json')
-
+    str_poubl = ""
     serialised_tournois = db_tournois.all()
     print()
     index = 0
     for i in serialised_tournois:
-        print(("ID tournoi n°" +
-               str(serialised_tournois[index]['id_tournoi'])) +
-              (",   appelé " + str(serialised_tournois[index]['nom'])) +
-              (", qui s'est passé à " +
-               str(serialised_tournois[index]['lieu'])) +
-              (", en date du " +
-               str(serialised_tournois[index]['date du tournoi'])))
+        str_poubl = "ID tournoi n°" + str(serialised_tournois[index]['id_tournoi'])
+        str_poubl = str_poubl + ",   appelé " + str(serialised_tournois[index]['nom'])
+        str_poubl = str_poubl + (", qui s'est passé à " + str(serialised_tournois[index]['lieu']))
+        print(str_poubl + (", en date du " + str(serialised_tournois[index]['date du tournoi'])))
+        str_poubl = ""
         print()
         index = index + 1
 
@@ -796,3 +731,161 @@ def liste_joueur_tournoi(joueur):
     sexe_j = (dict_joueur1["sexe"])
     classement_j = (dict_joueur1["Classement"])
     return (id_j, nom_j, prenom_j, date_j, sexe_j, classement_j)
+
+
+def lecture_joueur_tournoi_class():
+    # Récupération des informations du fichier JSON du tournoi
+    # pour créer les rounds
+    from tinydb import TinyDB
+    db_tournois = TinyDB('tournois.json')
+
+    tournoi_select = ClassVueAffichage.Input(self=True,
+                                             texte1="saisie Id tournoi "
+                                                    "pour lequel on veut "
+                                                    "afficher les joueurs")
+
+    tournoi_trouv = tournoi_exist(tournoi_select)
+    if tournoi_trouv == []:
+        print("Numéro de tournoi introuvable")
+        os._exit(0)
+
+    int_tournoi_select = int(tournoi_select)
+
+    # charger le tournoi sélectionné à partir de la base de données tournoi
+    tournoi = (db_tournois.search(where('id_tournoi') == int_tournoi_select))
+    id_j1 = (tournoi[0]['id_j1'])
+    id_j2 = (tournoi[0]['id_j2'])
+    id_j3 = (tournoi[0]['id_j3'])
+    id_j4 = (tournoi[0]['id_j4'])
+    id_j5 = (tournoi[0]['id_j5'])
+    id_j6 = (tournoi[0]['id_j6'])
+    id_j7 = (tournoi[0]['id_j7'])
+    id_j8 = (tournoi[0]['id_j8'])
+
+    db_joueurs = TinyDB('joueurs.json')
+    # charger le tournoi sélectionné à partir de la base de données tournoi
+
+    liste_joueurc_tournoi = []
+    joueur_charge = "False"
+    # Joueur 1
+    try:
+        joueur1 = (db_joueurs.search(where('id_joueur') == int(id_j1)))
+        liste_joueurc_tournoi.append(joueur1)
+    except ValueError:
+        print("pas de joueur 1 chargé dans le tournoi")
+
+    # Joueur 2
+    try:
+        joueur2 = (db_joueurs.search(where('id_joueur') == int(id_j2)))
+        liste_joueurc_tournoi.append(joueur2)
+    except ValueError:
+        print("pas de joueur 2 chargé dans le tournoi")
+
+    # Joueur 3
+    try:
+        joueur3 = (db_joueurs.search(where('id_joueur') == int(id_j3)))
+        liste_joueurc_tournoi.append(joueur3)
+    except ValueError:
+        print("pas de joueur 3 chargé dans le tournoi")
+
+    # Joueur 4
+    try:
+        joueur4 = (db_joueurs.search(where('id_joueur') == int(id_j4)))
+        liste_joueurc_tournoi.append(joueur4)
+    except ValueError:
+        print("pas de joueur 4 chargé dans le tournoi")
+
+    # Joueur 5
+    try:
+        joueur5 = (db_joueurs.search(where('id_joueur') == int(id_j5)))
+        liste_joueurc_tournoi.append(joueur5)
+    except ValueError:
+        print("pas de joueur 5 chargé dans le tournoi")
+    # Joueur 6
+    try:
+        joueur6 = (db_joueurs.search(where('id_joueur') == int(id_j6)))
+        liste_joueurc_tournoi.append(joueur6)
+    except ValueError:
+        print("pas de joueur 6 chargé dans le tournoi")
+
+    # Joueur 7
+    try:
+        joueur7 = (db_joueurs.search(where('id_joueur') == int(id_j7)))
+        liste_joueurc_tournoi.append(joueur7)
+    except ValueError:
+        print("pas de joueur 7 chargé dans le tournoi")
+    # Joueur 8
+    try:
+        joueur8 = (db_joueurs.search(where('id_joueur') == int(id_j8)))
+        liste_joueurc_tournoi.append(joueur8)
+        joueur_charge = "True"
+    except ValueError:
+        print("pas de joueur 8 chargé dans le tournoi")
+        joueur_charge = "False"
+
+    if joueur_charge == "True":
+        id_j, nom_j, prenom_j, date_j, sexe_j, classement_j = liste_joueur_tournoi(joueur1)
+
+        str_poubl = "JOUEUR 1 DU TOURNOI : Identifiant n°" + str(id_j) + " - "
+        str_poubl = str_poubl + str(nom_j) + " - " + str(prenom_j) + " - "
+        print(str_poubl + str(date_j) + " - " + str(sexe_j) + " - Classé," + str(classement_j))
+        str_poubl = ""
+
+        id_j, nom_j, prenom_j, date_j, sexe_j, classement_j = liste_joueur_tournoi(joueur2)
+        str_poubl = "JOUEUR 2 DU TOURNOI : Identifiant n°" + str(id_j) + " - "
+        str_poubl = str_poubl + str(nom_j) + " - " + str(prenom_j) + " - "
+        print(str_poubl + str(date_j) + " - " + str(sexe_j) + " - Classé," + str(classement_j))
+        str_poubl = ""
+
+        id_j, nom_j, prenom_j, date_j, sexe_j, classement_j = liste_joueur_tournoi(joueur3)
+        str_poubl = "JOUEUR 3 DU TOURNOI : Identifiant n°" + str(id_j) + " - "
+        str_poubl = str_poubl + str(nom_j) + " - " + str(prenom_j) + " - "
+        print(str_poubl + str(date_j) + " - " + str(sexe_j) + " - Classé," + str(classement_j))
+        str_poubl = ""
+
+        id_j, nom_j, prenom_j, date_j, sexe_j, classement_j = liste_joueur_tournoi(joueur4)
+        str_poubl = "JOUEUR 4 DU TOURNOI : Identifiant n°" + str(id_j) + " - "
+        str_poubl = str_poubl + str(nom_j) + " - " + str(prenom_j) + " - "
+        print(str_poubl + str(date_j) + " - " + str(sexe_j) + " - Classé," + str(classement_j))
+        str_poubl = ""
+
+        id_j, nom_j, prenom_j, date_j, sexe_j, classement_j = liste_joueur_tournoi(joueur5)
+        str_poubl = "JOUEUR 5 DU TOURNOI : Identifiant n°" + str(id_j) + " - "
+        str_poubl = str_poubl + str(nom_j) + " - " + str(prenom_j) + " - "
+        print(str_poubl + str(date_j) + " - " + str(sexe_j) + " - Classé," + str(classement_j))
+        str_poubl = ""
+
+        id_j, nom_j, prenom_j, date_j, sexe_j, classement_j = liste_joueur_tournoi(joueur6)
+        str_poubl = "JOUEUR 6 DU TOURNOI : Identifiant n°" + str(id_j) + " - "
+        str_poubl = str_poubl + str(nom_j) + " - " + str(prenom_j) + " - "
+        print(str_poubl + str(date_j) + " - " + str(sexe_j) + " - Classé," + str(classement_j))
+        str_poubl = ""
+
+        id_j, nom_j, prenom_j, date_j, sexe_j, classement_j = liste_joueur_tournoi(joueur7)
+        str_poubl = "JOUEUR 7 DU TOURNOI : Identifiant n°" + str(id_j) + " - "
+        str_poubl = str_poubl + str(nom_j) + " - " + str(prenom_j) + " - "
+        print(str_poubl + str(date_j) + " - " + str(sexe_j) + " - Classé," + str(classement_j))
+        str_poubl = ""
+
+        id_j, nom_j, prenom_j, date_j, sexe_j, classement_j = liste_joueur_tournoi(joueur8)
+        str_poubl = "JOUEUR 8 DU TOURNOI : Identifiant n°" + str(id_j) + " - "
+        str_poubl = str_poubl + str(nom_j) + " - " + str(prenom_j) + " - "
+        print(str_poubl + str(date_j) + " - " + str(sexe_j) + " - Classé," + str(classement_j))
+        str_poubl = ""
+
+        dict_joueurs = creat_dict(liste_joueurc_tournoi)
+
+        from operator import itemgetter
+        joueur_class_croissant = (sorted(dict_joueurs, key=itemgetter("Nom"), reverse=False))
+        print("Affichage des joueurs par classement nom")
+        index = 0
+        for i in joueur_class_croissant:
+            print(joueur_class_croissant[index])
+            index = index + 1
+
+        joueur_class_croissant = (sorted(dict_joueurs, key=itemgetter("Classement"), reverse=False))
+        print("Affichage des joueurs par classement croissant")
+        index = 0
+        for i in joueur_class_croissant:
+            print(joueur_class_croissant[index])
+            index = index + 1

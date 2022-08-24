@@ -87,61 +87,48 @@ def creat_new_joueurs():
                                      texte1="saisie prénom :")
     if prenom == "":
         prenom = ("Prenom " + str(id_libre))
-        ClassVueAffichage.Affichage(self=True,
-                                    texte1="en absence de prenom, "
-                                           "le prenom par défaut est "
-                                           + prenom,
+        ClassVueAffichage.Affichage(self=True, texte1="en absence de prenom, le prenom "
+                                                      "par défaut est " + prenom,
                                     texte2="", texte3="")
     if prenom == "r":
         prenom = ("Prenom " + str(id_libre))
-        ClassVueAffichage.Affichage(self=True,
-                                    texte1="r est un nom interdit, "
-                                           "réservé à commande clavier,"
-                                           " le prenom par défaut est "
-                                           + prenom,
+        ClassVueAffichage.Affichage(self=True, texte1="r est un nom interdit, réservé "
+                                                      "à commande clavier, le prenom "
+                                                      "par défaut est " + prenom,
                                     texte2="", texte3="")
     if prenom == "E":
         prenom = ("Prenom " + str(id_libre))
-        ClassVueAffichage.Affichage(self=True,
-                                    texte1="E est un nom interdit, "
-                                           "cela correspond à "
-                                           "une commande clavier,"
-                                           " le prenom par défaut "
-                                           "enregistré est " + prenom,
+        ClassVueAffichage.Affichage(self=True, texte1="E est un nom interdit, "
+                                                      "cela correspond à une commande clavier, "
+                                                      "le prenom par défaut enregistré "
+                                                      "est " + prenom,
                                     texte2="", texte3="")
 
     date_naissance = ClassVueAffichage.Input(self=True,
-                                             texte1="date de naissance "
-                                                    "(format DD/MM/YYYY):")
+                                             texte1="date de naissance (format DD/MM/YYYY):")
     if date_naissance == "":
         date_naissance = "01-01-1900"
 
-    sexe = ClassVueAffichage.Input(self=True,
-                                   texte1="saisie sexe h ou f ou nc :")
+    sexe = ClassVueAffichage.Input(self=True, texte1="saisie sexe h ou f ou nc :")
     if sexe == "":
         sexe = "nc"
-        ClassVueAffichage.Affichage(self=True,
-                                    texte1="en absence d'indication, "
-                                           "le sexe est indiqué nc",
+        ClassVueAffichage.Affichage(self=True, texte1="en absence d'indication, "
+                                                      "le sexe est indiqué nc",
                                     texte2="", texte3="")
         # print("en absence d'indication, le sexe est indiqué nc")
 
     classement = ClassVueAffichage.Input(self=True, texte1="classement :")
     # classement = input("classement : \n")
     if classement.isdigit():
-        ClassVueAffichage.Affichage(self=True,
-                                    texte1="classement "
-                                           + str(classement) + " ok",
-                                    texte2="",
-                                    texte3="")
+        ClassVueAffichage.Affichage(self=True, texte1="classement " + str(classement) + " ok",
+                                    texte2="", texte3="")
         # print("classement ok")
     else:
         # classement = 10000
         classement = id_libre + 100
-        ClassVueAffichage.Affichage(self=True,
-                                    texte1="Absence saisie, classement, "
-                                           "par défaut est numéro id + 100, "
-                                           + str(classement),
+        ClassVueAffichage.Affichage(self=True, texte1="Absence saisie, classement, "
+                                                      "par défaut est numéro id + "
+                                                      "100, " + str(classement),
                                     texte2="", texte3="")
 
         # print("Error saisie classement, par défaut, 10000")
@@ -216,8 +203,7 @@ def lecture_joueurs_class_nom():
         index = index + 1
 
     from operator import itemgetter
-    joueur_id_decroissant = (sorted(liste_joueurs,
-                                    key=itemgetter(3), reverse=False))
+    joueur_id_decroissant = (sorted(liste_joueurs, key=itemgetter(3), reverse=False))
 
     print("Affichage des joueurs par ordre alphabétique de leurs noms :")
     index = 0
@@ -247,8 +233,7 @@ def lecture_joueurs_class_id():
         index = index + 1
 
     from operator import itemgetter
-    joueur_id_decroissant = (sorted(liste_joueurs,
-                                    key=itemgetter(1), reverse=False))
+    joueur_id_decroissant = (sorted(liste_joueurs, key=itemgetter(1), reverse=False))
 
     print("Affichage des joueurs par ordre "
           "alphabétique de leurs identifiant :")
@@ -278,8 +263,7 @@ def lecture_joueurs_classement():
 
     # tri des joueurs
     from operator import itemgetter
-    joueur_class_decr = (sorted(liste_joueurs,
-                                key=itemgetter(7), reverse=False))
+    joueur_class_decr = (sorted(liste_joueurs, key=itemgetter(7), reverse=False))
 
     print("Affichage des joueurs dans l'ordre de leurs classements :")
     index = 0
@@ -292,8 +276,7 @@ def creat_new_class_joueurs():
     # CREATION DE L'ID DU JOUEUR ************************************
     # Récupération des informations du fichier
     # JSON du tournoi pour créer les rounds
-    from tinydb import TinyDB, Query
-    Todo = Query()
+    from tinydb import TinyDB
     db_joueurs = TinyDB('joueurs.json')
     serialised_joueurs = db_joueurs.all()
 
@@ -312,8 +295,7 @@ def creat_new_class_joueurs():
 
     # Tri de la liste des joueurs
     from operator import itemgetter
-    joueur_class_decr = (sorted(liste_joueurs,
-                                key=itemgetter(7), reverse=False))
+    joueur_class_decr = (sorted(liste_joueurs, key=itemgetter(7), reverse=False))
 
     print()
 
@@ -337,8 +319,8 @@ def creat_new_class_joueurs():
 
         saisie_new_cl = ClassVueAffichage.\
             Input(self=True,
-                  texte1="Saisie nouveau classement joueur n°"
-                         + str(serialised_joueurs[index]['id_joueur']))
+                  texte1="Saisie nouveau classement joueur "
+                         "n°" + str(serialised_joueurs[index]['id_joueur']))
 
         print()
 
@@ -348,9 +330,15 @@ def creat_new_class_joueurs():
 
         if saisie_new_cl.isdigit():
             new_classement = saisie_new_cl
-            db_joueurs.update({"Classement": new_classement},
-                              Todo.id_joueur ==
-                              int(serialised_joueurs[index]['id_joueur']))
+            identifiant_joueur = int(serialised_joueurs[index]['id_joueur'])
+            ClassJoueurs.UpdateClassJoueurs(self=True,
+                                            nom_donnees="Classement",
+                                            donnees=new_classement,
+                                            numero_joueur=identifiant_joueur)
+
+            # db_joueurs.update({"Classement": new_classement},
+            #                  Todo.id_joueur ==
+            #                  int(serialised_joueurs[index]['id_joueur']))
         else:
             print("pas de modification de classement pour ce joueur")
 

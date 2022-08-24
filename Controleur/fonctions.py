@@ -29,8 +29,7 @@ def tournoi_exist(id_tournoi_select):
 
     # charger le tournoi selectionné à partir de la table dans tournoi
     try:
-        trouve_tournoi = (db_tournois.search(where('id_tournoi') ==
-                                             int_tournoi_select))
+        trouve_tournoi = (db_tournois.search(where('id_tournoi') == int_tournoi_select))
     except KeyError:
         trouve_tournoi = ""
         print("tournoi introuvable ")
