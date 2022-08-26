@@ -1,32 +1,12 @@
 import os
 
 
-
 class ClassVueMenu():
     def Action_menu(self):
-        #from Controleur.Ctrl_Joueurs import lect_joueurs, sup_joueurs, \
-        #    purge_joueurs, creat_new_joueurs, lecture_joueurs_classement, \
-        #    lecture_joueurs_class_id, lecture_joueurs_class_nom, \
-        #    creat_new_class_joueurs
         from Controleur.Ctrl_Joueurs import ClassJoueurs
-
-        #from Controleur.Ctrl_Tournoi import lect_tournois, sup_tournois, \
-        #    purge_tournois, charge_joueurs_tournoi, creat_new_tournois, \
-        #    lecture_match_tournoi, lecture_round_tournoi, lecturetournoi, \
-        #    lecture_joueur_tournoi_class
         from Controleur.Ctrl_Tournoi import Class_Tournoi
-
-
-        #from Controleur.Ctrl_Round import creat_round
         from Controleur.Ctrl_Round import Class_Round
-
-
-        #from Controleur.Ctrl_Match import creat_match
         from Controleur.Ctrl_Match import Class_Match
-
-        from Modele.Joueurs import ClassJoueursModel
-
-
         menu_niv_0 = ""
         menu_niv_1 = ""
         menu_niv_2 = ""
@@ -45,7 +25,6 @@ class ClassVueMenu():
 
             if (menu_niv_0 == "J" and menu_niv_1 == "w" and saisie_clavier == "w"):
                 ClassJoueurs.creat_new_joueurs()
-                #ClassJoueurs.creat_new_joueurs()
 
             if (menu_niv_0 == "J" and menu_niv_1 == "r" and saisie_clavier == "r"):
                 ClassJoueurs.lect_joueurs()
