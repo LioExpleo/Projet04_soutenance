@@ -130,7 +130,7 @@ def creat_new_joueurs():
                                                       "par défaut est numéro id + "
                                                       "100, " + str(classement),
                                     texte2="", texte3="")
-#  
+#
         # print("Error saisie classement, par défaut, 10000")
     id_joueur = id_libre
 
