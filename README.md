@@ -87,13 +87,8 @@ pip intall flake8-html
 ```
 - tapez la commande suivante pour générer le fichier flake8
 ```
-flake8 --format=html --htmldir=flake-report --max-line-length=119 --exclude=env/
-Si cela fonctionne, tant mieux, sinon, pour mon cas, et après de multiples tentatives avec mon mentor ça ne fonctionne pas.
+flake8 --format=html --htmldir=flake-report --max-line-length=119 --exclude=env,__pycache__,.gitignore,.git,.css
 
-Il donc a été décidé de faire comme suit :
-flake8 --format=html --htmldir=flake-report --max-line-length=119 --ignore=env/
-fonctionne, mais il faudra supprimer les fichiers généré env à la main et pas de page générale html de génération ok 
-flake8 --format=html --htmldir=flake-report --max-line-length=119 --ignore=env/
 ```
 - la commande qui fonctione a été :
 ```
