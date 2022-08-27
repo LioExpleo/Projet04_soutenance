@@ -11,6 +11,7 @@ class ClassJoueurs():
         from Vue.affichage import ClassVueAffichage
         from Modele.Joueurs import ClassJoueursModel
         # CREATION DE L'ID DU JOUEUR ************************************
+
         from tinydb import TinyDB, Query
         Todo = Query()
         db_joueurs = TinyDB('joueurs.json')
@@ -127,17 +128,12 @@ class ClassJoueurs():
                                                           "par défaut est numéro id + "
                                                           "100, " + str(classement),
                                         texte2="", texte3="")
-    #
-            # print("Error saisie classement, par défaut, 10000")
-        id_joueur = id_libre
-        # Serialize l'instance joueurs
-        joueur = {"id_joueur": id_joueur,
-                  "Nom": nom, "Prenom": prenom,
-                  "date de naissance": date_naissance,
-                  "sexe": sexe, "Classement": classement}
 
-        ClassJoueursModel.CreatJoueurs(self=True, joueur=joueur)
-        return (joueur)
+        # Mise à disposition des attributs au modèle pour sérialisation et enregistrement de donnée
+        id_joueur = id_libre
+        ClassJoueursModel.CreatJoueur(self=True, id_joueur=id_joueur, nom=nom, prenom=prenom,
+                                      date_naissance=date_naissance,sexe=sexe, classement=classement)
+        return ()
 
     def lect_joueurs():
         from Vue.affichage import ClassVueAffichage
@@ -254,52 +250,31 @@ class ClassJoueurs():
         import os
         from Vue.affichage import ClassVueAffichage
         from Modele.Joueurs import ClassJoueursModel
-        from tinydb import TinyDB
-        db_joueurs = TinyDB('joueurs.json')
-        serialised_joueurs = db_joueurs.all()
-        index = 0
-        liste_joueurs = []
-        for i in serialised_joueurs:
-            # récupération des champs des joueurs,
-            # un par un pour les trier dans l'ordre
-            liste1 = ["ID joueur n°:", int(serialised_joueurs[index]['id_joueur']),
-                      "nom,", (serialised_joueurs[index]['Nom']),
-                      "prénom ,", (serialised_joueurs[index]['Prenom']),
-                      "class:",
-                      int(serialised_joueurs[index]['Classement'])]
-            liste_joueurs.append(liste1)
-            index = index + 1
+
+        # Appel de la méthode model de mise à disposition de la liste des joueurs à partir de la bdd
+        liste_joueurs= ClassJoueursModel.LectListeListeJoueursBdd()
+        print("liste joueurs")
+        print(liste_joueurs)
 
         # Tri de la liste des joueurs
         from operator import itemgetter
         joueur_class_decr = (sorted(liste_joueurs, key=itemgetter(7), reverse=False))
-
         print()
 
-        # affichage un par un des joueurs dans l'ordre de leurs classment
         print("Affichage des joueurs dans l'ordre de leurs classements :")
         index = 0
         for i in joueur_class_decr:
             print(joueur_class_decr[index])
             index = index + 1
         index = 0
-        liste_joueurs = []
 
-        for i in serialised_joueurs:
-            # récupération des champs des joueurs un par un
-            liste1 = ["ID joueur n°:", int(serialised_joueurs[index]['id_joueur']),
-                      "nom,", (serialised_joueurs[index]['Nom']),
-                      "prénom ,", (serialised_joueurs[index]['Prenom']),
-                      "class:", int(serialised_joueurs[index]['Classement'])]
+        for i in liste_joueurs:
+        # Appel de la méthode model de mise à disposition du joueur à classer à partir de l'index de la boucle
+            joueur_a_classer=ClassJoueursModel.MiseADispoJourAClasser(self=True,index=index)
 
-            liste_joueurs.append(liste1)
-
-            saisie_new_cl = ClassVueAffichage.\
-                Input(self=True,
-                      texte1="Saisie nouveau classement joueur "
-                             "n°" + str(serialised_joueurs[index]['id_joueur']))
-
-            print()
+        # Appel de la méthode input de la vue pour saisie du nouveau classment du joueur
+            saisie_new_cl = ClassVueAffichage. \
+                Input(self=True, texte1="Saisie nouveau classement joueur n°" + joueur_a_classer)
 
             if saisie_new_cl == "E":
                 break
@@ -307,7 +282,9 @@ class ClassJoueurs():
 
             if saisie_new_cl.isdigit():
                 new_classement = saisie_new_cl
-                identifiant_joueur = int(serialised_joueurs[index]['id_joueur'])
+                identifiant_joueur = int(joueur_a_classer)
+
+                # Appel du modèle pour mise à jour du classement du joueur
                 ClassJoueursModel.UpdateClassJoueurs(self=True,
                                                      nom_donnees="Classement",
                                                      donnees=new_classement,
@@ -315,3 +292,4 @@ class ClassJoueurs():
             else:
                 print("pas de modification de classement pour ce joueur")
             index = index + 1
+
