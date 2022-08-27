@@ -6,7 +6,7 @@ class Class_Round():
     from Controleur.fonctions import ClassFonctions
     from datetime import datetime
     from Controleur.Ctrl_Tournoi import Class_Tournoi
-    from Modele.Tournoi import ClassTournoi
+    from Modele.Tournoi import ClassModTournoi
 
     def creat_round():
         from Controleur.fonctions import ClassFonctions

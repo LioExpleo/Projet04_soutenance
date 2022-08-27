@@ -12,53 +12,16 @@ class ClassJoueurs():
         from Modele.Joueurs import ClassJoueursModel
         # CREATION DE L'ID DU JOUEUR ************************************
 
-        from tinydb import TinyDB, Query
-        Todo = Query()
-        db_joueurs = TinyDB('joueurs.json')
-        # Rechercher un id libre dans la base de donnée
-        # en incrémentant l'id de test jusqu'à trouver un ID libre
-        joueur_cherche = 1
-        joueur_trouve = 0
-        id_libre = 0
-        # Si l' id_joueur_cherché n'est pas trouvé,
-        # on le prend pour le mettre à l'id du nouveau joueur
-        # sinon, on reboucle jusqu'a trouver un id libre.
-        # On commence par regarder si l'id 1 existe
-        joueur_trouve = db_joueurs.search(Todo.id_joueur == joueur_cherche)
-        joueur_trouv = str(joueur_trouve)
-        # recherche de la position de id_joueur dans la chaine
-        char = 'id_joueur'
-        PositDebNbre = (joueur_trouv.find(char))
-        # recherche de la position de nom dans la chaine
-        char = "nom"
-        PositFinNbre = (joueur_trouv.find(char))
+        # Appel du Modèle pour création d'un identifiant du joueur, retourne le prochain identifiant libre
+        str_id_libre= ClassJoueursModel.CreatIdentifiantJoueur(self=True)
 
-        # Recherche de l'id à partir des positions précédentes et suivantes'
-        id_joueur = joueur_trouv[(PositDebNbre + 12): (PositFinNbre - 3)]
-
-        # tant que l'id cherché existe,
-        # on recherche jusqu'à en trouver un libre en l'incrémentant
-        while (id_joueur != ""):
-            joueur_cherche = joueur_cherche + 1
-            joueur_trouve = db_joueurs.search(Todo.id_joueur == joueur_cherche)
-            joueur_trouv = str(joueur_trouve)
-            char = 'id_joueur'
-            PositDebNbre = (joueur_trouv.find(char))
-
-            char = "nom"
-            PositFinNbre = (joueur_trouv.find(char))
-
-            id_joueur = joueur_trouv[(PositDebNbre + 12): (PositFinNbre - 3)]
-
-        else:
-            id_libre = joueur_cherche
-        str_id_libre = str(id_libre)
         ClassVueAffichage.Affichage(self=True,
                                     texte1=str_id_libre, texte2="", texte3="")
 
+        # Appel de la méthode de saisie dans vue pour saisie du nom
         nom = ClassVueAffichage.Input(self=True, texte1="saisie nom :")
         if nom == "":
-            nom = ("Joueur " + str(id_libre))
+            nom = ("Joueur " + str_id_libre)
             ClassVueAffichage.Affichage(self=True,
                                         texte1="en absence de nom, le nom par "
                                                "défaut est " + nom,
@@ -83,30 +46,34 @@ class ClassJoueurs():
 
         prenom = ClassVueAffichage.Input(self=True,
                                          texte1="saisie prénom :")
+
+        # Appel de la méthode de saisie dans vue pour saisie du prénom
         if prenom == "":
-            prenom = ("Prenom " + str(id_libre))
+            prenom = ("Prenom " + str_id_libre)
             ClassVueAffichage.Affichage(self=True, texte1="en absence de prenom, le prenom "
                                                           "par défaut est " + prenom,
                                         texte2="", texte3="")
         if prenom == "r":
-            prenom = ("Prenom " + str(id_libre))
+            prenom = ("Prenom " + str_id_libre)
             ClassVueAffichage.Affichage(self=True, texte1="r est un nom interdit, réservé "
                                                           "à commande clavier, le prenom "
                                                           "par défaut est " + prenom,
                                         texte2="", texte3="")
         if prenom == "E":
-            prenom = ("Prenom " + str(id_libre))
+            prenom = ("Prenom " + str_id_libre)
             ClassVueAffichage.Affichage(self=True, texte1="E est un nom interdit, "
                                                           "cela correspond à une commande clavier, "
                                                           "le prenom par défaut enregistré "
                                                           "est " + prenom,
                                         texte2="", texte3="")
 
+        # Appel de la méthode de saisie dans vue pour saisie de la date de naissance
         date_naissance = ClassVueAffichage.Input(self=True,
                                                  texte1="date de naissance (format DD/MM/YYYY):")
         if date_naissance == "":
             date_naissance = "01-01-1900"
 
+        # Appel de la méthode de saisie dans vue pour saisie sexe
         sexe = ClassVueAffichage.Input(self=True, texte1="saisie sexe h ou f ou nc :")
         if sexe == "":
             sexe = "nc"
@@ -115,63 +82,45 @@ class ClassJoueurs():
                                         texte2="", texte3="")
             # print("en absence d'indication, le sexe est indiqué nc")
 
+        # Appel de la méthode de saisie dans vue pour saisie du classement
         classement = ClassVueAffichage.Input(self=True, texte1="classement :")
-        # classement = input("classement : \n")
         if classement.isdigit():
             ClassVueAffichage.Affichage(self=True, texte1="classement " + str(classement) + " ok",
                                         texte2="", texte3="")
-            # print("classement ok")
         else:
-            # classement = 10000
-            classement = id_libre + 100
+            # classement par défaut
+            classement = int(str_id_libre) + 100
             ClassVueAffichage.Affichage(self=True, texte1="Absence saisie, classement, "
                                                           "par défaut est numéro id + "
                                                           "100, " + str(classement),
                                         texte2="", texte3="")
 
-        # Mise à disposition des attributs au modèle pour sérialisation et enregistrement de donnée
-        id_joueur = id_libre
+        # Mise à disposition des attributs de la méthode du modèle pour sérialisation et enregistrement de donnée
+        id_joueur = int(str_id_libre)
         ClassJoueursModel.CreatJoueur(self=True, id_joueur=id_joueur, nom=nom, prenom=prenom,
                                       date_naissance=date_naissance, sexe=sexe, classement=classement)
         return ()
 
     def lect_joueurs():
         from Vue.affichage import ClassVueAffichage
-        from tinydb import TinyDB
-        db_joueurs = TinyDB('joueurs.json')
-        # suppression {, [, et qui remplace chaque { par un \n
-        serialised_joueurs = db_joueurs.all()
-        str_joueurs = str(serialised_joueurs)
-        print_liste_joueurs = ""
-        char = "{"
-        for x in range(len(char)):
-            print_liste_joueurs = str_joueurs.replace(char, "\n")
-            print_liste_joueurs = print_liste_joueurs.replace("}", "")
-            print_liste_joueurs = print_liste_joueurs.replace(",", "         ")
-            print_liste_joueurs = print_liste_joueurs.replace("'", " ")
-            # print_liste_joueurs = print_liste_joueurs.replace(":", " ")
-
-        print_liste_joueurs = print_liste_joueurs.replace("[", "")
-        print_liste_joueurs = print_liste_joueurs.replace("]", "    ")
+        from Modele.Joueurs import ClassJoueursModel
+        # Appel du modèle pour mise à disposition de la liste des joueurs de la base de donnée.
+        liste_joueurs = ClassJoueursModel.MisADispoJoueurBddList(self=True)
 
         # Appel de la méthode vue du modèle VMC
         # pour affichage de la résultante de la base de données
         ClassVueAffichage.Affichage(self=True, texte1="",
                                     texte2="Joueurs de la base de données :",
-                                    texte3=print_liste_joueurs + "\n")
+                                    texte3=liste_joueurs + "\n")
         return ()
 
     def sup_joueurs(menu_niv_2):
-        from tinydb import TinyDB, Query
-        Todo = Query()
-        db_joueurs = TinyDB('joueurs.json')
-        menu_niv_2 = int(menu_niv_2)
-        db_joueurs.remove(Todo.id_joueur == menu_niv_2)
+        from Modele.Joueurs import ClassJoueursModel
+        ClassJoueursModel.SupJoueur(self=True, numero_joueur=int(menu_niv_2))
 
     def purge_joueurs():
-        from tinydb import TinyDB
-        db_joueurs = TinyDB('joueurs.json')
-        db_joueurs.truncate()
+        from Modele.Joueurs import ClassJoueursModel
+        ClassJoueursModel.PurgeBddJoueur()
 
     def lecture_joueurs_class_nom():
         # Récupération des informations du fichier

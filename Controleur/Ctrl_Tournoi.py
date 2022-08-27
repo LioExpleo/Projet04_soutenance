@@ -2,56 +2,18 @@ class Class_Tournoi():
     def __init__(self):
         pass
 
-    def creat_new_tournois(self):
+    def creat_new_tournois():
         # identifiant tournoi
         import os
         import datetime
         from Vue.affichage import ClassVueAffichage
-        from Modele.Tournoi import ClassTournoi
-        from tinydb import TinyDB, Query
-        Todo = Query()
-        db_tournoi = TinyDB('tournois.json')
+        from Modele.Tournoi import ClassModTournoi
 
-        # Rechercher un id libre dans la base de donnée en incrémentant
-        # l'id de test jusqu'à trouver un ID libre
-        tournoi_cherche = 1
-        tournoi_trouve = 0
-        id_libre = 0
+        # Appel du Modèle pour création d'un identifiant du tournoi, retourne le prochain identifiant libre
+        str_id_libre = ClassModTournoi.CreatIdentifiantTournoi(self=True)
+        id_tournoi = int(str_id_libre)
 
-        # Si l' id_tournoi_cherché n'est pas trouvé, on le prend pour le
-        # mettre à l'id du nouveau tournoi
-        # sinon, on reboucle jusqu'a trouver un id libre. On commence
-        # par regarder si l'id 1 existe
-        tournoi_trouve = db_tournoi.search(Todo.id_tournoi == tournoi_cherche)
-        tournoi_trouv = str(tournoi_trouve)
-        # recherche de la position de id_joueur dans la chaine
-        char = 'id_tournoi'
-        PositDebNbre = (tournoi_trouv.find(char))
-        # recherche de la position de nom dans la chaine
-        char = "nom"
-        PositFinNbre = (tournoi_trouv.find(char))
-
-        # Recherche de l'id à partir des positions précédentes et suivantes'
-        id_tournoi = tournoi_trouv[(PositDebNbre + 12): (PositFinNbre - 3)]
-
-        # tant que l'id cherché existe, on recherche jusqu'à en trouver
-        # un libre en l'incrémentant
-        while (id_tournoi != ""):
-            tournoi_cherche = tournoi_cherche + 1
-            tournoi_trouve = db_tournoi.search(Todo.id_tournoi == tournoi_cherche)
-            tournoi_trouv = str(tournoi_trouve)
-            char = 'id_tournoi'
-            PositDebNbre = (tournoi_trouv.find(char))
-
-            char = "nom"
-            PositFinNbre = (tournoi_trouv.find(char))
-
-            id_tournoi = tournoi_trouv[(PositDebNbre + 12): (PositFinNbre - 3)]
-
-        else:
-            id_libre = tournoi_cherche
-
-        id_tournoi = id_libre
+        # Appel Vue pour saisie du nom
         nom = ClassVueAffichage.Input(self=True, texte1="saisie nom :")
 
         if nom == "":
@@ -84,12 +46,14 @@ class Class_Tournoi():
 
         lieu = ClassVueAffichage.Input(self=True, texte1="saisie lieu :")
 
+        # Appel Vue pour saisie du lieu
         if lieu == "":
             lieu = ("Lieu " + str(id_tournoi))
 
         date = ClassVueAffichage.Input(self=True,
                                        texte1="date (format DD/MM/YYYY): ")
 
+        # Appel du Vue pour saisie de la date
         if date == "":
             date_heure = datetime.datetime.now()
             str_date_heure = str(date_heure)
@@ -98,6 +62,7 @@ class Class_Tournoi():
             str_date_heure = str_date_heure[0:(PositChar - 9)]
             date = str_date_heure
 
+        # Appel du Vue pour saisie du nombre de rounds
         nbr_rounds = ClassVueAffichage.Input(self=True,
                                              texte1="saisie nombre de rounds, "
                                                     "4 rounds si pas de saisie "
@@ -124,29 +89,15 @@ class Class_Tournoi():
                                         texte3="")
             nbr_rounds = "4"
 
-        id_j1 = ""
-        id_j2 = ""
-        id_j3 = ""
-        id_j4 = ""
-        id_j5 = ""
-        id_j6 = ""
-        id_j7 = ""
-        id_j8 = ""
-        round_1 = ""
-        round_2 = ""
-        round_3 = ""
-        round_4 = ""
-        round_5 = ""
-        round_6 = ""
-        round_7 = ""
+        id_j1 = ""; id_j2 = ""; id_j3 = ""; id_j4 = ""; id_j5 = ""; id_j6 = ""; id_j7 = ""; id_j8 = ""
+        round_1 = ""; round_2 = ""; round_3 = ""; round_4 = ""; round_5 = ""; round_6 = ""; round_7 = ""
 
         # saisie du type de matchs, bullet, blitz, ou coup rapide
         temps_matchs = ""
         saisie = ""
         list_tps = {1: "bullet", 2: "blitz", 3: "coup rapide"}
-
         while saisie != "1" and saisie != "2" and saisie != "3":
-
+            # Appel du modèle Vue pour saisie type de temps du match
             saisie = ClassVueAffichage.Input(self=True,
                                              texte1="saisie type de match "
                                                     ": \"1\" pour bullet, "
@@ -161,106 +112,84 @@ class Class_Tournoi():
         print(temps_matchs)
         print()
 
-        # saisie des remarques générale organisateur tournoi
+        # appel vue pour saisie des remarques générale organisateur
         remarque_tournoi = ClassVueAffichage.Input(self=True,
                                                    texte1="saisie des remarques "
                                                           "de l'organisateur "
                                                           "du tournoi :")
         print()
-
-        # Serialize l'instance tournoi
-        tournoi = {"id_tournoi": id_tournoi, "nom": nom, "lieu": lieu,
-                   "date du tournoi": date,
-                   "nombre de rounds": nbr_rounds, "id_j1": id_j1, "id_j2": id_j2,
-                   "id_j3": id_j3, "id_j4": id_j4, "id_j5": id_j5, "id_j6": id_j6,
-                   "id_j7": id_j7, "id_j8": id_j8, "round_1+match": round_1,
-                   "round_2+match": round_2, "round_3+match": round_3,
-                   "round_4+match": round_4, "round_5+match": round_5,
-                   "round_6+match": round_6, "round_7+match": round_7,
-                   "Temps": temps_matchs,
-                   "Remarques de l'organisateur": remarque_tournoi}
-
-        # Insertion du joueur saisi dans la base de donnée
-        ClassTournoi.CreatNewTournois(self=True, tournoi=tournoi)
-        str_poubl = ""
-        str_poubl = "Tournoi " + nom + ", avec id tournoi " + "\"" + str(id_tournoi) + "\"" + ", créé."
-        ClassVueAffichage.Affichage(self=True,
-                                    texte1=str_poubl,
-                                    texte2="Date du tournoi : " + str(date),
-                                    texte3="")
-        str_poubl = ""
+        # Appel du modele tournoi pour Serialisation et enregistrement des données dans la base
+        ClassModTournoi.CreatNewTournois(self=True, id_tournoi = id_tournoi, nom=nom, lieu=lieu, date=date,
+                                         nbr_rounds=nbr_rounds, id_j1=id_j1, id_j2=id_j2, id_j3=id_j3, id_j4=id_j4,
+                                         id_j5=id_j5, id_j6=id_j6, id_j7=id_j7, id_j8=id_j8, round_1=round_1,
+                                         round_2=round_2, round_3=round_3, round_4=round_4, round_5=round_5,
+                                         round_6=round_6, round_7=round_7, temps_matchs=temps_matchs,
+                                         remarque_tournoi=remarque_tournoi)
         return ()
 
-    def lect_tournois(self):
-        from tinydb import TinyDB
-        db_tournois = TinyDB('tournois.json')
-
-        serialised_tournois = db_tournois.all()
+    def lect_tournois():
+        from Modele.Tournoi import ClassModTournoi
+        # Appel du modèle tournoi pour récupérer le liste des tournois
+        tournois=ClassModTournoi.AffichageTournois(self=True)
         index = 0
-        for i in serialised_tournois:
-            print(serialised_tournois[index])
+        for i in tournois:
+            print(tournois[index])
             print()
             index = index + 1
         return ()
 
     # supprimer un tournoi de la liste pour éventuellement le ressaisir
     def sup_tournois(menu_niv_2):
-        from tinydb import TinyDB, Query
-        Todo = Query()
-        db_tournois = TinyDB('tournois.json')
-        id_tournoi_del = int(menu_niv_2)
-        db_tournois.remove(Todo.id_tournoi == id_tournoi_del)
+        from Modele.Tournoi import ClassModTournoi
+        if menu_niv_2.isdigit():
+            id_tournoi_del = int(menu_niv_2)
+            ClassModTournoi.SupprimTournois(self=True, numero_tournoi= id_tournoi_del)
+        else:
+            print("le numéro de tournoi doit être un nombre")
 
-    def purge_tournois(self):
-        from tinydb import TinyDB
-        db_tournois = TinyDB('tournois.json')
-        db_tournois.truncate()
+    def purge_tournois():
+        from Modele.Tournoi import ClassModTournoi
+        ClassModTournoi.PurgeTournois()
 
-    def charge_joueurs_tournoi(self):
+    def charge_joueurs_tournoi():
         import os
-        from tinydb import TinyDB
         from Controleur.fonctions import ClassFonctions
         from Vue.affichage import ClassVueAffichage
-        from Modele.Tournoi import ClassTournoi
+        from Modele.Tournoi import ClassModTournoi
 
+        # Appel de la fonction de sélection du tournoi
         id_tournoi_select = ClassFonctions.select_tournoi()
         # Appel de la méthode vue du modèle VMC pour affichage de la
         # résultante de la base de données
         str_poubl = ""
-        str_poubl = "Chargment des joueurs dans le tournoi " + id_tournoi_select
+        str_poubl = "Chargement des joueurs dans le tournoi " + id_tournoi_select
         ClassVueAffichage.Affichage(self=True, texte1=str_poubl, texte2="", texte3="")
         str_poubl = ""
         list_joueurs = []
 
-        db_joueurs = TinyDB('joueurs.json')
-
-        # JOUEURS A CHARGER
         index = 0
-        # faire une fonction qui supprime les {, [, et qui
-        # remplace chaque { par un \n
-        serialised_joueurs = db_joueurs.all()
-        str_joueurs = str(serialised_joueurs)
+        # Appel du modèle pour mise à disposition de la liste des joueurs de la base de donnée.
+        from Modele.Joueurs import ClassJoueursModel
+        serie_joueurs = ClassJoueursModel.MisADispoJoueurChargTournoi(self=True)
+        str_joueurs = str(serie_joueurs)
 
+
+        # Création d'une liste temporaire de joueurs
         char = "{"
         joueur_cherche = 1
-
         index = 1
-        for i in serialised_joueurs:
+        for i in serie_joueurs:
             index = index + 1
-
             # Extraction de l'id
             char = 'id_joueur'
             PositDebNbre = (str_joueurs.find(char))
-
             char = "Nom"
             PositFinNbre = (str_joueurs.find(char))
-
             id_joueur = str_joueurs[(PositDebNbre + 12): (PositFinNbre - 3)]
 
             # Supprimer le 1er joueur traité de la trame du dictionnaire car il ne peut être chargé deux fois
             char = '}'
             PositDebNbre = (str_joueurs.find(char))
-
             str_joueurs = str_joueurs[(PositDebNbre + 2):-1]
             list_joueurs.append(id_joueur)
             joueur_cherche = joueur_cherche + 1
@@ -312,14 +241,12 @@ class Class_Tournoi():
 
                 id_tournoi_select = int(id_tournoi_select)
 
-                ClassTournoi.UpdateJoueurTournois(self=True,
+                # Appel du modèle pour charger le joueur dans la base de données du tournoi
+                ClassModTournoi.UpdateJoueurTournois(self=True,
                                                   nom_donnees=id_jx,
                                                   donnees=id_a_charger,
                                                   numero_tournoi=id_tournoi_select)
-                '''
-                db_tournois.update({id_jx: id_a_charger},
-                                   Todo.id_tournoi == id_tournoi_select)
-                '''
+
                 joueur_a_charger = joueur_a_charger + 1
 
             else:
