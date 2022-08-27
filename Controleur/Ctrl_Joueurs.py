@@ -132,7 +132,7 @@ class ClassJoueurs():
         # Mise à disposition des attributs au modèle pour sérialisation et enregistrement de donnée
         id_joueur = id_libre
         ClassJoueursModel.CreatJoueur(self=True, id_joueur=id_joueur, nom=nom, prenom=prenom,
-                                      date_naissance=date_naissance,sexe=sexe, classement=classement)
+                                      date_naissance=date_naissance, sexe=sexe, classement=classement)
         return ()
 
     def lect_joueurs():
@@ -182,7 +182,10 @@ class ClassJoueurs():
         index = 0
         liste_joueurs = []
         for i in serialised_joueurs:
-            liste1 = ["ID joueur n°:", int(serialised_joueurs[index]['id_joueur']), "nom,", (serialised_joueurs[index]['Nom']), "prénom ,", (serialised_joueurs[index]['Prenom']), "class:", int(serialised_joueurs[index]['Classement'])]
+            liste1 = ["ID joueur n°:", int(serialised_joueurs[index]['id_joueur']),
+                      "nom,", (serialised_joueurs[index]['Nom']),
+                      "prénom ,", (serialised_joueurs[index]['Prenom']),
+                      "class:", int(serialised_joueurs[index]['Classement'])]
             liste_joueurs.append(liste1)
             index = index + 1
 
@@ -252,7 +255,7 @@ class ClassJoueurs():
         from Modele.Joueurs import ClassJoueursModel
 
         # Appel de la méthode model de mise à disposition de la liste des joueurs à partir de la bdd
-        liste_joueurs= ClassJoueursModel.LectListeListeJoueursBdd()
+        liste_joueurs = ClassJoueursModel.LectListeListeJoueursBdd()
         print("liste joueurs")
         print(liste_joueurs)
 
@@ -269,8 +272,8 @@ class ClassJoueurs():
         index = 0
 
         for i in liste_joueurs:
-        # Appel de la méthode model de mise à disposition du joueur à classer à partir de l'index de la boucle
-            joueur_a_classer=ClassJoueursModel.MiseADispoJourAClasser(self=True,index=index)
+            # Appel de la méthode model de mise à disposition du joueur à classer à partir de l'index de la boucle
+            joueur_a_classer = ClassJoueursModel.MiseADispoJourAClasser(self=True, index=index)
 
         # Appel de la méthode input de la vue pour saisie du nouveau classment du joueur
             saisie_new_cl = ClassVueAffichage. \
@@ -292,4 +295,3 @@ class ClassJoueurs():
             else:
                 print("pas de modification de classement pour ce joueur")
             index = index + 1
-
