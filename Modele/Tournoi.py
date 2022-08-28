@@ -60,7 +60,6 @@ class ClassModTournoi:
         from tinydb import TinyDB, Query
         Todo = Query()
         db_tournois = TinyDB('tournois.json')
-
         db_tournois.update({nom_donnees: donnees},
                            Todo.id_tournoi == numero_tournoi)
         return ()
@@ -119,9 +118,8 @@ class ClassModTournoi:
 
     def SupprimTournois(self, numero_tournoi):
         from tinydb import TinyDB, Query
-        Todo=Query()
+        Todo = Query()
         db_tournois = TinyDB('tournois.json')
-        tournois = db_tournois.all()
         db_tournois.remove(Todo.id_tournoi == numero_tournoi)
         return ()
 
@@ -132,20 +130,22 @@ class ClassModTournoi:
         return ()
 
     def Lect1Tournoi(self, tournoi_select):
-        import os
         from tinydb import TinyDB, where
-        from Vue.affichage import ClassVueAffichage
-        from Controleur.fonctions import ClassFonctions
         db_tournois = TinyDB('tournois.json')
         tournoi = (db_tournois.search(where('id_tournoi') == tournoi_select))
         return (tournoi)
 
-    def Lect1Tournoi(self, tournoi_select):
-        import os
-        from tinydb import TinyDB, where
-        from Vue.affichage import ClassVueAffichage
-        from Controleur.fonctions import ClassFonctions
+    def LectTournoi():
+        from tinydb import TinyDB
         db_tournois = TinyDB('tournois.json')
-        tournoi = (db_tournois.search(where('id_tournoi') == tournoi_select))
+        tournoi = db_tournois.all()
         return (tournoi)
 
+    def UpdateDonneesTournoi(self, numero_tournoi, nom_donnee, donnee):
+
+        from tinydb import TinyDB, Query
+        Todo = Query()
+        db_tournois = TinyDB('tournois.json')
+        db_tournois.update({nom_donnee: donnee},
+                           Todo.id_tournoi == numero_tournoi)
+        return ()

@@ -9,22 +9,18 @@ class Class_Round():
     from Modele.Tournoi import ClassModTournoi
 
     def creat_round():
+        from Modele.Tournoi import ClassModTournoi
         from Controleur.fonctions import ClassFonctions
+        # selection du tournoi
         tournoi_select = ClassFonctions.select_tournoi()
-        # print("Prochain round tournoi sélectionné : " + tournoi_select)
-
-        # Affichage du tournoi
-        from tinydb import TinyDB, where
-        db_tournois = TinyDB('tournois.json')
         int_tournoi_select = int(tournoi_select)
 
-        # récup le tournoi sélectionné à partir de la base de données du tournoi
-        tournoi = (db_tournois.search(where('id_tournoi') == int_tournoi_select))
+        # Appel du modèle pour mettre à disposition les données du round sélectionné
+        tournoi = ClassModTournoi.Lect1Tournoi(self=True, tournoi_select=int_tournoi_select)
 
         tournoi_round_en_cours = 0
         try:
             tournoi_round_en_cours = (tournoi[0]['round_en_cours'])
-            # print("Round précédent : " + str(tournoi_round_en_cours))
             tournoi_round_en_cours = (tournoi[0]['round_en_cours'])
             nb_r = (tournoi[0]['nombre de rounds'])
             if str(tournoi_round_en_cours) == str(nb_r):
@@ -37,8 +33,6 @@ class Class_Round():
                     print("le nombre de round maximum a déjà été créé pour"
                           " ce tournoi")
                     quit()
-                # else:
-                # creat_round_2(tournoi_select)
 
         except KeyError:
             print("création du round 1")
@@ -78,6 +72,8 @@ class Class_Round():
                       "d'en créer un nouveau")
                 quit()
             scoreMatchRound4 = scoreMatchRound4
+
+        # selon que le 1er round est été créé ou non, appel de création round 1 ou round au delà
         if tournoi_round_en_cours == 0:
             Class_Round.creat_round_1(tournoi_select)
         else:
@@ -88,22 +84,15 @@ class Class_Round():
         import datetime
         import os
         from Controleur.fonctions import ClassFonctions
+        from Modele.Tournoi import ClassModTournoi
+        from Modele.Joueurs import ClassJoueursModel
+
         print("CreatRound_1")
         liste_liste_class_joueur = []
-        # Affichage du tournoi
-        from tinydb import TinyDB, Query, where
-        Todo = Query()
-        db_tournois = TinyDB('tournois.json')
-        db_joueurs = TinyDB('joueurs.json')
-        print("db_tournois.search(where('id_tournoi')==tournoi_select")
+
+        # Appel du modèle pour mettre à disposition les données du round sélectionné
         int_tournoi_select = int(tournoi_select)
-
-        # charger le tournoi selectionné à partir de la base de données tournoi
-        tournoi = (db_tournois.search(where('id_tournoi') == int_tournoi_select))
-        print(tournoi)
-
-        # Récupération des données de la base de donnée tournoi pour constitution
-        # des rounds
+        tournoi = ClassModTournoi.Lect1Tournoi(self=True, tournoi_select=int_tournoi_select)
 
         id_t = (tournoi[0]['id_tournoi'])
         print("id tournoi : " + str(id_t))
@@ -150,8 +139,6 @@ class Class_Round():
 
         print("nombre de rounds")
         print(nb_r)
-
-        db_joueurs = TinyDB('joueurs.json')
         index_joueur = 0
         while (index_joueur < 8):
             print("id_joueur " + str(index_joueur) + ": ")
@@ -172,7 +159,8 @@ class Class_Round():
                       "chargés pour créer des rounds")
                 os._exit(0)
 
-            joueur = (db_joueurs.search(where('id_joueur') == int_id_joueur_en_cours))
+            # Appel du modele joueur pour mise à disposition d'un joueur
+            joueur = ClassJoueursModel.MisADispoJoueurTournoi(self=True, id_joueur=int_id_joueur_en_cours)
             dict_joueur = ClassFonctions.creat_dict(donnees_db=joueur)
 
             print("identifiant joueur :")
@@ -206,8 +194,6 @@ class Class_Round():
             print(liste_liste_class_joueur)
 
             index_joueur = index_joueur + 1
-
-            # print("FIN RECUPERATION DES DONNEES DU JOUEUR")
 
         print("liste_liste_class_joueur : ")
         print(liste_liste_class_joueur)
@@ -315,45 +301,35 @@ class Class_Round():
         liste_round_1.append(liste_paire_3)
         liste_round_1.append(liste_paire_4)
 
-        from tinydb import TinyDB, Query, where
-        db_tournois = TinyDB('tournois.json')
         print()
         print("numéro de tournoi")
         print(int_tournoi_select)
 
-        # FAIRE UNE METHODE DANS MODELE ET L'APPELER ICI POUR RESPECT MVC
-        # La sélection du round 1 est sauvegardée dans la base de données tournoi
-        # il faudra écraser l'instance avec le résultat en plus des matchs
-        # Si round_1+match n'existe pas dans la base de donnée, il est créé
-        db_tournois.update({"round_1+match": liste_round_1},
-                           Todo.id_tournoi == int_tournoi_select)
+        # appel du modele tournoi pour enregistrer le nouveau tournoi dans la base de données
+        ClassModTournoi.UpdateDonneesTournoi(self=True,
+                                             numero_tournoi=int_tournoi_select,
+                                             nom_donnee="round_1+match",
+                                             donnee=liste_round_1)
 
-        # Ecriture du round en cours dans la base de donnée du tournoi
-        db_tournois.update({"round_en_cours": 1},
-                           Todo.id_tournoi == int_tournoi_select)
-
+        # appel du modele tournoi pour enregistrer le round en cours
+        ClassModTournoi.UpdateDonneesTournoi(self=True,
+                                             numero_tournoi=int_tournoi_select,
+                                             nom_donnee="round_en_cours",
+                                             donnee=1)
         return ()
 
     def creat_round_2(tournoi_select):
         import datetime
         import os
         from Controleur.fonctions import ClassFonctions
-        from Modele.Tournoi import ClassTournoi
+        from Modele.Tournoi import ClassModTournoi
+        from Modele.Joueurs import ClassJoueursModel
         from operator import itemgetter
-        from tinydb import TinyDB, Query, where
-        # print("CreatRound_2 et plus. Début du programme")
+
         liste_liste_class_joueur = []
-        Todo = Query()
-        db_tournois = TinyDB('tournois.json')
-        db_joueurs = TinyDB('joueurs.json')
+
         int_tournoi_select = int(tournoi_select)
-
-        # charger le tournoi selectionné à partir de la base de données
-        # dans tournoi
-        tournoi = (db_tournois.search(where('id_tournoi') == int_tournoi_select))
-
-        # Récupération des informations du fichier JSON du tournoi pour
-        # créer les rounds
+        tournoi = ClassModTournoi.Lect1Tournoi(self=True, tournoi_select=int_tournoi_select)
 
         Tournoi_round_en_cours = (tournoi[0]['round_en_cours'])
         print("Round précédent : " + str(Tournoi_round_en_cours))
@@ -386,7 +362,6 @@ class Class_Round():
         id_j8 = (tournoi[0]['id_j8'])
         list_id_joueur.append(id_j8)
 
-        db_joueurs = TinyDB('joueurs.json')
         index_joueur = 0
         list_jx = []
         while (index_joueur < 8):
@@ -407,7 +382,8 @@ class Class_Round():
                       "sont chargés pour créer des rounds Y")
                 os._exit(0)
 
-            joueur = (db_joueurs.search(where('id_joueur') == int_id_joueur_en_cours))
+            # Appel du modele joueur pour mise à disposition d'un joueur
+            joueur = ClassJoueursModel.MisADispoJoueurTournoi(self=True, id_joueur=int_id_joueur_en_cours)
             dict_joueur = ClassFonctions.creat_dict(joueur)
             # identifiant joueur
             round_id_joueur = (dict_joueur["id_joueur"])
@@ -428,11 +404,6 @@ class Class_Round():
                                   round_prenom_joueur]
 
             liste_liste_class_joueur.append(liste_class_joueur)
-
-            # Liste avec id joueur et classement pour construction round > 1
-            # Liste contient l'id, le classement, et un score à 0 pour le moment'
-            # Attention, il ne faudra pas réécraser le score avec 0 lors
-            # des prochains rounds
 
             # SI TOURNOI ROUND EN COURS = 1 FAIRE
             list_ja = [round_id_joueur, int(round_class_joueur), 0]
@@ -783,8 +754,6 @@ class Class_Round():
         print("liste_round" + str(Tournoi_round_en_cours + 1))
         print(liste_round_x)
 
-        from tinydb import TinyDB
-        db_tournois = TinyDB('tournois.json')
         print()
         print("numéro de tournoi")
         print(int_tournoi_select)
@@ -797,19 +766,19 @@ class Class_Round():
 
         # update la base de donnée
         if Tournoi_round_en_cours <= int(nb_r):
-
             update_round = ("round_" + str(Tournoi_round_en_cours) + "+match")
-            # db_tournois.update({update_round: liste_round_x},
-            #                    Todo.id_tournoi == int_tournoi_select)
-
-            ClassTournoi.UpdateRoundTournois(self=True,
-                                             nom_donnees=update_round,
-                                             donnees=liste_round_x,
-                                             numero_tournoi=int_tournoi_select)
-
             print("nouveau round")
             print(Tournoi_round_en_cours)
-            db_tournois.update({"round_en_cours": Tournoi_round_en_cours},
-                               Todo.id_tournoi == int_tournoi_select)
 
+            # appel du modele tournoi pour enregistrer le nouveau tournoi dans la base de données
+            ClassModTournoi.UpdateDonneesTournoi(self=True,
+                                                 numero_tournoi=int_tournoi_select,
+                                                 nom_donnee=update_round,
+                                                 donnee=(liste_round_x))
+
+            # appel du modele tournoi pour enregistrer le round en cours
+            ClassModTournoi.UpdateDonneesTournoi(self=True,
+                                                 numero_tournoi=int_tournoi_select,
+                                                 nom_donnee="round_en_cours",
+                                                 donnee=Tournoi_round_en_cours)
         return ()

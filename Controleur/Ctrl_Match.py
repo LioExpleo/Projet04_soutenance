@@ -4,20 +4,21 @@ class Class_Match():
 
     def creat_match():
         import os
-        from tinydb import TinyDB, where
         from Controleur.fonctions import ClassFonctions
         from Vue.affichage import ClassVueAffichage
-        # from Controleur.Ctrl_Tournoi import select_tournoi
-        db_tournois = TinyDB('tournois.json')
+        from Modele.Tournoi import ClassModTournoi
         print("saisie des scores du match")
         tournoi_select = ClassFonctions.select_tournoi()
         int_tournoi_select = int(tournoi_select)
         print("int_tournoi_select : " + str(int_tournoi_select))
-        tournoi = (db_tournois.search(where('id_tournoi') == int_tournoi_select))
-        # print("tournoi" + str(tournoi))
-        id_t = (tournoi[0]['id_tournoi'])
+
+        # Appel du modele pour mise a disposition données tournoi
+        db_tournoi = ClassModTournoi.Lect1Tournoi(self=True, tournoi_select=int_tournoi_select)
+        print("tournoi" + str(db_tournoi))
+
+        id_t = (db_tournoi[0]['id_tournoi'])
         try:
-            round_en_cours = (tournoi[0]['round_en_cours'])
+            round_en_cours = (db_tournoi[0]['round_en_cours'])
             ClassVueAffichage.Affichage(self=True,
                                         texte1="round en cours :",
                                         texte2=round_en_cours,
@@ -68,26 +69,15 @@ class Class_Match():
         # charger le tournoi selectionné à partir de
         # la base de données dans tournoi
         # tournoi_select = select_tournoi()
-
-
         # Appel du modèle pour mise à disposition des données du tournoi
 
-        from tinydb import TinyDB, Query, where
-        Todo = Query()
-        db_tournois = TinyDB('tournois.json')
         int_tournoi_select = tournoi
         tournoi_select = tournoi
-        tournoi = (db_tournois.search(where('id_tournoi') == int_tournoi_select))
-
-        print(tournoi)
-
-        # Récupération des informations du fichier
-        # JSON du tournoi pour vérifier le round en cours
-
-
-
+        # Appel du modele pour creation liste tournoi
+        db_tournoi = ClassModTournoi.Lect1Tournoi(self=True, tournoi_select=int(tournoi_select))
+        print(db_tournoi)
         try:
-            round_en_cours = (tournoi[0]['round_en_cours'])
+            round_en_cours = (db_tournoi[0]['round_en_cours'])
             ClassVueAffichage.Affichage(self=True,
                                         texte1="round_en_cours : ",
                                         texte2=round_en_cours,
@@ -103,11 +93,11 @@ class Class_Match():
                                         texte3="")
             os._exit(0)
 
-        List_de_liste_joueur = (tournoi[0]['round_en_cours'])
+        List_de_liste_joueur = (db_tournoi[0]['round_en_cours'])
         round_select = "round_" + str(round_en_cours) + "+match"
 
         # aller chercher les listes en fonction du round en cours
-        List_de_liste_joueur = (tournoi[0][round_select])
+        List_de_liste_joueur = (db_tournoi[0][round_select])
         print("paire 1")
         print(List_de_liste_joueur[1])
         print()
@@ -264,9 +254,6 @@ class Class_Match():
                                   liste_paire4_j1[1],
                                   liste_paire4_j2[0],
                                   liste_paire4_j2[1]))
-
-        from tinydb import TinyDB, Query, where
-        db_tournois = TinyDB('tournois.json')
         print()
         print("numéro de tournoi")
         print(int_tournoi_select)
@@ -302,10 +289,6 @@ class Class_Match():
 
         # chargment dans la base de données de
         # la fin de match du round en cours
-        nom_donne_fin_match = ("fin round " + str(round_en_cours))
-        donne_fin_match = str_date_heure_fin
-        db_tournois.update({nom_donne_fin_match: donne_fin_match},
-                           Todo.id_tournoi == int_tournoi_select)
 
         # chargement dans la base de données des scores des 4 matchs du round
         nom_donnees = "ScoreMatchRound" + str(round_en_cours)
@@ -320,42 +303,30 @@ class Class_Match():
         liste_4matchs.append(liste_paire3_j2)
         liste_4matchs.append(liste_paire4_j1)
         liste_4matchs.append(liste_paire4_j2)
-        # Appel du modele pour updater les donnees des matchs
-        # dans la base de donnée
-        ClassModTournoi.UpdateMatchTournois(self=True,
-                                         nom_donnees=nom_donnees,
-                                         donnees=liste_4matchs,
-                                         numero_tournoi=int_tournoi_select)
+
+        # Appel Modele Tournoi pour enregistrement des donnees dans la base de donnees
+        ClassModTournoi.UpdateDonneesTournoi(self=True, numero_tournoi=int_tournoi_select,
+                                             nom_donnee=nom_donnees, donnee=liste_4matchs)
 
     def creat_match_r2(tournoi, round):
         import datetime
         import os
         from Vue.affichage import ClassVueAffichage
-        from tinydb import TinyDB, Query, where
-        print("tournoi r1 : " + str(tournoi))
-        print("round r1 : " + str(round))
-        print()
-        print("saisie des scores du match")
+        from Modele.Tournoi import ClassModTournoi
 
-        # Vérifier que la saisie du numero du tournoi est correcte
-        Todo = Query()
-        db_tournois = TinyDB('tournois.json')
-        int_tournoi_select = tournoi
         tournoi_select = tournoi
-        print("int_tournoi_select")
-        print(int_tournoi_select)
 
-        # va chercher l'id du tournoi dans la base de donnée
-        tournoi = (db_tournois.search(where('id_tournoi') == int_tournoi_select))
-        print(tournoi)
+        # Appel du modele pour mise a disposition données tournoi
+        db_tournoi = ClassModTournoi.Lect1Tournoi(self=True, tournoi_select=int(tournoi_select))
+        print(db_tournoi)
 
         # Récupération des informations du fichier JSON
         # du tournoi pour vérifier le round en cours
-        id_t = (tournoi[0]['id_tournoi'])
+        id_t = (db_tournoi[0]['id_tournoi'])
         print("id tournoi : " + str(id_t))
 
         try:
-            round_en_cours = (tournoi[0]['round_en_cours'])
+            round_en_cours = (db_tournoi[0]['round_en_cours'])
             print("round_en_cours : " + str(round_en_cours))
 
         except KeyError:
@@ -365,12 +336,12 @@ class Class_Match():
                   "- R suivi de + - pour créer le 1er round")
             os._exit(0)
 
-        List_de_liste_joueur = (tournoi[0]['round_en_cours'])
+        List_de_liste_joueur = (db_tournoi[0]['round_en_cours'])
         round_select = "round_" + str(round_en_cours) + "+match"
         print(round_select)
 
         # aller chercher les listes en fonction du round en cours
-        List_de_liste_joueur = (tournoi[0][round_select])
+        List_de_liste_joueur = (db_tournoi[0][round_select])
 
         print("List_de_liste_joueur")
         print(List_de_liste_joueur)
@@ -533,8 +504,6 @@ class Class_Match():
                                   liste_paire4_j2[0],
                                   liste_paire4_j2[1]))
 
-        from tinydb import TinyDB
-        db_tournois = TinyDB('tournois.json')
         print()
         # print("numéro de tournoi")
         # print(int_tournoi_select)
@@ -614,16 +583,8 @@ class Class_Match():
         str_date_heure_fin = str_date_heure_fin[0:(PositChar)]
         print("fin round en cours " + str(round_en_cours) + " : " + str_date_heure_fin)
 
-        # chargement dans la base de données
-        # de la fin de match du round en cours
-        nom_donne_fin_match = ("fin round " + str(round_en_cours))
-        donne_fin_match = str_date_heure_fin
-        db_tournois.update({nom_donne_fin_match: donne_fin_match},
-                           Todo.id_tournoi == int_tournoi_select)
-
         # chargment dans la base de données des scores des 4 matchs du round
         nom_donnees = "ScoreMatchRound" + str(round_en_cours)
-        # print(nom_donnees)
 
         liste_4matchs = []
         liste_4matchs.append(liste_paire1_j1)
@@ -635,6 +596,7 @@ class Class_Match():
         liste_4matchs.append(liste_paire4_j1)
         liste_4matchs.append(liste_paire4_j2)
 
-        db_tournois.update({nom_donnees: liste_4matchs},
-                           Todo.id_tournoi == int_tournoi_select)
+        # Appel Modele Tournoi pour enregistrement des donnees dans la base de donnees
+        ClassModTournoi.UpdateDonneesTournoi(self=True, numero_tournoi=int(tournoi_select),
+                                             nom_donnee=nom_donnees, donnee=liste_4matchs)
         print()

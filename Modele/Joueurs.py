@@ -119,8 +119,7 @@ class ClassJoueursModel:
             print_liste_joueurs = print_liste_joueurs.replace("'", " ")
         print_liste_joueurs = print_liste_joueurs.replace("[", "")
         liste_joueurs = print_liste_joueurs.replace("]", "    ")
-
-        return(liste_joueurs)
+        return (liste_joueurs)
 
     def SupJoueur(self, numero_joueur):
         from tinydb import TinyDB, Query
@@ -148,12 +147,9 @@ class ClassJoueursModel:
         joueur = (db_joueurs.search(where('id_joueur') == id_joueur))
         return (joueur)
 
-
-
-
-
-
-
-
-
-
+    def MisADispoJoueursRapport():
+        # Mise à disposition des joueurs
+        from tinydb import TinyDB
+        db_joueurs = TinyDB('joueurs.json')
+        joueurs = db_joueurs.all()
+        return (joueurs)

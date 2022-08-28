@@ -13,7 +13,7 @@ class ClassJoueurs():
         # CREATION DE L'ID DU JOUEUR ************************************
 
         # Appel du Modèle pour création d'un identifiant du joueur, retourne le prochain identifiant libre
-        str_id_libre= ClassJoueursModel.CreatIdentifiantJoueur(self=True)
+        str_id_libre = ClassJoueursModel.CreatIdentifiantJoueur(self=True)
 
         ClassVueAffichage.Affichage(self=True,
                                     texte1=str_id_libre, texte2="", texte3="")
@@ -27,7 +27,7 @@ class ClassJoueurs():
                                                "défaut est " + nom,
                                         texte2="", texte3="")
         if nom == "r":
-            nom = ("Joueur " + str(id_libre))
+            nom = ("Joueur " + str_id_libre)
             ClassVueAffichage.Affichage(self=True,
                                         texte1="r est un nom interdit, cela "
                                                "correspond à "
@@ -35,7 +35,7 @@ class ClassJoueurs():
                                                "le nom par défaut est " + nom,
                                         texte2="", texte3="")
         if nom == "E":
-            nom = ("Joueur " + str(id_libre))
+            nom = ("Joueur " + str_id_libre)
             ClassVueAffichage.Affichage(self=True,
                                         texte1="E est un nom interdit, "
                                                "cela correspond"
@@ -125,16 +125,15 @@ class ClassJoueurs():
     def lecture_joueurs_class_nom():
         # Récupération des informations du fichier
         # JSON du tournoi pour créer les rounds
-        from tinydb import TinyDB
-        db_joueurs = TinyDB('joueurs.json')
-        serialised_joueurs = db_joueurs.all()
+        from Modele.Joueurs import ClassJoueursModel
+        serie_joueurs = ClassJoueursModel.MisADispoJoueursRapport()
         index = 0
         liste_joueurs = []
-        for i in serialised_joueurs:
-            liste1 = ["ID joueur n°:", int(serialised_joueurs[index]['id_joueur']),
-                      "nom,", (serialised_joueurs[index]['Nom']),
-                      "prénom ,", (serialised_joueurs[index]['Prenom']),
-                      "class:", int(serialised_joueurs[index]['Classement'])]
+        for i in serie_joueurs:
+            liste1 = ["ID joueur n°:", int(serie_joueurs[index]['id_joueur']),
+                      "nom,", (serie_joueurs[index]['Nom']),
+                      "prénom ,", (serie_joueurs[index]['Prenom']),
+                      "class:", int(serie_joueurs[index]['Classement'])]
             liste_joueurs.append(liste1)
             index = index + 1
 
@@ -150,16 +149,15 @@ class ClassJoueurs():
     def lecture_joueurs_class_id():
         # Récupération des informations du fichier
         # JSON du tournoi pour créer les rounds
-        from tinydb import TinyDB
-        db_joueurs = TinyDB('joueurs.json')
-        serialised_joueurs = db_joueurs.all()
+        from Modele.Joueurs import ClassJoueursModel
+        serie_joueurs = ClassJoueursModel.MisADispoJoueursRapport()
         index = 0
         liste_joueurs = []
-        for i in serialised_joueurs:
-            liste1 = ["ID joueur n°:", int(serialised_joueurs[index]['id_joueur']),
-                      "nom,", (serialised_joueurs[index]['Nom']),
-                      "prénom ,", (serialised_joueurs[index]['Prenom']),
-                      "class:", int(serialised_joueurs[index]['Classement'])]
+        for i in serie_joueurs:
+            liste1 = ["ID joueur n°:", int(serie_joueurs[index]['id_joueur']),
+                      "nom,", (serie_joueurs[index]['Nom']),
+                      "prénom ,", (serie_joueurs[index]['Prenom']),
+                      "class:", int(serie_joueurs[index]['Classement'])]
             liste_joueurs.append(liste1)
             index = index + 1
         from operator import itemgetter
@@ -173,18 +171,16 @@ class ClassJoueurs():
 
     def lecture_joueurs_classement():
         # Récupération des informations du fichier
-        # JSON du tournoi pour créer les rounds
-        from tinydb import TinyDB
-        db_joueurs = TinyDB('joueurs.json')
-        serialised_joueurs = db_joueurs.all()
+        from Modele.Joueurs import ClassJoueursModel
+        serie_joueurs = ClassJoueursModel.MisADispoJoueursRapport()
         index = 0
         liste_joueurs = []
-        for i in serialised_joueurs:
-            liste1 = ["ID joueur n°:", int(serialised_joueurs[index]['id_joueur']),
-                      "nom,", (serialised_joueurs[index]['Nom']),
-                      "prénom ,", (serialised_joueurs[index]['Prenom']),
+        for i in serie_joueurs:
+            liste1 = ["ID joueur n°:", int(serie_joueurs[index]['id_joueur']),
+                      "nom,", (serie_joueurs[index]['Nom']),
+                      "prénom ,", (serie_joueurs[index]['Prenom']),
                       "class:",
-                      int(serialised_joueurs[index]['Classement'])]
+                      int(serie_joueurs[index]['Classement'])]
             liste_joueurs.append(liste1)
             index = index + 1
 
