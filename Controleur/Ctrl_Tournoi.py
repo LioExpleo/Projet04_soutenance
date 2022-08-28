@@ -13,7 +13,7 @@ class Class_Tournoi():
         str_id_libre = ClassModTournoi.CreatIdentifiantTournoi(self=True)
         id_tournoi = int(str_id_libre)
 
-        # Appel Vue pour saisie du nom
+        # Appel Vue pour saisie nom
         nom = ClassVueAffichage.Input(self=True, texte1="saisie nom :")
 
         if nom == "":
@@ -168,7 +168,7 @@ class Class_Tournoi():
         list_joueurs = []
 
         index = 0
-        # Appel du modèle pour mise à disposition de la liste des joueurs de la base de donnée.
+        # Appel du modèle pour mise à disposition de la liste des joueurs à partir de la base de donnée.
         from Modele.Joueurs import ClassJoueursModel
         serie_joueurs = ClassJoueursModel.MisADispoJoueurChargTournoi(self=True)
         str_joueurs = str(serie_joueurs)
@@ -216,7 +216,7 @@ class Class_Tournoi():
 
             if id_a_charger == "E" or id_a_charger == "e":
                 os._exit(0)
-
+            # vérification que l'ID à charger se trouve dans la liste des joueurs pouvant l'être
             if id_a_charger in list_joueurs:
                 # Appel de la méthode vue du modèle VMC pour affichage de la
                 # résultante de la base de données
@@ -230,6 +230,7 @@ class Class_Tournoi():
                 str_list_joueurs = str_list_joueurs.replace('\']', '')
                 str_list_joueurs = str_list_joueurs.replace('\'', 'joueur n°')
 
+                # Appel de la méthode vue du modèle VMC pour affichage de la liste des joueurs non sélectionnés
                 ClassVueAffichage.Affichage(self=True,
                                             texte1="liste des numéros des "
                                                    "joueurs non sélectionnés :",
@@ -250,6 +251,7 @@ class Class_Tournoi():
                 joueur_a_charger = joueur_a_charger + 1
 
             else:
+                # Appel de la méthode vue du modèle VMC pour affichage que le joueur saisi n'est pas sélectionnable
                 ClassVueAffichage.Affichage(self=True,
                                             texte1="n° de joueur absent de la "
                                                    "liste des joueurs ou déjà"
@@ -257,28 +259,29 @@ class Class_Tournoi():
                                             texte2="",
                                             texte3="")
 
-    def lecture_match_tournoi(self):
-        # Récupération des informations du fichier JSON du tournoi
-        # pour créer les rounds
-        import os
-        from tinydb import TinyDB, where
+    def lecture_match_tournoi():
+        # Appel du modèle pour récupération données du match d'un tournoi
+        from Modele.Tournoi import ClassModTournoi
         from Vue.affichage import ClassVueAffichage
         from Controleur.fonctions import ClassFonctions
-        db_tournois = TinyDB('tournois.json')
 
         tournoi_select = ClassVueAffichage.Input(self=True,
                                                  texte1="saisie Id du tournoi "
                                                         "pour lequel on veut "
                                                         "le résultat des matchs")
+        # verification que le tournoi existe
         tournoi_trouv = ClassFonctions.tournoi_exist(id_tournoi_select=tournoi_select)
+
         if tournoi_trouv == []:
             print("Numéro de tournoi introuvable")
             os._exit(0)
         int_tournoi_select = int(tournoi_select)
 
-        # charger le tournoi selectionné à partir de la base de données tournoi
-        tournoi = (db_tournois.search(where('id_tournoi') == int_tournoi_select))
 
+        # charger le tournoi selectionné à partir de la base de données tournoi
+        tournoi = ClassModTournoi.Lect1Tournoi(self=True, tournoi_select=int_tournoi_select)
+
+        # Affichage scores round 1
         try:
             score_round1 = (tournoi[0]['ScoreMatchRound1'])
             print("Score round 1 - ID joueur + score : " + str(score_round1[0]) + str(score_round1[1]))
@@ -289,6 +292,7 @@ class Class_Tournoi():
         except KeyError:
             print("pas de score pour le round 1")
 
+        # Affichage scores round 2
         try:
             score_round2 = (tournoi[0]['ScoreMatchRound2'])
             print("Score round 2 - ID joueur + score : " + str(score_round2[0]) + str(score_round2[1]))
@@ -299,6 +303,7 @@ class Class_Tournoi():
         except KeyError:
             print("pas de score pour le round 2")
 
+        # Affichage scores round 3
         try:
             score_round3 = (tournoi[0]['ScoreMatchRound3'])
             print("Score round 3 - ID joueur + score : " + str(score_round3[0]) + str(score_round3[1]))
@@ -309,6 +314,7 @@ class Class_Tournoi():
         except KeyError:
             print("pas de score pour le round 3")
 
+        # Affichage scores round 4
         try:
             score_round4 = (tournoi[0]['ScoreMatchRound4'])
             print("Score round 4 - ID joueur + score : " + str(score_round4[0]) + str(score_round4[1]))
@@ -319,6 +325,7 @@ class Class_Tournoi():
         except KeyError:
             print("pas de score pour le round 4")
 
+        # Affichage scores round 5
         try:
             score_round5 = (tournoi[0]['ScoreMatchRound5'])
             print("Score round 5 - ID joueur + score : " + str(score_round5[0]) + str(score_round5[1]))
@@ -330,29 +337,37 @@ class Class_Tournoi():
             print("pas de score pour le round 5")
             print()
 
-    def lecture_round_tournoi(self):
+    def lecture_round_tournoi():
         # Récupération des informations du fichier JSON du tournoi
         # pour créer les rounds
+        from Modele.Tournoi import ClassModTournoi
+
+
         import os
-        from tinydb import TinyDB, where
         from Vue.affichage import ClassVueAffichage
         from Controleur.fonctions import ClassFonctions
-        db_tournois = TinyDB('tournois.json')
 
+        # Appel de la Vue pour saisie id du tournoi pour lequel on veut afficher les rounds
         tournoi_select = ClassVueAffichage.Input(self=True,
                                                  texte1="saisie Id du tournoi "
                                                         "pour lequel on veut "
                                                         "afficher les rounds")
+
+        # Verif si tournoi existe
         tournoi_trouv = ClassFonctions.tournoi_exist(tournoi_select)
+
         if tournoi_trouv == []:
             print("Numéro de tournoi introuvable")
             os._exit(0)
 
+        # Apppel du modèle pour récupération du tournoi sélectionné
         int_tournoi_select = int(tournoi_select)
+        tournoi = ClassModTournoi.Lect1Tournoi(self=True, tournoi_select=int_tournoi_select)
+        print(tournoi)
 
         # charger le tournoi sélectionné à partir de la base
         # de données dans tournoi
-        tournoi = (db_tournois.search(where('id_tournoi') == int_tournoi_select))
+        #tournoi = (db_tournois.search(where('id_tournoi') == int_tournoi_select))
 
         # ROUND 1
         # Extraction de round 1 de la base de donnée
@@ -409,7 +424,7 @@ class Class_Tournoi():
             index_round = index_round + 1
         print()
 
-    def lecture_joueur_tournoi(self):
+    def lecture_joueur_tournoi():
         # Récupération des informations du fichier JSON du tournoi
         # pour créer les rounds
         import os
@@ -572,28 +587,30 @@ class Class_Tournoi():
         classement_j = (dict_joueur1["Classement"])
         return (id_j, nom_j, prenom_j, date_j, sexe_j, classement_j)
 
-    def lecture_joueur_tournoi_class(self):
+    def lecture_joueur_tournoi_class():
+        from Modele.Tournoi import ClassModTournoi
+        from Modele.Joueurs import ClassJoueursModel
         import os
         from Vue.affichage import ClassVueAffichage
         from Controleur.fonctions import ClassFonctions
-        # Récupération des informations du fichier JSON du tournoi
-        # pour créer les rounds
-        from tinydb import TinyDB, where
-        db_tournois = TinyDB('tournois.json')
-        print(db_tournois)
+
+        # Appel de la Vue pour saisie tournoi pour lequel on veut afficher les joueurs
         tournoi_select = ClassVueAffichage.Input(self=True,
                                                  texte1="saisie Id tournoi "
                                                         "pour lequel on veut "
                                                         "afficher les joueurs")
+        # Vérification que le tournoi existe
         tournoi_trouv = ClassFonctions.tournoi_exist(tournoi_select)
+
         if tournoi_trouv == []:
             print("Numéro de tournoi introuvable")
             os._exit(0)
 
         int_tournoi_select = int(tournoi_select)
+        # Appel du modèle tournoi pour récupérer les données du tournoi
+        tournoi = ClassModTournoi.Lect1Tournoi(self=True, tournoi_select=int_tournoi_select)
 
-        # charger le tournoi sélectionné à partir de la base de données tournoi
-        tournoi = (db_tournois.search(where('id_tournoi') == int_tournoi_select))
+        # Initialisation des joueurs à afficher
         id_j1 = (tournoi[0]['id_j1'])
         id_j2 = (tournoi[0]['id_j2'])
         id_j3 = (tournoi[0]['id_j3'])
@@ -602,60 +619,70 @@ class Class_Tournoi():
         id_j6 = (tournoi[0]['id_j6'])
         id_j7 = (tournoi[0]['id_j7'])
         id_j8 = (tournoi[0]['id_j8'])
-        db_joueurs = TinyDB('joueurs.json')
-        # charger le tournoi sélectionné à partir de la base de données tournoi
+
+
         liste_joueurc_tournoi = []
-        joueur_charge = "False"
         # Joueur 1
         try:
-            joueur1 = (db_joueurs.search(where('id_joueur') == int(id_j1)))
+            id_j = int(id_j1)
+            joueur1 = ClassJoueursModel.MisADispoJoueurTournoi(self=True, id_joueur=id_j)
             liste_joueurc_tournoi.append(joueur1)
         except ValueError:
             print("pas de joueur 1 chargé dans le tournoi")
 
         # Joueur 2
         try:
-            joueur2 = (db_joueurs.search(where('id_joueur') == int(id_j2)))
+            id_j = int(id_j2)
+            joueur2 = ClassJoueursModel.MisADispoJoueurTournoi(self=True, id_joueur=id_j)
             liste_joueurc_tournoi.append(joueur2)
         except ValueError:
             print("pas de joueur 2 chargé dans le tournoi")
 
         # Joueur 3
         try:
-            joueur3 = (db_joueurs.search(where('id_joueur') == int(id_j3)))
+            id_j = int(id_j3)
+            joueur3 = ClassJoueursModel.MisADispoJoueurTournoi(self=True, id_joueur=id_j)
             liste_joueurc_tournoi.append(joueur3)
         except ValueError:
             print("pas de joueur 3 chargé dans le tournoi")
 
         # Joueur 4
         try:
-            joueur4 = (db_joueurs.search(where('id_joueur') == int(id_j4)))
+            id_j = int(id_j4)
+            joueur4 = ClassJoueursModel.MisADispoJoueurTournoi(self=True, id_joueur=id_j)
             liste_joueurc_tournoi.append(joueur4)
         except ValueError:
             print("pas de joueur 4 chargé dans le tournoi")
 
         # Joueur 5
         try:
-            joueur5 = (db_joueurs.search(where('id_joueur') == int(id_j5)))
+            id_j = int(id_j5)
+            joueur5 = ClassJoueursModel.MisADispoJoueurTournoi(self=True, id_joueur=id_j)
             liste_joueurc_tournoi.append(joueur5)
         except ValueError:
             print("pas de joueur 5 chargé dans le tournoi")
+
         # Joueur 6
         try:
-            joueur6 = (db_joueurs.search(where('id_joueur') == int(id_j6)))
+            id_j = int(id_j6)
+            joueur6 = ClassJoueursModel.MisADispoJoueurTournoi(self=True, id_joueur=id_j)
             liste_joueurc_tournoi.append(joueur6)
         except ValueError:
             print("pas de joueur 6 chargé dans le tournoi")
 
         # Joueur 7
         try:
-            joueur7 = (db_joueurs.search(where('id_joueur') == int(id_j7)))
+            id_j = int(id_j7)
+            joueur7 = ClassJoueursModel.MisADispoJoueurTournoi(self=True, id_joueur=id_j)
             liste_joueurc_tournoi.append(joueur7)
         except ValueError:
             print("pas de joueur 7 chargé dans le tournoi")
+
         # Joueur 8
         try:
-            joueur8 = (db_joueurs.search(where('id_joueur') == int(id_j8)))
+            id_j = int(id_j8)
+            joueur8 = ClassJoueursModel.MisADispoJoueurTournoi(self=True, id_joueur=id_j)
+            #joueur8 = (db_joueurs.search(where('id_joueur') == int(id_j8)))
             liste_joueurc_tournoi.append(joueur8)
             joueur_charge = "True"
         except ValueError:

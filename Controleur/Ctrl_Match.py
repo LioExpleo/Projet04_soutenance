@@ -48,7 +48,7 @@ class Class_Match():
     def creat_match_r1(tournoi, round):
         import os
         from Vue.affichage import ClassVueAffichage
-        from Modele.Tournoi import ClassTournoi
+        from Modele.Tournoi import ClassModTournoi
         import datetime
         ClassVueAffichage.Affichage(self=True,
                                     texte1="tournoi r1 : ",
@@ -322,7 +322,7 @@ class Class_Match():
         liste_4matchs.append(liste_paire4_j2)
         # Appel du modele pour updater les donnees des matchs
         # dans la base de donnée
-        ClassTournoi.UpdateMatchTournois(self=True,
+        ClassModTournoi.UpdateMatchTournois(self=True,
                                          nom_donnees=nom_donnees,
                                          donnees=liste_4matchs,
                                          numero_tournoi=int_tournoi_select)
