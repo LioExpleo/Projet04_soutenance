@@ -131,4 +131,21 @@ class ClassModTournoi:
         db_tournois.truncate()
         return ()
 
+    def Lect1Tournoi(self, tournoi_select):
+        import os
+        from tinydb import TinyDB, where
+        from Vue.affichage import ClassVueAffichage
+        from Controleur.fonctions import ClassFonctions
+        db_tournois = TinyDB('tournois.json')
+        tournoi = (db_tournois.search(where('id_tournoi') == tournoi_select))
+        return (tournoi)
+
+    def Lect1Tournoi(self, tournoi_select):
+        import os
+        from tinydb import TinyDB, where
+        from Vue.affichage import ClassVueAffichage
+        from Controleur.fonctions import ClassFonctions
+        db_tournois = TinyDB('tournois.json')
+        tournoi = (db_tournois.search(where('id_tournoi') == tournoi_select))
+        return (tournoi)
 

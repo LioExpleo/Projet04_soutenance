@@ -141,6 +141,13 @@ class ClassJoueursModel:
         joueurs = serialised_joueurs
         return (joueurs)
 
+    def MisADispoJoueurTournoi(self, id_joueur):
+        # Mise à disposition des joueurs
+        from tinydb import TinyDB, where
+        db_joueurs = TinyDB('joueurs.json')
+        joueur = (db_joueurs.search(where('id_joueur') == id_joueur))
+        return (joueur)
+
 
 
 

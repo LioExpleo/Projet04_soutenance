@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>flake8 violations: Controleur/Ctrl_Tournoi.py</title>
+      <meta http-equiv="Content-Type" value="text/html; charset=UTF-8">
+      <link rel="stylesheet" href="styles.css">
+<script>
+function bindHandler(link) {
+   var code = link.getAttribute('data-code');
+   var key = location.pathname + '#' + code;
+
+   var ul = link.parentNode.querySelector('.details');
+   if (sessionStorage[key] != 'open') {
+      ul.style.display = 'none';
+   }
+   link.addEventListener('click', function (event) {
+      if (!ul.style.display || ul.style.display == 'none') {
+         ul.style.display = 'block';
+         sessionStorage[key] = 'open';
+      } else {
+         ul.style.display = 'none';
+         sessionStorage[key] = 'closed';
+      }
+   });
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+   var links = document.querySelectorAll('#index > li > a');
+   for (var i = 0; i < links.length; i++) {
+      bindHandler(links[i]);
+   }
+});
+</script>
+   </head>
+   <body>
+      <div id="masthead" class="sev-1"></div>
+      <div id="page">
+         <p id="srclink">
+            <a title="View full annotated source"
+               href="Controleur.Ctrl_Tournoi.source.html">
+               <img src="file.svg" alt="&#x2261;">
+            </a></p>
+         <h1>
+            <a href="index.html">
+               <img src="back.svg" alt="&#x2B05;">
+               Controleur/Ctrl_Tournoi.py
+            </a>
+         </h1>
+
+         <ul id="index">
+         
+         <li>
+            <a data-code="F821">
+               <span class="count sev-1">
+                  1
+               </span>
+               <strong>F821:</strong> undefined name 'os'
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="Controleur.Ctrl_Tournoi.source.html#l277">
+                  <tt><i>277</i>             <span class="n">os</span><span class="o">.</span><span class="n">_exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E702">
+               <span class="count sev-2">
+                  13
+               </span>
+               <strong>E702:</strong> multiple statements on one line (semicolon)
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <p>Multiple statements on one line (semicolon) (in 7 places):</p>
+               
+               <a href="Controleur.Ctrl_Tournoi.source.html#l92">
+                  <tt><i>92</i>         <span class="n">id_j1</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span> <span class="n">id_j2</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span> <span class="n">id_j3</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span> <span class="n">id_j4</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span> <span class="n">id_j5</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span> <span class="n">id_j6</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span> <span class="n">id_j7</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span> <span class="n">id_j8</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Multiple statements on one line (semicolon) (in 6 places):</p>
+               
+               <a href="Controleur.Ctrl_Tournoi.source.html#l93">
+                  <tt><i>93</i>         <span class="n">round_1</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span> <span class="n">round_2</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span> <span class="n">round_3</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span> <span class="n">round_4</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span> <span class="n">round_5</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span> <span class="n">round_6</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span> <span class="n">round_7</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E303">
+               <span class="count sev-2">
+                  4
+               </span>
+               <strong>E303:</strong> too many blank lines (2)
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="Controleur.Ctrl_Tournoi.source.html#l177">
+                  <tt><i>177</i>         <span class="c1"># Création d&#39;une liste temporaire de joueurs</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="Controleur.Ctrl_Tournoi.source.html#l281">
+                  <tt><i>281</i>         <span class="c1"># charger le tournoi selectionné à partir de la base de données tournoi</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="Controleur.Ctrl_Tournoi.source.html#l346">
+                  <tt><i>346</i>         <span class="kn">import</span> <span class="nn">os</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="Controleur.Ctrl_Tournoi.source.html#l624">
+                  <tt><i>624</i>         <span class="n">liste_joueurc_tournoi</span> <span class="o">=</span> <span class="p">[]</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E128">
+               <span class="count sev-2">
+                  3
+               </span>
+               <strong>E128:</strong> continuation line under-indented for visual indent
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="Controleur.Ctrl_Tournoi.source.html#l247">
+                  <tt><i>247</i>                                                   <span class="n">nom_donnees</span><span class="o">=</span><span class="n">id_jx</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="Controleur.Ctrl_Tournoi.source.html#l248">
+                  <tt><i>248</i>                                                   <span class="n">donnees</span><span class="o">=</span><span class="n">id_a_charger</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="Controleur.Ctrl_Tournoi.source.html#l249">
+                  <tt><i>249</i>                                                   <span class="n">numero_tournoi</span><span class="o">=</span><span class="n">id_tournoi_select</span><span class="p">)</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E251">
+               <span class="count sev-2">
+                  3
+               </span>
+               <strong>E251:</strong> unexpected spaces around keyword / parameter equals
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <p>Unexpected spaces around keyword / parameter equals (in 2 places):</p>
+               
+               <a href="Controleur.Ctrl_Tournoi.source.html#l122">
+                  <tt><i>122</i>         <span class="n">ClassModTournoi</span><span class="o">.</span><span class="n">CreatNewTournois</span><span class="p">(</span><span class="bp">self</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">id_tournoi</span> <span class="o">=</span> <span class="n">id_tournoi</span><span class="p">,</span> <span class="n">nom</span><span class="o">=</span><span class="n">nom</span><span class="p">,</span> <span class="n">lieu</span><span class="o">=</span><span class="n">lieu</span><span class="p">,</span> <span class="n">date</span><span class="o">=</span><span class="n">date</span><span class="p">,</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Unexpected spaces around keyword / parameter equals:</p>
+               
+               <a href="Controleur.Ctrl_Tournoi.source.html#l146">
+                  <tt><i>146</i>             <span class="n">ClassModTournoi</span><span class="o">.</span><span class="n">SupprimTournois</span><span class="p">(</span><span class="bp">self</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">numero_tournoi</span><span class="o">=</span> <span class="n">id_tournoi_del</span><span class="p">)</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E265">
+               <span class="count sev-2">
+                  2
+               </span>
+               <strong>E265:</strong> block comment should start with '# '
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="Controleur.Ctrl_Tournoi.source.html#l370">
+                  <tt><i>370</i>         <span class="c1">#tournoi = (db_tournois.search(where(&#39;id_tournoi&#39;) == int_tournoi_select))</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="Controleur.Ctrl_Tournoi.source.html#l685">
+                  <tt><i>685</i>             <span class="c1">#joueur8 = (db_joueurs.search(where(&#39;id_joueur&#39;) == int(id_j8)))</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E225">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>E225:</strong> missing whitespace around operator
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="Controleur.Ctrl_Tournoi.source.html#l133">
+                  <tt><i>133</i>         <span class="n">tournois</span><span class="o">=</span><span class="n">ClassModTournoi</span><span class="o">.</span><span class="n">AffichageTournois</span><span class="p">(</span><span class="bp">self</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         </ul>
+      </div>
+   </body>
+</html>

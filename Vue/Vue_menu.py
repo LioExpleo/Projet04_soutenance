@@ -71,7 +71,6 @@ class ClassVueMenu():
 
             if (menu_niv_0 == "TJ"):
                 Class_Tournoi.lecture_joueur_tournoi_class()
-                # lecture_joueur_tournoi()
 
             if (menu_niv_0 == "TR"):
                 print("Saisir ensuite l'id du tournoi, s'afficheront "
