@@ -73,7 +73,7 @@ class Class_Round():
                 quit()
             scoreMatchRound4 = scoreMatchRound4
 
-        # selon que le 1er round est été créé ou non, appel de création round 1 ou round au delà
+        # selon que le 1er round ait été créé ou non, appel de création round 1 ou round au delà
         if tournoi_round_en_cours == 0:
             Class_Round.creat_round_1(tournoi_select)
         else:
@@ -94,54 +94,19 @@ class Class_Round():
         int_tournoi_select = int(tournoi_select)
         tournoi = ClassModTournoi.Lect1Tournoi(self=True, tournoi_select=int_tournoi_select)
 
-        id_t = (tournoi[0]['id_tournoi'])
-        print("id tournoi : " + str(id_t))
-
-        nom_t = (tournoi[0]['nom'])
-        print("nom : " + nom_t)
-
-        nb_r = (tournoi[0]['nombre de rounds'])
-        print(nb_r + " rounds")
-
         list_id_joueur = []
+        list_id_joueur = ClassFonctions.ListejoueursTournoi(self=True, tournoi=tournoi, clef1="id_j1", clef2="id_j2",
+                                                            clef3="id_j3", clef4="id_j4", clef5="id_j5", clef6="id_j6",
+                                                            clef7="id_j7", clef8="id_j8")
 
-        id_j1 = (tournoi[0]['id_j1'])
-        print("id joueur 1 : " + id_j1)
-        list_id_joueur.append(id_j1)
+        id_joueur_en_cours = ""
+        print(list_id_joueur)
+        index_joueur = 0
+        id_joueur_en_cours = list_id_joueur[index_joueur]
+        print(id_joueur_en_cours)
 
-        id_j2 = (tournoi[0]['id_j2'])
-        print("id joueur 2 : " + id_j2)
-        list_id_joueur.append(id_j2)
-
-        id_j3 = (tournoi[0]['id_j3'])
-        print("id joueur 3 : " + id_j3)
-        list_id_joueur.append(id_j3)
-
-        id_j4 = (tournoi[0]['id_j4'])
-        print("id joueur 4 : " + id_j4)
-        list_id_joueur.append(id_j4)
-
-        id_j5 = (tournoi[0]['id_j5'])
-        print("id joueur 5 : " + id_j5)
-        list_id_joueur.append(id_j5)
-
-        id_j6 = (tournoi[0]['id_j6'])
-        print("id joueur 6 : " + id_j6)
-        list_id_joueur.append(id_j6)
-
-        id_j7 = (tournoi[0]['id_j7'])
-        print("id joueur 7 : " + id_j7)
-        list_id_joueur.append(id_j7)
-
-        id_j8 = (tournoi[0]['id_j8'])
-        print("id joueur 8 : " + id_j8)
-        list_id_joueur.append(id_j8)
-
-        print("nombre de rounds")
-        print(nb_r)
         index_joueur = 0
         while (index_joueur < 8):
-            print("id_joueur " + str(index_joueur) + ": ")
             id_joueur_en_cours = ""
             int_id_joueur_en_cours = ""
             # Essayer de récupérer les joueurs du tournoi
@@ -163,60 +128,24 @@ class Class_Round():
             joueur = ClassJoueursModel.MisADispoJoueurTournoi(self=True, id_joueur=int_id_joueur_en_cours)
             dict_joueur = ClassFonctions.creat_dict(donnees_db=joueur)
 
-            print("identifiant joueur :")
             round_id_joueur = (dict_joueur["id_joueur"])
-            print(round_id_joueur)
-
-            print("Nom :")
-            print(dict_joueur["Nom"])
             round_nom_joueur = (dict_joueur["Nom"])
-
-            print("Prénom :")
-            print(dict_joueur["Prenom"])
             round_prenom_joueur = (dict_joueur["Prenom"])
-
-            print("Né le :")
-            print(dict_joueur["date de naissance"])
-
-            print("Sexe :")
-            print(dict_joueur["sexe"])
-
-            print("Classement :")
             round_class_joueur = (dict_joueur["Classement"])
-            print(round_class_joueur)
-
             liste_class_joueur = [round_id_joueur, int(round_class_joueur),
                                   round_nom_joueur,
                                   round_prenom_joueur]
-            print("liste : id_joueur, classement joueur, nom, prenom")
-            print(liste_class_joueur)
             liste_liste_class_joueur.append(liste_class_joueur)
-            print(liste_liste_class_joueur)
-
             index_joueur = index_joueur + 1
-
-        print("liste_liste_class_joueur : ")
-        print(liste_liste_class_joueur)
 
         # Mise des joueurs dans ordre décroissant
         from operator import itemgetter
-        print("List A based on index 0: % s" % (sorted(liste_liste_class_joueur,
-                                                       key=itemgetter(1),
-                                                       reverse=True)))
-        joueur_class_decroissant = (sorted(liste_liste_class_joueur,
-                                           key=itemgetter(1),
-                                           reverse=True))
-        print(joueur_class_decroissant)
 
         # Mise en ordre des joueurs par classement, le classement étant
         # la valeur en position "1" de la liste
         joueur_class_croissant = (sorted(liste_liste_class_joueur,
                                          key=itemgetter(1),
                                          reverse=False))
-        print("Affichage joueur par classement croissant")
-        print(joueur_class_croissant)
-
-        print("Affichage des paires de joueurs par identifiant du round 1 \n")
 
         liste_paire_1 = []
         liste_paire_1.append(joueur_class_croissant[0])
@@ -337,30 +266,9 @@ class Class_Round():
         nb_r = (tournoi[0]['nombre de rounds'])
 
         list_id_joueur = []
-
-        id_j1 = (tournoi[0]['id_j1'])
-        list_id_joueur.append(id_j1)
-
-        id_j2 = (tournoi[0]['id_j2'])
-        list_id_joueur.append(id_j2)
-
-        id_j3 = (tournoi[0]['id_j3'])
-        list_id_joueur.append(id_j3)
-
-        id_j4 = (tournoi[0]['id_j4'])
-        list_id_joueur.append(id_j4)
-
-        id_j5 = (tournoi[0]['id_j5'])
-        list_id_joueur.append(id_j5)
-
-        id_j6 = (tournoi[0]['id_j6'])
-        list_id_joueur.append(id_j6)
-
-        id_j7 = (tournoi[0]['id_j7'])
-        list_id_joueur.append(id_j7)
-
-        id_j8 = (tournoi[0]['id_j8'])
-        list_id_joueur.append(id_j8)
+        list_id_joueur = ClassFonctions.ListejoueursTournoi(self=True, tournoi=tournoi, clef1="id_j1", clef2="id_j2",
+                                                            clef3="id_j3", clef4="id_j4", clef5="id_j5", clef6="id_j6",
+                                                            clef7="id_j7", clef8="id_j8")
 
         index_joueur = 0
         list_jx = []
@@ -389,10 +297,8 @@ class Class_Round():
             round_id_joueur = (dict_joueur["id_joueur"])
             # nom joueur
             round_nom_joueur = (dict_joueur["Nom"])
-
             # Prénom
             round_prenom_joueur = (dict_joueur["Prenom"])
-
             # Classement
             round_class_joueur = (dict_joueur["Classement"])
 
@@ -690,13 +596,6 @@ class Class_Round():
                         # print(list_part)
 
                         list_list_part.append(list_part)
-                        # print()
-                        # print("LISTE DE LISTE DES FUTURES PAIRES DE JOUEURS")
-                        # print(list_list_part)
-                        # print("liste_jy_temp")
-                        # print(list_jy_temp)
-                        # print("liste_jy_temp après suppression "
-                        #      "des joueurs appairés")
                         list_jy_temp.pop(0)
                         # enlever 1 à l'index, la suppression du joueur ayant
                         # décalé le partenaire à supprimer
@@ -705,7 +604,6 @@ class Class_Round():
                         nbr_part_rest_a_tester = nbr_part_rest_a_tester - 2
                         # print("nombre de partenaire restant à tester : " +
                         #       str(nbr_part_rest_a_tester))
-
                         index_partenaire = 0
                     index_joueur_affront = index_joueur_affront + 1
                     index_nbr_part_affront = index_nbr_part_affront + 1

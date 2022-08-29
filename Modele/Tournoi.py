@@ -2,7 +2,7 @@ class ClassModTournoi:
     def __init__(self):
         pass
 
-    def CreatNewTournois(self,  id_tournoi, nom, lieu, date, nbr_rounds,
+    def CreatNewTournois(self, id_tournoi, nom, lieu, date, nbr_rounds,
                          id_j1, id_j2, id_j3, id_j4, id_j5, id_j6, id_j7, id_j8,
                          round_1, round_2, round_3, round_4, round_5, round_6, round_7,
                          temps_matchs, remarque_tournoi):

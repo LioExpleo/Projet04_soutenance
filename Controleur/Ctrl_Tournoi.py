@@ -108,7 +108,6 @@ class Class_Tournoi():
                 os._exit(0)
         else:
             temps_matchs = list_tps[int(saisie)]
-
         print(temps_matchs)
         print()
 

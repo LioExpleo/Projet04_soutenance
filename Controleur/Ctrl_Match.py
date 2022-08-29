@@ -505,74 +505,25 @@ class Class_Match():
                                   liste_paire4_j2[1]))
 
         print()
-        # print("numéro de tournoi")
-        # print(int_tournoi_select)
-        # print(round_select)
 
         # préparation  pour mise dans la base de donnée
-        # joueur 1
-        # print(List_de_liste_joueur[1])
         liste_match1 = []
         liste_match1.append(globals()[nom_tuple1])
-        # print("liste_match1")
-        # print(liste_match1)
 
-        # joueur 2
-        # print(List_de_liste_joueur[2])
         liste_match2 = []
         liste_match2.append(globals()[nom_tuple2])
-        # print("liste_match2")
-        # print(liste_match2)
 
-        # joueur 3
-        # print(List_de_liste_joueur[3])
         liste_match3 = []
         liste_match3.append(globals()[nom_tuple3])
-        # print("liste_match3")
-        # print(liste_match3)
 
-        # joueur 4
-        # print(List_de_liste_joueur[4])
         liste_match4 = []
         liste_match4.append(globals()[nom_tuple4])
-        # print("liste_match4")
-        # print(liste_match4)
 
         liste_4matchs = []
         liste_4matchs.append(liste_match1)
         liste_4matchs.append(liste_match2)
         liste_4matchs.append(liste_match3)
         liste_4matchs.append(liste_match4)
-
-        # print("liste_4matchs.append(liste_match4)")
-        # print(liste_4matchs)
-
-        # print(liste_4matchs[0])
-        # print(liste_4matchs[0][0][0])
-        # print(liste_4matchs[0][0][1])
-        # print(liste_4matchs[0][0][2])
-        # print(liste_4matchs[0][0][3])
-
-        # print(liste_4matchs[1])
-        # print(liste_4matchs[1][0])
-        # print(liste_4matchs[1][0][0])
-        # print(liste_4matchs[1][0][1])
-        # print(liste_4matchs[1][0][2])
-        # print(liste_4matchs[1][0][3])
-
-        # print(liste_4matchs[2])
-        # print(liste_4matchs[2][0])
-        # print(liste_4matchs[2][0][0])
-        # print(liste_4matchs[2][0][1])
-        # print(liste_4matchs[2][0][2])
-        # print(liste_4matchs[2][0][3])
-
-        # print(liste_4matchs[3])
-        # print(liste_4matchs[3][0])
-        # print(liste_4matchs[3][0][0])
-        # print(liste_4matchs[3][0][1])
-        # print(liste_4matchs[3][0][2])
-        # print(liste_4matchs[3][0][3])
 
         # mise de l'heure de fin du match
         # pour la mettre dans la base de donnée du tournoi

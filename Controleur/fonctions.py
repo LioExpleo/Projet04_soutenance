@@ -125,3 +125,23 @@ class ClassFonctions():
                                             texte2="",
                                             texte3="")
         return (id_tournoi_select)
+
+    def ListejoueursTournoi(self, tournoi, clef1, clef2, clef3, clef4, clef5, clef6, clef7, clef8):
+        r1 = (tournoi[0][clef1])
+        r2 = (tournoi[0][clef2])
+        r3 = (tournoi[0][clef3])
+        r4 = (tournoi[0][clef4])
+        r5 = (tournoi[0][clef5])
+        r6 = (tournoi[0][clef6])
+        r7 = (tournoi[0][clef7])
+        r8 = (tournoi[0][clef8])
+        list_id_joueur = []
+        list_id_joueur.append(r1)
+        list_id_joueur.append(r2)
+        list_id_joueur.append(r3)
+        list_id_joueur.append(r4)
+        list_id_joueur.append(r5)
+        list_id_joueur.append(r6)
+        list_id_joueur.append(r7)
+        list_id_joueur.append(r8)
+        return (list_id_joueur)

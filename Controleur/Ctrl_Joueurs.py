@@ -14,7 +14,7 @@ class ClassJoueurs():
 
         # Appel du Modèle pour création d'un identifiant du joueur, retourne le prochain identifiant libre
         str_id_libre = ClassJoueursModel.CreatIdentifiantJoueur(self=True)
-
+        # Appel de Vue, méthode affichage
         ClassVueAffichage.Affichage(self=True,
                                     texte1=str_id_libre, texte2="", texte3="")
 
