@@ -7,14 +7,15 @@ class Class_Match():
         from Controleur.fonctions import ClassFonctions
         from Vue.affichage import ClassVueAffichage
         from Modele.Tournoi import ClassModTournoi
-        print("saisie des scores du match")
+
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1="saisie des scores du match")
         tournoi_select = ClassFonctions.select_tournoi()
         int_tournoi_select = int(tournoi_select)
-        print("int_tournoi_select : " + str(int_tournoi_select))
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1="int_tournoi_select : " + str(int_tournoi_select))
 
         # Appel du modele pour mise a disposition données tournoi
         db_tournoi = ClassModTournoi.Lect1Tournoi(self=True, tournoi_select=int_tournoi_select)
-        print("tournoi" + str(db_tournoi))
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1="tournoi" + str(db_tournoi))
 
         id_t = (db_tournoi[0]['id_tournoi'])
         try:
@@ -23,7 +24,7 @@ class Class_Match():
                                         texte1="round en cours :",
                                         texte2=round_en_cours,
                                         texte3="")
-            print("round_en_cours : " + str(round_en_cours))
+            ClassVueAffichage.Affichage1Ligne(self=True, texte1="round_en_cours : " + str(round_en_cours))
         except KeyError:
             ClassVueAffichage.Affichage(self=True,
                                         texte1="Le round doit être créé "
@@ -33,10 +34,9 @@ class Class_Match():
                                                "créer le 1er round",
                                         texte2="",
                                         texte3="")
-            print(
-                "Le round doit être créé dans le match pour "
-                "que les scores du match puissent être saisis, "
-                "- R suivi de + - pour créer le 1er round")
+            ClassVueAffichage.Affichage1Ligne(self=True, texte1="Le round doit être créé dans le match pour que les"
+                                                                " scores du match puissent être saisis, "
+                                                                "- R suivi de + - pour créer le 1er round")
             os._exit(0)
 
         tournoi = id_t
@@ -75,7 +75,7 @@ class Class_Match():
         tournoi_select = tournoi
         # Appel du modele pour creation liste tournoi
         db_tournoi = ClassModTournoi.Lect1Tournoi(self=True, tournoi_select=int(tournoi_select))
-        print(db_tournoi)
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1=db_tournoi)
         try:
             round_en_cours = (db_tournoi[0]['round_en_cours'])
             ClassVueAffichage.Affichage(self=True,
@@ -98,17 +98,17 @@ class Class_Match():
 
         # aller chercher les listes en fonction du round en cours
         List_de_liste_joueur = (db_tournoi[0][round_select])
-        print("paire 1")
-        print(List_de_liste_joueur[1])
-        print()
-        print("paire 2")
-        print(List_de_liste_joueur[2])
-        print()
-        print("paire 3")
-        print(List_de_liste_joueur[3])
-        print()
-        print("paire 4")
-        print(List_de_liste_joueur[4])
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1="paire 1")
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1=List_de_liste_joueur[1])
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1="")
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1="paire 2")
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1=List_de_liste_joueur[2])
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1="")
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1="paire 3")
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1=List_de_liste_joueur[3])
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1="")
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1="paire 4")
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1=List_de_liste_joueur[4])
 
         # Saisie des scores de la paire 1
         str_liste_liste_joueur1 = str(List_de_liste_joueur[1][0])
@@ -130,16 +130,16 @@ class Class_Match():
         # Ajout dans la liste de l'id du joueur et de son score
         # joueur 1
         liste_paire1_j1 = []
-        print(List_de_liste_joueur)
-        print(List_de_liste_joueur[1][0])
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1=List_de_liste_joueur)
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1=List_de_liste_joueur[1][0])
         liste_paire1_j1.append(List_de_liste_joueur[1][0][0])
         liste_paire1_j1.append(saisie_score1)
-        print(liste_paire1_j1)
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1=liste_paire1_j1)
         # joueur 2
         liste_paire1_j2 = []
         liste_paire1_j2.append(List_de_liste_joueur[1][1][0])
         liste_paire1_j2.append(saisie_score2)
-        print(liste_paire1_j2)
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1=liste_paire1_j2)
 
         # Chaque match génèrera 1 tuple avec comme nom,
         # « Tuple_ « Id_tournoi » & n°round & « idMatch(n°paire)» de 2 listes
@@ -160,19 +160,21 @@ class Class_Match():
         saisie_score3, saisie_score4 = ClassVueAffichage.SaisieScore(self, str_liste_liste_joueur1,
                                                                      str_liste_liste_joueur2,
                                                                      texteJ1, texteJ2)
-        print('saisie score 1 et 2 du match 2: ' + (saisie_score3) + " - " + saisie_score4)
+        ClassVueAffichage.Affichage1Ligne(self=True,
+                                          texte1='saisie score 1 et 2 du '
+                                                 'match 2: ' + (saisie_score3) + " - " + saisie_score4)
 
         # Ajout dans la liste de l'id du joueur et de son score
         # joueur 1
         liste_paire2_j1 = []
         liste_paire2_j1.append(List_de_liste_joueur[2][0][0])
         liste_paire2_j1.append(saisie_score3)
-        print(liste_paire2_j1)
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1=liste_paire2_j1)
         # joueur 2
         liste_paire2_j2 = []
         liste_paire2_j2.append(List_de_liste_joueur[2][1][0])
         liste_paire2_j2.append(saisie_score4)
-        print(liste_paire2_j2)
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1=liste_paire2_j2)
 
         # Chaque match génèrera 1 tuple avec comme nom,
         # « Tuple_ « Id_tournoi » & n°round & « idMatch(n°paire)» de 2 listes
@@ -195,19 +197,21 @@ class Class_Match():
                                                                      str_liste_liste_joueur1,
                                                                      str_liste_liste_joueur2,
                                                                      texteJ1, texteJ2)
-        print('saisie score 1 et 2 du match 3: ' + (saisie_score5) + " - " + saisie_score6)
+        ClassVueAffichage.Affichage1Ligne(self=True,
+                                          texte1='saisie score 1 et 2 du '
+                                                 'match 3: ' + (saisie_score5) + " - " + saisie_score6)
 
         # Ajout dans la liste de l'id du joueur et de son score
         # joueur 1
         liste_paire3_j1 = []
         liste_paire3_j1.append(List_de_liste_joueur[3][0][0])
         liste_paire3_j1.append(saisie_score5)
-        print(liste_paire3_j1)
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1=liste_paire3_j1)
         # joueur 2
         liste_paire3_j2 = []
         liste_paire3_j2.append(List_de_liste_joueur[3][1][0])
         liste_paire3_j2.append(saisie_score6)
-        print(liste_paire3_j2)
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1=liste_paire3_j2)
 
         # Chaque match génèrera 1 tuple avec comme nom,
         # « Tuple_ « Id_tournoi » & n°round & « idMatch(n°paire)» de 2 listes
@@ -230,19 +234,21 @@ class Class_Match():
                                                                      str_liste_liste_joueur1,
                                                                      str_liste_liste_joueur2,
                                                                      texteJ1, texteJ2)
-        print('saisie score 1 et 2 du match 4: ' + (saisie_score7) + " - " + saisie_score8)
+        ClassVueAffichage.Affichage1Ligne(self=True,
+                                          texte1='saisie score 1 et 2 du match '
+                                                 '4: ' + (saisie_score7) + " - " + saisie_score8)
 
         # Ajout dans la liste de l'id du joueur et de son score
         # joueur 1
         liste_paire4_j1 = []
         liste_paire4_j1.append(List_de_liste_joueur[4][0][0])
         liste_paire4_j1.append(saisie_score7)
-        print(liste_paire4_j1)
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1=liste_paire4_j1)
         # joueur 2
         liste_paire4_j2 = []
         liste_paire4_j2.append(List_de_liste_joueur[4][1][0])
         liste_paire4_j2.append(saisie_score8)
-        print(liste_paire4_j2)
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1=liste_paire4_j2)
 
         # Chaque match génèrera 1 tuple avec comme nom,
         # « Tuple_ « Id_tournoi » & n°round & « idMatch(n°paire)» de 2 listes
@@ -254,10 +260,10 @@ class Class_Match():
                                   liste_paire4_j1[1],
                                   liste_paire4_j2[0],
                                   liste_paire4_j2[1]))
-        print()
-        print("numéro de tournoi")
-        print(int_tournoi_select)
-        print(round_select)
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1="")
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1="numéro de tournoi")
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1=int_tournoi_select)
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1=round_select)
 
         # préparation pour mise dans la base de donnée
         liste_match1 = []
@@ -285,14 +291,15 @@ class Class_Match():
         char = '.'
         PositChar = str_date_heure_fin.find(char)
         str_date_heure_fin = str_date_heure_fin[0:(PositChar)]
-        print("fin round en cours " + str(round_en_cours) + " : " + str_date_heure_fin)
+        ClassVueAffichage.Affichage1Ligne(self=True,
+                                          texte1="fin round en "
+                                                 "cours " + str(round_en_cours) + " : " + str_date_heure_fin)
 
         # chargment dans la base de données de
         # la fin de match du round en cours
 
         # chargement dans la base de données des scores des 4 matchs du round
         nom_donnees = "ScoreMatchRound" + str(round_en_cours)
-        # print(nom_donnees)
 
         liste_4matchs = []
         liste_4matchs.append(liste_paire1_j1)
@@ -313,50 +320,50 @@ class Class_Match():
         import os
         from Vue.affichage import ClassVueAffichage
         from Modele.Tournoi import ClassModTournoi
-
         tournoi_select = tournoi
 
         # Appel du modele pour mise a disposition données tournoi
         db_tournoi = ClassModTournoi.Lect1Tournoi(self=True, tournoi_select=int(tournoi_select))
-        print(db_tournoi)
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1=db_tournoi)
 
         # Récupération des informations du fichier JSON
         # du tournoi pour vérifier le round en cours
         id_t = (db_tournoi[0]['id_tournoi'])
-        print("id tournoi : " + str(id_t))
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1="id tournoi : " + str(id_t))
 
         try:
             round_en_cours = (db_tournoi[0]['round_en_cours'])
-            print("round_en_cours : " + str(round_en_cours))
+            ClassVueAffichage.Affichage1Ligne(self=True, texte1="round_en_cours : " + str(round_en_cours))
 
         except KeyError:
-            print("Le round doit être créé")
-            print("Le round doit être créé dans le match pour que les scores "
-                  "du match puissent être saisis, "
-                  "- R suivi de + - pour créer le 1er round")
+            ClassVueAffichage.Affichage1Ligne(self=True, texte1="Le round doit être créé")
+            ClassVueAffichage.Affichage1Ligne(self=True,
+                                              texte1="Le round doit être créé dans le match pour que les scores "
+                                                     "du match puissent être saisis, "
+                                                     "- R suivi de + - pour créer le 1er round")
             os._exit(0)
 
         List_de_liste_joueur = (db_tournoi[0]['round_en_cours'])
         round_select = "round_" + str(round_en_cours) + "+match"
-        print(round_select)
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1=round_select)
 
         # aller chercher les listes en fonction du round en cours
         List_de_liste_joueur = (db_tournoi[0][round_select])
 
-        print("List_de_liste_joueur")
-        print(List_de_liste_joueur)
-        print()
-        print("paire 1")
-        print(List_de_liste_joueur[1])
-        print()
-        print("paire 2")
-        print(List_de_liste_joueur[2])
-        print()
-        print("paire 3")
-        print(List_de_liste_joueur[3])
-        print()
-        print("paire 4")
-        print(List_de_liste_joueur[4])
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1="List_de_liste_joueur")
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1=List_de_liste_joueur)
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1="")
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1="paire 1")
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1=List_de_liste_joueur[1])
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1="")
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1="paire 2")
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1=List_de_liste_joueur[2])
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1="")
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1="paire 3")
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1=List_de_liste_joueur[3])
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1="")
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1="paire 4")
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1=List_de_liste_joueur[4])
 
         # Saisie des scores de la paire 1
         str_liste_liste_joueur1 = str(List_de_liste_joueur[1][0])
@@ -368,26 +375,28 @@ class Class_Match():
                                                                      str_liste_liste_joueur1,
                                                                      str_liste_liste_joueur2,
                                                                      texteJ1, texteJ2)
-        print('saisie score 1 et 2 du match 1: ' + (saisie_score1) + " - " + saisie_score2)
+        ClassVueAffichage.Affichage1Ligne(self=True,
+                                          texte1='saisie score 1 et 2 du '
+                                                 'match 1: ' + (saisie_score1) + " - " + saisie_score2)
 
         # Ajout dans la liste de l'id du joueur et de son score
         # joueur 1
         liste_paire1_j1 = []
         liste_paire1_j2 = []
-        print("List_de_liste_joueur")
-        print(List_de_liste_joueur)
-        print("List_de_liste_joueur[1][0]")
-        print(List_de_liste_joueur[1][0])
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1="List_de_liste_joueur")
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1=List_de_liste_joueur)
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1="List_de_liste_joueur[1][0]")
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1=List_de_liste_joueur[1][0])
         liste_paire1_j1.append(List_de_liste_joueur[1][0])
         liste_paire1_j1.append(saisie_score1)
 
-        print(liste_paire1_j1)
-        print(liste_paire1_j2)
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1=liste_paire1_j1)
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1=liste_paire1_j2)
         # joueur 2
         liste_paire1_j2 = []
         liste_paire1_j2.append(List_de_liste_joueur[1][1])
         liste_paire1_j2.append(saisie_score2)
-        print(liste_paire1_j2)
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1=liste_paire1_j2)
 
         # Chaque match génèrera 1 tuple avec comme nom,
         # « Tuple_ « Id_tournoi » & n°round & « idMatch(n°paire)» de 2 listes
@@ -409,19 +418,21 @@ class Class_Match():
                                                                      str_liste_liste_joueur1,
                                                                      str_liste_liste_joueur2,
                                                                      texteJ1, texteJ2)
-        print('saisie score 1 et 2 du match 2: ' + (saisie_score3) + " - " + saisie_score4)
+        ClassVueAffichage.Affichage1Ligne(self=True,
+                                          texte1='saisie score 1 et 2 du '
+                                                 'match 2: ' + (saisie_score3) + " - " + saisie_score4)
 
         # Ajout dans la liste de l'id du joueur et de son score
         # joueur 1
         liste_paire2_j1 = []
         liste_paire2_j1.append(List_de_liste_joueur[2][0])
         liste_paire2_j1.append(saisie_score3)
-        print(liste_paire2_j1)
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1=liste_paire2_j1)
         # joueur 2
         liste_paire2_j2 = []
         liste_paire2_j2.append(List_de_liste_joueur[2][1])
         liste_paire2_j2.append(saisie_score4)
-        print(liste_paire2_j2)
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1=liste_paire2_j2)
 
         # Chaque match génèrera 1 tuple avec comme nom,
         # « Tuple_ « Id_tournoi » & n°round & « idMatch(n°paire)» de 2 listes
@@ -444,19 +455,21 @@ class Class_Match():
                                                                      str_liste_liste_j2,
                                                                      texteJ1,
                                                                      texteJ2)
-        print('saisie score 1 et 2 du match 3: ' + (saisie_score5) + " - " + saisie_score6)
+        ClassVueAffichage.Affichage1Ligne(self=True,
+                                          texte1='saisie score 1 et 2 du '
+                                                 'match 3: ' + (saisie_score5) + " - " + saisie_score6)
 
         # Ajout dans la liste de l'id du joueur et de son score
         # joueur 1
         liste_paire3_j1 = []
         liste_paire3_j1.append(List_de_liste_joueur[3][0])
         liste_paire3_j1.append(saisie_score5)
-        print(liste_paire3_j1)
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1=liste_paire3_j1)
         # joueur 2
         liste_paire3_j2 = []
         liste_paire3_j2.append(List_de_liste_joueur[3][1])
         liste_paire3_j2.append(saisie_score6)
-        print(liste_paire3_j2)
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1=liste_paire3_j2)
 
         # Chaque match génèrera 1 tuple avec comme nom, « Tuple_
         # « Id_tournoi » & n°round & « idMatch(n°paire)» de 2 listes
@@ -480,20 +493,22 @@ class Class_Match():
                                                                      str_liste_liste_j2,
                                                                      texteJ1, texteJ2)
 
-        print('saisie score 1 et 2 du match 4: ' + (saisie_score7) + " - " + saisie_score8)
+        ClassVueAffichage.Affichage1Ligne(self=True,
+                                          texte1='saisie score 1 et 2 du '
+                                                 'match 4: ' + (saisie_score7) + " - " + saisie_score8)
 
         # Ajout dans la liste de l'id du joueur et de son score
         # joueur 1
         liste_paire4_j1 = []
         liste_paire4_j1.append(List_de_liste_joueur[4][0])
         liste_paire4_j1.append(saisie_score7)
-        print(liste_paire4_j1)
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1=liste_paire4_j1)
 
         # joueur 2
         liste_paire4_j2 = []
         liste_paire4_j2.append(List_de_liste_joueur[4][1])
         liste_paire4_j2.append(saisie_score8)
-        print(liste_paire4_j2)
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1=liste_paire4_j2)
 
         # Chaque match génèrera 1 tuple avec comme nom,
         # « Tuple_ « Id_tournoi » & n°round & « idMatch(n°paire)» de 2 listes
@@ -503,8 +518,6 @@ class Class_Match():
                                   liste_paire4_j1[1],
                                   liste_paire4_j2[0],
                                   liste_paire4_j2[1]))
-
-        print()
 
         # préparation  pour mise dans la base de donnée
         liste_match1 = []
@@ -532,7 +545,9 @@ class Class_Match():
         char = '.'
         PositChar = str_date_heure_fin.find(char)
         str_date_heure_fin = str_date_heure_fin[0:(PositChar)]
-        print("fin round en cours " + str(round_en_cours) + " : " + str_date_heure_fin)
+        ClassVueAffichage.Affichage1Ligne(self=True,
+                                          texte1="fin round en "
+                                                 "cours " + str(round_en_cours) + " : " + str_date_heure_fin)
 
         # chargment dans la base de données des scores des 4 matchs du round
         nom_donnees = "ScoreMatchRound" + str(round_en_cours)
@@ -550,4 +565,4 @@ class Class_Match():
         # Appel Modele Tournoi pour enregistrement des donnees dans la base de donnees
         ClassModTournoi.UpdateDonneesTournoi(self=True, numero_tournoi=int(tournoi_select),
                                              nom_donnee=nom_donnees, donnee=liste_4matchs)
-        print()
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1="")

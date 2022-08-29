@@ -49,9 +49,6 @@ class ClassJoueursModel:
         # Réécriture du classement d'un joueur dans la base de données
         from tinydb import TinyDB, Query
         Todo = Query()
-        print(nom_donnees)
-        print(donnees)
-        print(numero_joueur)
         db_joueurs = TinyDB('joueurs.json')
         db_joueurs.update({nom_donnees: donnees},
                           Todo.id_joueur == numero_joueur)
@@ -110,15 +107,15 @@ class ClassJoueursModel:
         # suppression {, [, et qui remplace chaque { par un \n
         serialised_joueurs = db_joueurs.all()
         str_joueurs = str(serialised_joueurs)
-        print_liste_joueurs = ""
+        la_liste_joueurs = ""
         char = "{"
         for x in range(len(char)):
-            print_liste_joueurs = str_joueurs.replace(char, "\n")
-            print_liste_joueurs = print_liste_joueurs.replace("}", "")
-            print_liste_joueurs = print_liste_joueurs.replace(",", "         ")
-            print_liste_joueurs = print_liste_joueurs.replace("'", " ")
-        print_liste_joueurs = print_liste_joueurs.replace("[", "")
-        liste_joueurs = print_liste_joueurs.replace("]", "    ")
+            la_liste_joueurs = str_joueurs.replace(char, "\n")
+            la_liste_joueurs = la_liste_joueurs.replace("}", "")
+            la_liste_joueurs = la_liste_joueurs.replace(",", "         ")
+            la_liste_joueurs = la_liste_joueurs.replace("'", " ")
+        la_liste_joueurs = la_liste_joueurs.replace("[", "")
+        liste_joueurs = la_liste_joueurs.replace("]", "    ")
         return (liste_joueurs)
 
     def SupJoueur(self, numero_joueur):

@@ -108,15 +108,15 @@ class Class_Tournoi():
                 os._exit(0)
         else:
             temps_matchs = list_tps[int(saisie)]
-        print(temps_matchs)
-        print()
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1=temps_matchs)
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1="")
 
         # appel vue pour saisie des remarques générale organisateur
         remarque_tournoi = ClassVueAffichage.Input(self=True,
                                                    texte1="saisie des remarques "
                                                           "de l'organisateur "
                                                           "du tournoi :")
-        print()
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1="")
         # Appel du modele tournoi pour Serialisation et enregistrement des données dans la base
         ClassModTournoi.CreatNewTournois(self=True, id_tournoi=id_tournoi, nom=nom, lieu=lieu, date=date,
                                          nbr_rounds=nbr_rounds, id_j1=id_j1, id_j2=id_j2, id_j3=id_j3, id_j4=id_j4,
@@ -128,23 +128,25 @@ class Class_Tournoi():
 
     def lect_tournois():
         from Modele.Tournoi import ClassModTournoi
+        from Vue.affichage import ClassVueAffichage
         # Appel du modèle tournoi pour récupérer le liste des tournois
         tournois = ClassModTournoi.AffichageTournois(self=True)
         index = 0
         for i in tournois:
-            print(tournois[index])
-            print()
+            ClassVueAffichage.Affichage1Ligne(self=True, texte1=tournois[index])
+            ClassVueAffichage.Affichage1Ligne(self=True, texte1="")
             index = index + 1
         return ()
 
     # supprimer un tournoi de la liste pour éventuellement le ressaisir
     def sup_tournois(menu_niv_2):
         from Modele.Tournoi import ClassModTournoi
+        from Vue.affichage import ClassVueAffichage
         if menu_niv_2.isdigit():
             id_tournoi_del = int(menu_niv_2)
             ClassModTournoi.SupprimTournois(self=True, numero_tournoi=id_tournoi_del)
         else:
-            print("le numéro de tournoi doit être un nombre")
+            ClassVueAffichage.Affichage1Ligne(self=True, texte1="le numéro de tournoi doit être un nombre")
 
     def purge_tournois():
         from Modele.Tournoi import ClassModTournoi
@@ -272,7 +274,7 @@ class Class_Tournoi():
         tournoi_trouv = ClassFonctions.tournoi_exist(id_tournoi_select=tournoi_select)
 
         if tournoi_trouv == []:
-            print("Numéro de tournoi introuvable")
+            ClassVueAffichage.Affichage1Ligne(self=True, texte1="Numéro de tournoi introuvable")
             os._exit(0)
         int_tournoi_select = int(tournoi_select)
 
@@ -282,58 +284,98 @@ class Class_Tournoi():
         # Affichage scores round 1
         try:
             score_round1 = (tournoi[0]['ScoreMatchRound1'])
-            print("Score round 1 - ID joueur + score : " + str(score_round1[0]) + str(score_round1[1]))
-            print("Score round 1 - ID joueur + score : " + str(score_round1[2]) + str(score_round1[3]))
-            print("Score round 1 - ID joueur + score : " + str(score_round1[4]) + str(score_round1[5]))
-            print("Score round 1 - ID joueur + score : " + str(score_round1[6]) + str(score_round1[7]))
-            print()
+            ClassVueAffichage.Affichage1Ligne(self=True,
+                                              texte1="Score round 1 - ID joueur + "
+                                                     "score : " + str(score_round1[0]) + str(score_round1[1]))
+            ClassVueAffichage.Affichage1Ligne(self=True,
+                                              texte1="Score round 1 - ID joueur + "
+                                                     "score : " + str(score_round1[2]) + str(score_round1[3]))
+            ClassVueAffichage.Affichage1Ligne(self=True,
+                                              texte1="Score round 1 - ID joueur + "
+                                                     "score : " + str(score_round1[4]) + str(score_round1[5]))
+            ClassVueAffichage.Affichage1Ligne(self=True,
+                                              texte1="Score round 1 - ID joueur + "
+                                                     "score : " + str(score_round1[6]) + str(score_round1[7]))
+            ClassVueAffichage.Affichage1Ligne(self=True, texte1="")
         except KeyError:
-            print("pas de score pour le round 1")
+            ClassVueAffichage.Affichage1Ligne(self=True, texte1="pas de score pour le round 1")
 
         # Affichage scores round 2
         try:
             score_round2 = (tournoi[0]['ScoreMatchRound2'])
-            print("Score round 2 - ID joueur + score : " + str(score_round2[0]) + str(score_round2[1]))
-            print("Score round 2 - ID joueur + score : " + str(score_round2[2]) + str(score_round2[3]))
-            print("Score round 2 - ID joueur + score : " + str(score_round2[4]) + str(score_round2[5]))
-            print("Score round 2 - ID joueur + score : " + str(score_round2[6]) + str(score_round2[7]))
-            print()
+            ClassVueAffichage.Affichage1Ligne(self=True,
+                                              texte1="Score round 2 - ID joueur + "
+                                                     "score : " + str(score_round2[0]) + str(score_round2[1]))
+            ClassVueAffichage.Affichage1Ligne(self=True,
+                                              texte1="Score round 2 - ID joueur + "
+                                                     "score : " + str(score_round2[2]) + str(score_round2[3]))
+            ClassVueAffichage.Affichage1Ligne(self=True,
+                                              texte1="Score round 2 - ID joueur + "
+                                                     "score : " + str(score_round2[4]) + str(score_round2[5]))
+            ClassVueAffichage.Affichage1Ligne(self=True,
+                                              texte1="Score round 2 - ID joueur + "
+                                                     "score : " + str(score_round2[6]) + str(score_round2[7]))
+            ClassVueAffichage.Affichage1Ligne(self=True, texte1="")
         except KeyError:
-            print("pas de score pour le round 2")
+            ClassVueAffichage.Affichage1Ligne(self=True, texte1="pas de score pour le round 2")
 
         # Affichage scores round 3
         try:
             score_round3 = (tournoi[0]['ScoreMatchRound3'])
-            print("Score round 3 - ID joueur + score : " + str(score_round3[0]) + str(score_round3[1]))
-            print("Score round 3 - ID joueur + score : " + str(score_round3[2]) + str(score_round3[3]))
-            print("Score round 3 - ID joueur + score : " + str(score_round3[4]) + str(score_round3[5]))
-            print("Score round 3 - ID joueur + score : " + str(score_round3[6]) + str(score_round3[7]))
-            print()
+            ClassVueAffichage.Affichage1Ligne(self=True,
+                                              texte1="Score round 3 - ID joueur + "
+                                                     "score : " + str(score_round3[0]) + str(score_round3[1]))
+            ClassVueAffichage.Affichage1Ligne(self=True,
+                                              texte1="Score round 3 - ID joueur + "
+                                                     "score : " + str(score_round3[2]) + str(score_round3[3]))
+            ClassVueAffichage.Affichage1Ligne(self=True,
+                                              texte1="Score round 3 - ID joueur + "
+                                                     "score : " + str(score_round3[4]) + str(score_round3[5]))
+            ClassVueAffichage.Affichage1Ligne(self=True,
+                                              texte1="Score round 3 - ID joueur + "
+                                                     "score : " + str(score_round3[6]) + str(score_round3[7]))
+            ClassVueAffichage.Affichage1Ligne(self=True, texte1="")
         except KeyError:
-            print("pas de score pour le round 3")
+            ClassVueAffichage.Affichage1Ligne(self=True, texte1="pas de score pour le round 3")
 
         # Affichage scores round 4
         try:
             score_round4 = (tournoi[0]['ScoreMatchRound4'])
-            print("Score round 4 - ID joueur + score : " + str(score_round4[0]) + str(score_round4[1]))
-            print("Score round 4 - ID joueur + score : " + str(score_round4[2]) + str(score_round4[3]))
-            print("Score round 4 - ID joueur + score : " + str(score_round4[4]) + str(score_round4[5]))
-            print("Score round 4 - ID joueur + score : " + str(score_round4[6]) + str(score_round4[7]))
-            print()
+            ClassVueAffichage.Affichage1Ligne(self=True,
+                                              texte1="Score round 4 - ID joueur + "
+                                                     "score : " + str(score_round4[0]) + str(score_round4[1]))
+            ClassVueAffichage.Affichage1Ligne(self=True,
+                                              texte1="Score round 4 - ID joueur + "
+                                                     "score : " + str(score_round4[2]) + str(score_round4[3]))
+            ClassVueAffichage.Affichage1Ligne(self=True,
+                                              texte1="Score round 4 - ID joueur + "
+                                                     "score : " + str(score_round4[4]) + str(score_round4[5]))
+            ClassVueAffichage.Affichage1Ligne(self=True,
+                                              texte1="Score round 4 - ID joueur + "
+                                                     "score : " + str(score_round4[6]) + str(score_round4[7]))
+            ClassVueAffichage.Affichage1Ligne(self=True, texte1="")
         except KeyError:
-            print("pas de score pour le round 4")
+            ClassVueAffichage.Affichage1Ligne(self=True, texte1="pas de score pour le round 4")
 
         # Affichage scores round 5
         try:
             score_round5 = (tournoi[0]['ScoreMatchRound5'])
-            print("Score round 5 - ID joueur + score : " + str(score_round5[0]) + str(score_round5[1]))
-            print("Score round 5 - ID joueur + score : " + str(score_round5[2]) + str(score_round5[3]))
-            print("Score round 5 - ID joueur + score : " + str(score_round5[4]) + str(score_round5[5]))
-            print("Score round 5 - ID joueur + score : " + str(score_round5[6]) + str(score_round5[7]))
-            print()
+            ClassVueAffichage.Affichage1Ligne(self=True,
+                                              texte1="Score round 5 - ID joueur + "
+                                                     "score : " + str(score_round5[0]) + str(score_round5[1]))
+            ClassVueAffichage.Affichage1Ligne(self=True,
+                                              texte1="Score round 5 - ID joueur + "
+                                                     "score : " + str(score_round5[2]) + str(score_round5[3]))
+            ClassVueAffichage.Affichage1Ligne(self=True,
+                                              texte1="Score round 5 - ID joueur + "
+                                                     "score : " + str(score_round5[4]) + str(score_round5[5]))
+            ClassVueAffichage.Affichage1Ligne(self=True,
+                                              texte1="Score round 5 - ID joueur + "
+                                                     "score : " + str(score_round5[6]) + str(score_round5[7]))
+            ClassVueAffichage.Affichage1Ligne(self=True, texte1="")
         except KeyError:
-            print("pas de score pour le round 5")
-            print()
+            ClassVueAffichage.Affichage1Ligne(self=True, texte1="pas de score pour le round 5")
+            ClassVueAffichage.Affichage1Ligne(self=True, texte1="")
 
     def lecture_round_tournoi():
         import os
@@ -351,13 +393,13 @@ class Class_Tournoi():
         tournoi_trouv = ClassFonctions.tournoi_exist(tournoi_select)
 
         if tournoi_trouv == []:
-            print("Numéro de tournoi introuvable")
+            ClassVueAffichage.Affichage1Ligne(self=True, texte1="Numéro de tournoi introuvable")
             os._exit(0)
 
         # Apppel du modèle pour récupération du tournoi sélectionné
         int_tournoi_select = int(tournoi_select)
         tournoi = ClassModTournoi.Lect1Tournoi(self=True, tournoi_select=int_tournoi_select)
-        print(tournoi)
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1=tournoi)
 
         # charger le tournoi sélectionné à partir de la base
         # de données dans tournoi
@@ -368,10 +410,10 @@ class Class_Tournoi():
         try:
             round1 = (tournoi[0]['round_1+match'])
             try:
-                print("Round 1 - Date du tournoi : " + str(round1[0]))
-                print()
+                ClassVueAffichage.Affichage1Ligne(self=True, texte1="Round 1 - Date du tournoi : " + str(round1[0]))
+                ClassVueAffichage.Affichage1Ligne(self=True, texte1="")
             except IndexError:
-                print("pas de round 1 créé")
+                ClassVueAffichage.Affichage1Ligne(self=True, texte1="pas de round 1 créé")
             index = 1
             if round1 != "":
                 while index < 5:
@@ -379,19 +421,19 @@ class Class_Tournoi():
                     str_poubl = str_poubl + str(round1[index][0][0]) + " - "
                     str_poubl = str_poubl + str(round1[index][0][2]) + " - : "
                     str_poubl = str_poubl + str(round1[index][0][3])
-                    print(str_poubl)
+                    ClassVueAffichage.Affichage1Ligne(self=True, texte1=str_poubl)
                     str_poubl = ""
 
                     str_poubl = "Round 1 - Paire" + str(index) + " - Joueur 2 : " + "ID : "
                     str_poubl = str_poubl + str(round1[index][1][0]) + " - "
                     str_poubl = str_poubl + str(round1[index][1][2]) + " - : "
                     str_poubl = str_poubl + str(round1[index][1][3])
-                    print(str_poubl)
+                    ClassVueAffichage.Affichage1Ligne(self=True, texte1=str_poubl)
                     str_poubl = ""
                     index = index + 1
-                    print()
+                    ClassVueAffichage.Affichage1Ligne(self=True, texte1="")
         except KeyError:
-            print("pas de round créé pour le round 1")
+            ClassVueAffichage.Affichage1Ligne(self=True, texte1="pas de round créé pour le round 1")
 
         # ROUND 2 ET PLUS
         index_round = 2
@@ -399,23 +441,30 @@ class Class_Tournoi():
             round_bd = "round_" + str(index_round) + "+match"
             roundx = (tournoi[0][round_bd])
             try:
-                print("Round" + str(index_round) + " - Date du tournoi : " + str(roundx[0]))
+                ClassVueAffichage.Affichage1Ligne(self=True,
+                                                  texte1="Round" + str(index_round) + " - Date du "
+                                                                                      "tournoi : " + str(roundx[0]))
 
                 index = 1
                 while index < 5:
                     str_poubl = "Round" + str(index_round) + " - Paire" + str(index)
-                    print(str_poubl + " - Joueur 1 : " + "ID : " + str(roundx[index][0]))
+                    ClassVueAffichage.Affichage1Ligne(self=True,
+                                                      texte1=str_poubl + " - Joueur "
+                                                                         "1 : " + "ID : " + str(roundx[index][0]))
                     str_poubl = ""
 
                     str_poubl = "Round" + str(index_round) + " - Paire" + str(index)
-                    print(str_poubl + " - Joueur 2 : " + "ID : " + str(roundx[index][1]))
+                    ClassVueAffichage.Affichage1Ligne(self=True,
+                                                      texte1=str_poubl + " - Joueur "
+                                                                         "2 : " + "ID : " + str(roundx[index][1]))
                     str_poubl = ""
                     index = index + 1
-                    print()
+                    ClassVueAffichage.Affichage1Ligne(self=True, texte1="")
             except IndexError:
-                print("pas de round " + str(index_round) + "créé")
+                ClassVueAffichage.Affichage1Ligne(self=True,
+                                                  texte1="pas de round " + str(index_round) + "créé")
             index_round = index_round + 1
-        print()
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1="")
 
     def lecture_joueur_tournoi():
         # Récupération des informations du fichier JSON du tournoi
@@ -433,7 +482,7 @@ class Class_Tournoi():
 
         tournoi_trouv = ClassFonctions.tournoi_exist(tournoi_select)
         if tournoi_trouv == []:
-            print("Numéro de tournoi introuvable")
+            ClassVueAffichage.Affichage1Ligne(self=True, texte1="Numéro de tournoi introuvable")
             os._exit(0)
 
         int_tournoi_select = int(tournoi_select)
@@ -457,48 +506,48 @@ class Class_Tournoi():
         try:
             joueur1 = (db_joueurs.search(where('id_joueur') == int(id_j1)))
         except ValueError:
-            print("pas de joueur 1 chargé dans le tournoi")
+            ClassVueAffichage.Affichage1Ligne(self=True, texte1="pas de joueur 1 chargé dans le tournoi")
 
         # Joueur 2
         try:
             joueur2 = (db_joueurs.search(where('id_joueur') == int(id_j2)))
         except ValueError:
-            print("pas de joueur 2 chargé dans le tournoi")
+            ClassVueAffichage.Affichage1Ligne(self=True, texte1="pas de joueur 2 chargé dans le tournoi")
 
         # Joueur 3
         try:
             joueur3 = (db_joueurs.search(where('id_joueur') == int(id_j3)))
         except ValueError:
-            print("pas de joueur 3 chargé dans le tournoi")
+            ClassVueAffichage.Affichage1Ligne(self=True, texte1="pas de joueur 3 chargé dans le tournoi")
 
         # Joueur 4
         try:
             joueur4 = (db_joueurs.search(where('id_joueur') == int(id_j4)))
         except ValueError:
-            print("pas de joueur 4 chargé dans le tournoi")
+            ClassVueAffichage.Affichage1Ligne(self=True, texte1="pas de joueur 4 chargé dans le tournoi")
 
         # Joueur 5
         try:
             joueur5 = (db_joueurs.search(where('id_joueur') == int(id_j5)))
         except ValueError:
-            print("pas de joueur 5 chargé dans le tournoi")
+            ClassVueAffichage.Affichage1Ligne(self=True, texte1="pas de joueur 5 chargé dans le tournoi")
         # Joueur 6
         try:
             joueur6 = (db_joueurs.search(where('id_joueur') == int(id_j6)))
         except ValueError:
-            print("pas de joueur 6 chargé dans le tournoi")
+            ClassVueAffichage.Affichage1Ligne(self=True, texte1="pas de joueur 6 chargé dans le tournoi")
 
         # Joueur 7
         try:
             joueur7 = (db_joueurs.search(where('id_joueur') == int(id_j7)))
         except ValueError:
-            print("pas de joueur 7 chargé dans le tournoi")
+            ClassVueAffichage.Affichage1Ligne(self=True, texte1="pas de joueur 7 chargé dans le tournoi")
         # Joueur 8
         try:
             joueur8 = (db_joueurs.search(where('id_joueur') == int(id_j8)))
             joueur_charge = "True"
         except ValueError:
-            print("pas de joueur 8 chargé dans le tournoi")
+            ClassVueAffichage.Affichage1Ligne(self=True, texte1="pas de joueur 8 chargé dans le tournoi")
             joueur_charge = "False"
 
         if joueur_charge == "True":
@@ -506,63 +555,78 @@ class Class_Tournoi():
 
             str_poubl = "JOUEUR 1 DU TOURNOI : Identifiant n°" + str(id_j) + " - "
             str_poubl = str_poubl + str(nom_j) + " - " + str(prenom_j) + " - "
-            print(str_poubl + str(date_j) + " - " + str(sexe_j) + " - Classé," + str(classement_j))
+            ClassVueAffichage.Affichage1Ligne(self=True,
+                                              texte1=str_poubl + str
+                                              (date_j) + " - " + str(sexe_j) + " - Classé," + str(classement_j))
             str_poubl = ""
 
             id_j, nom_j, prenom_j, date_j, sexe_j, classement_j = Class_Tournoi.liste_joueur_tournoi(joueur2)
             str_poubl = "JOUEUR 2 DU TOURNOI : Identifiant n°" + str(id_j) + " - "
             str_poubl = str_poubl + str(nom_j) + " - " + str(prenom_j) + " - "
-            print(str_poubl + str(date_j) + " - " + str(sexe_j) + " - Classé," + str(classement_j))
+            ClassVueAffichage.Affichage1Ligne(self=True,
+                                              texte1=str_poubl + str(date_j) + " - " + str
+                                              (sexe_j) + " - Classé," + str(classement_j))
             str_poubl = ""
 
             id_j, nom_j, prenom_j, date_j, sexe_j, classement_j = Class_Tournoi.liste_joueur_tournoi(joueur3)
             str_poubl = "JOUEUR 3 DU TOURNOI : Identifiant n°" + str(id_j) + " - "
             str_poubl = str_poubl + str(nom_j) + " - " + str(prenom_j) + " - "
-            print(str_poubl + str(date_j) + " - " + str(sexe_j) + " - Classé," + str(classement_j))
+            ClassVueAffichage.Affichage1Ligne(self=True,
+                                              texte1=str_poubl + str(date_j) + " - " + str
+                                              (sexe_j) + " - Classé," + str(classement_j))
             str_poubl = ""
 
             id_j, nom_j, prenom_j, date_j, sexe_j, classement_j = Class_Tournoi.liste_joueur_tournoi(joueur4)
             str_poubl = "JOUEUR 4 DU TOURNOI : Identifiant n°" + str(id_j) + " - "
             str_poubl = str_poubl + str(nom_j) + " - " + str(prenom_j) + " - "
-            print(str_poubl + str(date_j) + " - " + str(sexe_j) + " - Classé," + str(classement_j))
+            ClassVueAffichage.Affichage1Ligne(self=True,
+                                              texte1=str_poubl + str(date_j) + " - " + str
+                                              (sexe_j) + " - Classé," + str(classement_j))
             str_poubl = ""
 
             id_j, nom_j, prenom_j, date_j, sexe_j, classement_j = Class_Tournoi.liste_joueur_tournoi(joueur5)
             str_poubl = "JOUEUR 5 DU TOURNOI : Identifiant n°" + str(id_j) + " - "
             str_poubl = str_poubl + str(nom_j) + " - " + str(prenom_j) + " - "
-            print(str_poubl + str(date_j) + " - " + str(sexe_j) + " - Classé," + str(classement_j))
+            str_poubl = str_poubl + str(date_j) + " - " + str(sexe_j) + " - Classé," + str(classement_j)
+            ClassVueAffichage.Affichage1Ligne(self=True, texte1=str_poubl)
             str_poubl = ""
 
             id_j, nom_j, prenom_j, date_j, sexe_j, classement_j = Class_Tournoi.liste_joueur_tournoi(joueur6)
             str_poubl = "JOUEUR 6 DU TOURNOI : Identifiant n°" + str(id_j) + " - "
             str_poubl = str_poubl + str(nom_j) + " - " + str(prenom_j) + " - "
-            print(str_poubl + str(date_j) + " - " + str(sexe_j) + " - Classé," + str(classement_j))
+            str_poubl = str_poubl + str(date_j) + " - " + str(sexe_j) + " - Classé," + str(classement_j)
+            ClassVueAffichage.Affichage1Ligne(self=True, texte1=str_poubl)
             str_poubl = ""
 
             id_j, nom_j, prenom_j, date_j, sexe_j, classement_j = Class_Tournoi.liste_joueur_tournoi(joueur7)
             str_poubl = "JOUEUR 7 DU TOURNOI : Identifiant n°" + str(id_j) + " - "
             str_poubl = str_poubl + str(nom_j) + " - " + str(prenom_j) + " - "
-            print(str_poubl + str(date_j) + " - " + str(sexe_j) + " - Classé," + str(classement_j))
+            str_poubl = str_poubl + str(date_j) + " - " + str(sexe_j) + " - Classé," + str(classement_j)
+            ClassVueAffichage.Affichage1Ligne(self=True, texte1=str_poubl)
             str_poubl = ""
 
             id_j, nom_j, prenom_j, date_j, sexe_j, classement_j = Class_Tournoi.liste_joueur_tournoi(joueur8)
             str_poubl = "JOUEUR 8 DU TOURNOI : Identifiant n°" + str(id_j) + " - "
             str_poubl = str_poubl + str(nom_j) + " - " + str(prenom_j) + " - "
-            print(str_poubl + str(date_j) + " - " + str(sexe_j) + " - Classé," + str(classement_j))
+            str_poubl = str_poubl + str(date_j) + " - " + str(sexe_j) + " - Classé," + str(classement_j)
+            ClassVueAffichage.Affichage1Ligne(self=True, texte1=str_poubl)
             str_poubl = ""
 
     def lecturetournoi():
         from Modele.Tournoi import ClassModTournoi
+        from Vue.affichage import ClassVueAffichage
         # appel du modèle tournoi pour récupération tournoi
         serie_tournois = ClassModTournoi.LectTournoi()
-        print()
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1="")
         index = 0
         for i in serie_tournois:
             str_poubl = "ID tournoi n°" + str(serie_tournois[index]['id_tournoi'])
             str_poubl = str_poubl + ",   appelé " + str(serie_tournois[index]['nom'])
             str_poubl = str_poubl + (", qui s'est passé à " + str(serie_tournois[index]['lieu']))
-            print(str_poubl + (", en date du " + str(serie_tournois[index]['date du tournoi'])))
-            print()
+            str_poubl = str_poubl + (", en date du " + str(serie_tournois[index]['date du tournoi']))
+            ClassVueAffichage.Affichage1Ligne(self=True,
+                                              texte1=str_poubl)
+            ClassVueAffichage.Affichage1Ligne(self=True, texte1="")
             index = index + 1
 
     def liste_joueur_tournoi(joueur):
@@ -592,7 +656,7 @@ class Class_Tournoi():
         tournoi_trouv = ClassFonctions.tournoi_exist(tournoi_select)
 
         if tournoi_trouv == []:
-            print("Numéro de tournoi introuvable")
+            ClassVueAffichage.Affichage1Ligne(self=True, texte1="Numéro de tournoi introuvable")
             os._exit(0)
 
         int_tournoi_select = int(tournoi_select)
@@ -616,7 +680,7 @@ class Class_Tournoi():
             joueur1 = ClassJoueursModel.MisADispoJoueurTournoi(self=True, id_joueur=id_j)
             liste_joueurc_tournoi.append(joueur1)
         except ValueError:
-            print("pas de joueur 1 chargé dans le tournoi")
+            ClassVueAffichage.Affichage1Ligne(self=True, texte1="pas de joueur 1 chargé dans le tournoi")
 
         # Joueur 2
         try:
@@ -624,7 +688,7 @@ class Class_Tournoi():
             joueur2 = ClassJoueursModel.MisADispoJoueurTournoi(self=True, id_joueur=id_j)
             liste_joueurc_tournoi.append(joueur2)
         except ValueError:
-            print("pas de joueur 2 chargé dans le tournoi")
+            ClassVueAffichage.Affichage1Ligne(self=True, texte1="pas de joueur 2 chargé dans le tournoi")
 
         # Joueur 3
         try:
@@ -632,7 +696,7 @@ class Class_Tournoi():
             joueur3 = ClassJoueursModel.MisADispoJoueurTournoi(self=True, id_joueur=id_j)
             liste_joueurc_tournoi.append(joueur3)
         except ValueError:
-            print("pas de joueur 3 chargé dans le tournoi")
+            ClassVueAffichage.Affichage1Ligne(self=True, texte1="pas de joueur 3 chargé dans le tournoi")
 
         # Joueur 4
         try:
@@ -640,7 +704,7 @@ class Class_Tournoi():
             joueur4 = ClassJoueursModel.MisADispoJoueurTournoi(self=True, id_joueur=id_j)
             liste_joueurc_tournoi.append(joueur4)
         except ValueError:
-            print("pas de joueur 4 chargé dans le tournoi")
+            ClassVueAffichage.Affichage1Ligne(self=True, texte1="pas de joueur 4 chargé dans le tournoi")
 
         # Joueur 5
         try:
@@ -648,7 +712,7 @@ class Class_Tournoi():
             joueur5 = ClassJoueursModel.MisADispoJoueurTournoi(self=True, id_joueur=id_j)
             liste_joueurc_tournoi.append(joueur5)
         except ValueError:
-            print("pas de joueur 5 chargé dans le tournoi")
+            ClassVueAffichage.Affichage1Ligne(self=True, texte1="pas de joueur 5 chargé dans le tournoi")
 
         # Joueur 6
         try:
@@ -656,7 +720,7 @@ class Class_Tournoi():
             joueur6 = ClassJoueursModel.MisADispoJoueurTournoi(self=True, id_joueur=id_j)
             liste_joueurc_tournoi.append(joueur6)
         except ValueError:
-            print("pas de joueur 6 chargé dans le tournoi")
+            ClassVueAffichage.Affichage1Ligne(self=True, texte1="pas de joueur 6 chargé dans le tournoi")
 
         # Joueur 7
         try:
@@ -664,7 +728,7 @@ class Class_Tournoi():
             joueur7 = ClassJoueursModel.MisADispoJoueurTournoi(self=True, id_joueur=id_j)
             liste_joueurc_tournoi.append(joueur7)
         except ValueError:
-            print("pas de joueur 7 chargé dans le tournoi")
+            ClassVueAffichage.Affichage1Ligne(self=True, texte1="pas de joueur 7 chargé dans le tournoi")
 
         # Joueur 8
         try:
@@ -673,7 +737,7 @@ class Class_Tournoi():
             liste_joueurc_tournoi.append(joueur8)
             joueur_charge = "True"
         except ValueError:
-            print("pas de joueur 8 chargé dans le tournoi")
+            ClassVueAffichage.Affichage1Ligne(self=True, texte1="pas de joueur 8 chargé dans le tournoi")
             joueur_charge = "False"
 
         if joueur_charge == "True":
@@ -681,49 +745,57 @@ class Class_Tournoi():
 
             str_poubl = "JOUEUR 1 DU TOURNOI : Identifiant n°" + str(id_j) + " - "
             str_poubl = str_poubl + str(nom_j) + " - " + str(prenom_j) + " - "
-            print(str_poubl + str(date_j) + " - " + str(sexe_j) + " - Classé," + str(classement_j))
+            str_poubl = str_poubl + str(date_j) + " - " + str(sexe_j) + " - Classé," + str(classement_j)
+            ClassVueAffichage.Affichage1Ligne(self=True, texte1=str_poubl)
             str_poubl = ""
 
             id_j, nom_j, prenom_j, date_j, sexe_j, classement_j = Class_Tournoi.liste_joueur_tournoi(joueur2)
             str_poubl = "JOUEUR 2 DU TOURNOI : Identifiant n°" + str(id_j) + " - "
             str_poubl = str_poubl + str(nom_j) + " - " + str(prenom_j) + " - "
-            print(str_poubl + str(date_j) + " - " + str(sexe_j) + " - Classé," + str(classement_j))
+            str_poubl = str_poubl + str(date_j) + " - " + str(sexe_j) + " - Classé," + str(classement_j)
+            ClassVueAffichage.Affichage1Ligne(self=True, texte1=str_poubl)
             str_poubl = ""
 
             id_j, nom_j, prenom_j, date_j, sexe_j, classement_j = Class_Tournoi.liste_joueur_tournoi(joueur3)
             str_poubl = "JOUEUR 3 DU TOURNOI : Identifiant n°" + str(id_j) + " - "
             str_poubl = str_poubl + str(nom_j) + " - " + str(prenom_j) + " - "
-            print(str_poubl + str(date_j) + " - " + str(sexe_j) + " - Classé," + str(classement_j))
+            str_poubl = str_poubl + str(date_j) + " - " + str(sexe_j) + " - Classé," + str(classement_j)
+            ClassVueAffichage.Affichage1Ligne(self=True, texte1=str_poubl)
             str_poubl = ""
 
             id_j, nom_j, prenom_j, date_j, sexe_j, classement_j = Class_Tournoi.liste_joueur_tournoi(joueur4)
             str_poubl = "JOUEUR 4 DU TOURNOI : Identifiant n°" + str(id_j) + " - "
             str_poubl = str_poubl + str(nom_j) + " - " + str(prenom_j) + " - "
-            print(str_poubl + str(date_j) + " - " + str(sexe_j) + " - Classé," + str(classement_j))
+            str_poubl = str_poubl + str(date_j) + " - " + str(sexe_j) + " - Classé," + str(classement_j)
+            ClassVueAffichage.Affichage1Ligne(self=True, texte1=str_poubl)
             str_poubl = ""
 
             id_j, nom_j, prenom_j, date_j, sexe_j, classement_j = Class_Tournoi.liste_joueur_tournoi(joueur5)
             str_poubl = "JOUEUR 5 DU TOURNOI : Identifiant n°" + str(id_j) + " - "
             str_poubl = str_poubl + str(nom_j) + " - " + str(prenom_j) + " - "
-            print(str_poubl + str(date_j) + " - " + str(sexe_j) + " - Classé," + str(classement_j))
+            str_poubl = str_poubl + str(date_j) + " - " + str(sexe_j) + " - Classé," + str(classement_j)
+            ClassVueAffichage.Affichage1Ligne(self=True, texte1=str_poubl)
             str_poubl = ""
 
             id_j, nom_j, prenom_j, date_j, sexe_j, classement_j = Class_Tournoi.liste_joueur_tournoi(joueur6)
             str_poubl = "JOUEUR 6 DU TOURNOI : Identifiant n°" + str(id_j) + " - "
             str_poubl = str_poubl + str(nom_j) + " - " + str(prenom_j) + " - "
-            print(str_poubl + str(date_j) + " - " + str(sexe_j) + " - Classé," + str(classement_j))
+            str_poubl = str_poubl + str(date_j) + " - " + str(sexe_j) + " - Classé," + str(classement_j)
+            ClassVueAffichage.Affichage1Ligne(self=True, texte1=str_poubl)
             str_poubl = ""
 
             id_j, nom_j, prenom_j, date_j, sexe_j, classement_j = Class_Tournoi.liste_joueur_tournoi(joueur7)
             str_poubl = "JOUEUR 7 DU TOURNOI : Identifiant n°" + str(id_j) + " - "
             str_poubl = str_poubl + str(nom_j) + " - " + str(prenom_j) + " - "
-            print(str_poubl + str(date_j) + " - " + str(sexe_j) + " - Classé," + str(classement_j))
+            str_poubl = str_poubl + str(date_j) + " - " + str(sexe_j) + " - Classé," + str(classement_j)
+            ClassVueAffichage.Affichage1Ligne(self=True, texte1=str_poubl)
             str_poubl = ""
 
             id_j, nom_j, prenom_j, date_j, sexe_j, classement_j = Class_Tournoi.liste_joueur_tournoi(joueur8)
             str_poubl = "JOUEUR 8 DU TOURNOI : Identifiant n°" + str(id_j) + " - "
             str_poubl = str_poubl + str(nom_j) + " - " + str(prenom_j) + " - "
-            print(str_poubl + str(date_j) + " - " + str(sexe_j) + " - Classé," + str(classement_j))
+            str_poubl = str_poubl + str(date_j) + " - " + str(sexe_j) + " - Classé," + str(classement_j)
+            ClassVueAffichage.Affichage1Ligne(self=True, texte1=str_poubl)
             str_poubl = ""
 
             dict_joueurs = ClassFonctions.creat_dict(donnees_db=liste_joueurc_tournoi)
@@ -731,17 +803,18 @@ class Class_Tournoi():
             from operator import itemgetter
             joueur_class_croissant = (sorted(dict_joueurs, key=itemgetter("Nom"), reverse=False))
 
-            print("Affichage des joueurs classés par nom")
+            ClassVueAffichage.Affichage1Ligne(self=True, texte1="Affichage des joueurs classés par nom")
             index = 0
             for i in joueur_class_croissant:
-                print(joueur_class_croissant[index])
+                ClassVueAffichage.Affichage1Ligne(self=True, texte1=joueur_class_croissant[index])
                 index = index + 1
-            print()
+            ClassVueAffichage.Affichage1Ligne(self=True, texte1="")
 
-            print("Affichage des joueurs par classement croissant du tournoi")
+            ClassVueAffichage.Affichage1Ligne(self=True, texte1="Affichage des joueurs par classement "
+                                                                "croissant du tournoi")
             joueur_class_croissant = (sorted(dict_joueurs, key=itemgetter("Classement"), reverse=False))
             index = 0
             for i in joueur_class_croissant:
-                print(joueur_class_croissant[index])
+                ClassVueAffichage.Affichage1Ligne(self=True, texte1=joueur_class_croissant[index])
                 index = index + 1
-            print()
+            ClassVueAffichage.Affichage1Ligne(self=True, texte1="")

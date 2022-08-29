@@ -10,6 +10,13 @@ class ClassVueAffichage:
         print(texte2)
         print(texte3)
 
+    def Affichage1Ligne(self, texte1):
+        print(texte1)
+
+    def Affichage2Lignes(self, texte1, texte2):
+        print(texte1)
+        print(texte2)
+
     def Input(self, texte1):
         input_saisie = input(texte1 + "\n")
         return (input_saisie)

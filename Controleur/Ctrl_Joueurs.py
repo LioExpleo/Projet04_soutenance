@@ -80,7 +80,6 @@ class ClassJoueurs():
             ClassVueAffichage.Affichage(self=True, texte1="en absence d'indication, "
                                                           "le sexe est indiqué nc",
                                         texte2="", texte3="")
-            # print("en absence d'indication, le sexe est indiqué nc")
 
         # Appel de la méthode de saisie dans vue pour saisie du classement
         classement = ClassVueAffichage.Input(self=True, texte1="classement :")
@@ -126,6 +125,7 @@ class ClassJoueurs():
         # Récupération des informations du fichier
         # JSON du tournoi pour créer les rounds
         from Modele.Joueurs import ClassJoueursModel
+        from Vue.affichage import ClassVueAffichage
         serie_joueurs = ClassJoueursModel.MisADispoJoueursRapport()
         index = 0
         liste_joueurs = []
@@ -140,16 +140,18 @@ class ClassJoueurs():
         from operator import itemgetter
         joueur_id_decroissant = (sorted(liste_joueurs, key=itemgetter(3), reverse=False))
 
-        print("Affichage des joueurs par ordre alphabétique de leurs noms :")
+        ClassVueAffichage.Affichage(self=True, texte1="Affichage des joueurs par ordre alphabétique de leurs noms :",
+                                    texte2="", texte3="")
         index = 0
         for i in joueur_id_decroissant:
-            print(joueur_id_decroissant[index])
+            ClassVueAffichage.Affichage1Ligne(self=True, texte1=joueur_id_decroissant[index])
             index = index + 1
 
     def lecture_joueurs_class_id():
         # Récupération des informations du fichier
         # JSON du tournoi pour créer les rounds
         from Modele.Joueurs import ClassJoueursModel
+        from Vue.affichage import ClassVueAffichage
         serie_joueurs = ClassJoueursModel.MisADispoJoueursRapport()
         index = 0
         liste_joueurs = []
@@ -162,16 +164,18 @@ class ClassJoueurs():
             index = index + 1
         from operator import itemgetter
         joueur_id_decroissant = (sorted(liste_joueurs, key=itemgetter(1), reverse=False))
-        print("Affichage des joueurs par ordre "
-              "alphabétique de leurs identifiant :")
+        ClassVueAffichage.Affichage1Ligne(self=True,
+                                          texte1="Affichage des joueurs par ordre "
+                                                 "alphabétique de leurs identifiant :")
         index = 0
         for i in joueur_id_decroissant:
-            print(joueur_id_decroissant[index])
+            ClassVueAffichage.Affichage1Ligne(self=True, texte1=joueur_id_decroissant[index])
             index = index + 1
 
     def lecture_joueurs_classement():
         # Récupération des informations du fichier
         from Modele.Joueurs import ClassJoueursModel
+        from Vue.affichage import ClassVueAffichage
         serie_joueurs = ClassJoueursModel.MisADispoJoueursRapport()
         index = 0
         liste_joueurs = []
@@ -187,11 +191,11 @@ class ClassJoueurs():
         # tri des joueurs
         from operator import itemgetter
         joueur_class_decr = (sorted(liste_joueurs, key=itemgetter(7), reverse=False))
-
-        print("Affichage des joueurs dans l'ordre de leurs classements :")
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1="Affichage des joueurs "
+                                                            "dans l'ordre de leurs classements :")
         index = 0
         for i in joueur_class_decr:
-            print(joueur_class_decr[index])
+            ClassVueAffichage.Affichage1Ligne(self=True, texte1=joueur_class_decr[index])
             index = index + 1
 
     def creat_new_class_joueurs():
@@ -201,18 +205,16 @@ class ClassJoueurs():
 
         # Appel de la méthode model de mise à disposition de la liste des joueurs à partir de la bdd
         liste_joueurs = ClassJoueursModel.LectListeListeJoueursBdd()
-        print("liste joueurs")
-        print(liste_joueurs)
+        ClassVueAffichage.Affichage(self=True, texte1="liste joueurs", texte2=liste_joueurs, texte3="")
 
         # Tri de la liste des joueurs
         from operator import itemgetter
         joueur_class_decr = (sorted(liste_joueurs, key=itemgetter(7), reverse=False))
-        print()
-
-        print("Affichage des joueurs dans l'ordre de leurs classements :")
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1="Affichage des joueurs dans "
+                                                            "l'ordre de leurs classements :")
         index = 0
         for i in joueur_class_decr:
-            print(joueur_class_decr[index])
+            ClassVueAffichage.Affichage1Ligne(self=True, texte1=joueur_class_decr[index])
             index = index + 1
         index = 0
 
@@ -238,5 +240,5 @@ class ClassJoueurs():
                                                      donnees=new_classement,
                                                      numero_joueur=identifiant_joueur)
             else:
-                print("pas de modification de classement pour ce joueur")
+                ClassVueAffichage.Affichage1Ligne(self=True, texte1="pas de modification de classement pour ce joueur")
             index = index + 1

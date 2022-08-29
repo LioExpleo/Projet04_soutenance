@@ -11,6 +11,7 @@ class Class_Round():
     def creat_round():
         from Modele.Tournoi import ClassModTournoi
         from Controleur.fonctions import ClassFonctions
+        from Vue.affichage import ClassVueAffichage
         # selection du tournoi
         tournoi_select = ClassFonctions.select_tournoi()
         int_tournoi_select = int(tournoi_select)
@@ -24,25 +25,26 @@ class Class_Round():
             tournoi_round_en_cours = (tournoi[0]['round_en_cours'])
             nb_r = (tournoi[0]['nombre de rounds'])
             if str(tournoi_round_en_cours) == str(nb_r):
-                print("le nombre de round maximum a déjà été créé pour"
-                      " ce tournoi")
+                ClassVueAffichage.Affichage1Ligne(self=True,
+                                                  texte1="le nombre de round maximum a déjà été créé pour ce tournoi")
                 quit()
             else:
                 nb_r = (tournoi[0]['nombre de rounds'])
                 if str(tournoi_round_en_cours) == str(nb_r):
-                    print("le nombre de round maximum a déjà été créé pour"
-                          " ce tournoi")
+                    ClassVueAffichage.Affichage1Ligne(self=True,
+                                                      texte1="le nombre de round maximum a déjà été créé "
+                                                             "pour ce tournoi")
                     quit()
 
         except KeyError:
-            print("création du round 1")
+            ClassVueAffichage.Affichage1Ligne(self=True, texte1="création du round 1")
 
         if tournoi_round_en_cours == 1:
             try:
                 scoreMatchRound1 = (tournoi[0]['ScoreMatchRound1'])
             except KeyError:
-                print("Saisir les scores du précédent round avant "
-                      "d'en créer un nouveau")
+                ClassVueAffichage.Affichage1Ligne(self=True, texte1="Saisir les scores du précédent round avant "
+                                                                    "d'en créer un nouveau")
                 quit()
             scoreMatchRound1 = scoreMatchRound1
 
@@ -50,8 +52,8 @@ class Class_Round():
             try:
                 scoreMatchRound2 = (tournoi[0]['ScoreMatchRound2'])
             except KeyError:
-                print("Saisir les scores du précédent round avant "
-                      "d'en créer un nouveau")
+                ClassVueAffichage.Affichage1Ligne(self=True, texte1="Saisir les scores du précédent round avant "
+                                                                    "d'en créer un nouveau")
                 quit()
             scoreMatchRound3 = scoreMatchRound2
 
@@ -59,8 +61,8 @@ class Class_Round():
             try:
                 scoreMatchRound3 = (tournoi[0]['ScoreMatchRound3'])
             except KeyError:
-                print("Saisir les scores du précédent round avant "
-                      "d'en créer un nouveau")
+                ClassVueAffichage.Affichage1Ligne(self=True, texte1="Saisir les scores du précédent round avant "
+                                                                    "d'en créer un nouveau")
                 quit()
             scoreMatchRound3 = scoreMatchRound3
 
@@ -68,8 +70,8 @@ class Class_Round():
             try:
                 scoreMatchRound4 = (tournoi[0]['ScoreMatchRound4'])
             except KeyError:
-                print("Saisir les scores du précédent round avant "
-                      "d'en créer un nouveau")
+                ClassVueAffichage.Affichage1Ligne(self=True, texte1="Saisir les scores du précédent round avant "
+                                                                    "d'en créer un nouveau")
                 quit()
             scoreMatchRound4 = scoreMatchRound4
 
@@ -86,8 +88,9 @@ class Class_Round():
         from Controleur.fonctions import ClassFonctions
         from Modele.Tournoi import ClassModTournoi
         from Modele.Joueurs import ClassJoueursModel
+        from Vue.affichage import ClassVueAffichage
 
-        print("CreatRound_1")
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1="CreatRound_1")
         liste_liste_class_joueur = []
 
         # Appel du modèle pour mettre à disposition les données du round sélectionné
@@ -100,10 +103,10 @@ class Class_Round():
                                                             clef7="id_j7", clef8="id_j8")
 
         id_joueur_en_cours = ""
-        print(list_id_joueur)
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1=list_id_joueur)
         index_joueur = 0
         id_joueur_en_cours = list_id_joueur[index_joueur]
-        print(id_joueur_en_cours)
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1=id_joueur_en_cours)
 
         index_joueur = 0
         while (index_joueur < 8):
@@ -113,15 +116,17 @@ class Class_Round():
             try:
                 id_joueur_en_cours = list_id_joueur[index_joueur]
             except ValueError:
-                print("Vous devez choisir un tournoi où les 8 joueurs sont "
-                      "chargés pour créer des rounds")
+                ClassVueAffichage.Affichage1Ligne(self=True,
+                                                  texte1="Vous devez choisir un tournoi où les 8 joueurs sont "
+                                                         "chargés pour créer des rounds")
                 os._exit()
 
             try:
                 int_id_joueur_en_cours = int(id_joueur_en_cours)
             except ValueError:
-                print("Erreur, vous devez choisir un tournoi où les joueurs sont "
-                      "chargés pour créer des rounds")
+                ClassVueAffichage.Affichage1Ligne(self=True,
+                                                  texte1="Erreur, vous devez choisir un tournoi où les joueurs sont "
+                                                         "chargés pour créer des rounds")
                 os._exit(0)
 
             # Appel du modele joueur pour mise à disposition d'un joueur
@@ -150,62 +155,76 @@ class Class_Round():
         liste_paire_1 = []
         liste_paire_1.append(joueur_class_croissant[0])
         liste_paire_1.append(joueur_class_croissant[4])
-        # print(liste_paire_1)
 
         str_poubl = ""
-        print("Paire 1, par ordre de classement, 1er joueur contre 5ème")
+        ClassVueAffichage.Affichage1Ligne(self=True,
+                                          texte1="Paire 1, par ordre de classement, 1er joueur contre 5ème")
         str_poubl = ("ID: " + str(liste_paire_1[0][0]) + " , Nom:" + str(liste_paire_1[0][2]))
-        print(str_poubl + " , Prénom : " + str(liste_paire_1[0][3]))
+        ClassVueAffichage.Affichage1Ligne(self=True,
+                                          texte1=str_poubl + " , Prénom : " + str(liste_paire_1[0][3]))
         str_poubl = ""
-        print("VS")
+        ClassVueAffichage.Affichage1Ligne(self=True,
+                                          texte1="VS")
         str_poubl = ("ID: " + str(liste_paire_1[1][0]) + " , Nom:" + str(liste_paire_1[1][2]))
-        print(str_poubl + " , Prénom : " + str(liste_paire_1[1][3]))
+        ClassVueAffichage.Affichage1Ligne(self=True,
+                                          texte1=str_poubl + " , Prénom : " + str(liste_paire_1[1][3]))
         str_poubl = ""
-        print()
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1="")
 
         liste_paire_2 = []
         liste_paire_2.append(joueur_class_croissant[1])
         liste_paire_2.append(joueur_class_croissant[5])
-        # print(liste_paire_2)
-        print("Paire 2, par ordre de classement, 2eme joueur contre 6ème")
+        ClassVueAffichage.Affichage1Ligne(self=True,
+                                          texte1="Paire 2, par ordre de classement, 2eme joueur contre 6ème")
         str_poubl = ("ID: " + str(liste_paire_2[0][0]) + " , Nom:" + str(liste_paire_2[0][2]))
-        print(str_poubl + " , Prénom : " + str(liste_paire_2[0][3]))
+        ClassVueAffichage.Affichage1Ligne(self=True,
+                                          texte1=str_poubl + " , Prénom : " + str(liste_paire_2[0][3]))
         str_poubl = ""
-        print("VS")
+        ClassVueAffichage.Affichage1Ligne(self=True,
+                                          texte1="VS")
         str_poubl = ("ID: " + str(liste_paire_2[1][0]) + " , Nom:" + str(liste_paire_2[1][2]))
-        print(str_poubl + " , Prénom : " + str(liste_paire_2[1][3]))
+        ClassVueAffichage.Affichage1Ligne(self=True,
+                                          texte1=str_poubl + " , Prénom : " + str(liste_paire_2[1][3]))
         str_poubl = ""
-        print()
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1="")
 
         liste_paire_3 = []
         liste_paire_3.append(joueur_class_croissant[2])
         liste_paire_3.append(joueur_class_croissant[6])
-        # print(liste_paire_3)
-        print("Paire 3, par ordre de classement, 3eme joueur contre 7ème")
+        ClassVueAffichage.Affichage1Ligne(self=True,
+                                          texte1="Paire 3, par ordre de classement, 3eme joueur contre 7ème")
         str_poubl = ("ID: " + str(liste_paire_3[0][0]) + " , Nom:" + str(liste_paire_3[0][2]))
-        print(str_poubl + " , Prénom : " + str(liste_paire_3[0][3]))
+        ClassVueAffichage.Affichage1Ligne(self=True,
+                                          texte1=str_poubl + " , Prénom : " + str(liste_paire_3[0][3]))
         str_poubl = ""
-        print("VS")
+        ClassVueAffichage.Affichage1Ligne(self=True,
+                                          texte1="VS")
         str_poubl = ("ID: " + str(liste_paire_3[1][0]) + " , Nom:" + str(liste_paire_3[1][2]))
-        print(str_poubl + " , Prénom : " + str(liste_paire_3[1][3]))
+        ClassVueAffichage.Affichage1Ligne(self=True,
+                                          texte1=str_poubl + " , Prénom : " + str(liste_paire_3[1][3]))
         str_poubl = ""
-        print()
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1="")
 
         liste_paire_4 = []
         liste_paire_4.append(joueur_class_croissant[3])
         liste_paire_4.append(joueur_class_croissant[7])
-        # print(liste_paire_4)
-        print("Paire 4, par ordre de classement, 4eme joueur contre 8ème")
+        ClassVueAffichage.Affichage1Ligne(self=True,
+                                          texte1="Paire 4, par ordre de classement, 4eme joueur contre 8ème")
         str_poubl = ("ID: " + str(liste_paire_4[0][0]) + " , Nom:" + str(liste_paire_4[0][2]))
-        print(str_poubl + " , Prénom : " + str(liste_paire_4[0][3]))
+        ClassVueAffichage.Affichage1Ligne(self=True,
+                                          texte1=str_poubl + " , Prénom : " + str(liste_paire_4[0][3]))
         str_poubl = ""
-        print("ID")
+        ClassVueAffichage.Affichage1Ligne(self=True,
+                                          texte1="ID")
         str_poubl = ("identifiant: " + str(liste_paire_4[1][0]) + " , Nom:" + str(liste_paire_4[1][2]))
-        print(str_poubl + " , Prénom : " + str(liste_paire_4[1][3]))
+        ClassVueAffichage.Affichage1Ligne(self=True,
+                                          texte1=str_poubl + " , Prénom : " + str(liste_paire_4[1][3]))
         str_poubl = ""
-        print()
-        print("*** FIN DE RECUPERATION DES JOUEURS POUR LES ROUNDS ***")
-        print("Round 1 créé")
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1="")
+        ClassVueAffichage.Affichage1Ligne(self=True,
+                                          texte1="*** FIN DE RECUPERATION DES JOUEURS POUR LES ROUNDS ***")
+        ClassVueAffichage.Affichage1Ligne(self=True,
+                                          texte1="Round 1 créé")
         # mise de l'heure de depart dans la liste pour la mettre dans la base
         # de donnée du tournoi
         date_heure_debut = datetime.datetime.now()
@@ -213,14 +232,14 @@ class Class_Round():
         char = '.'
         PositChar = str_date_heure_debut.find(char)
         str_date_heure_debut = str_date_heure_debut[0:(PositChar)]
-        print("début heure round : " + str_date_heure_debut)
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1="début heure round : " + str_date_heure_debut)
 
-        print(liste_paire_1)
-        print(liste_paire_2)
-        print(liste_paire_3)
-        print(liste_paire_4)
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1=liste_paire_1)
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1=liste_paire_2)
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1=liste_paire_3)
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1=liste_paire_4)
 
-        print("********* FIN CREATION ROUND 1 *************************")
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1="*** FIN CREATION ROUND 1 ***")
 
         # Stocker les instances de Round dans le tournoi
         liste_round_1 = []
@@ -230,9 +249,9 @@ class Class_Round():
         liste_round_1.append(liste_paire_3)
         liste_round_1.append(liste_paire_4)
 
-        print()
-        print("numéro de tournoi")
-        print(int_tournoi_select)
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1="")
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1="numéro de tournoi")
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1=int_tournoi_select)
 
         # appel du modele tournoi pour enregistrer le nouveau tournoi dans la base de données
         ClassModTournoi.UpdateDonneesTournoi(self=True,
@@ -253,6 +272,7 @@ class Class_Round():
         from Controleur.fonctions import ClassFonctions
         from Modele.Tournoi import ClassModTournoi
         from Modele.Joueurs import ClassJoueursModel
+        from Vue.affichage import ClassVueAffichage
         from operator import itemgetter
 
         liste_liste_class_joueur = []
@@ -261,7 +281,7 @@ class Class_Round():
         tournoi = ClassModTournoi.Lect1Tournoi(self=True, tournoi_select=int_tournoi_select)
 
         Tournoi_round_en_cours = (tournoi[0]['round_en_cours'])
-        print("Round précédent : " + str(Tournoi_round_en_cours))
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1="Round précédent : " + str(Tournoi_round_en_cours))
 
         nb_r = (tournoi[0]['nombre de rounds'])
 
@@ -279,15 +299,17 @@ class Class_Round():
             try:
                 id_joueur_en_cours = list_id_joueur[index_joueur]
             except IndexError:
-                print("Vous devez choisir un tournoi où les 8 joueurs "
-                      "sont chargés pour créer des rounds X")
+                ClassVueAffichage.Affichage1Ligne(self=True,
+                                                  texte1="Vous devez choisir un tournoi où les 8 joueurs "
+                                                         "sont chargés pour créer des rounds X")
                 os._exit(1)
 
             try:
                 int_id_joueur_en_cours = int(id_joueur_en_cours)
             except ValueError:
-                print("Erreur, vous devez choisir un tournoi où les 8 joueurs "
-                      "sont chargés pour créer des rounds Y")
+                ClassVueAffichage.Affichage1Ligne(self=True,
+                                                  texte1="Erreur, vous devez choisir un tournoi où les 8 joueurs "
+                                                         "sont chargés pour créer des rounds Y")
                 os._exit(0)
 
             # Appel du modele joueur pour mise à disposition d'un joueur
@@ -316,7 +338,6 @@ class Class_Round():
             list_jx.append(list_ja)
             index_joueur = index_joueur + 1
 
-        # print("FIN RECUPERATION DES DONNEES DU JOUEUR")
         # Récupération des scores des joueurs dans le tournoi pour les mettre
         # dans une liste
         # de joueur qui contient, l'id du joueur, son score, son classement
@@ -324,9 +345,6 @@ class Class_Round():
         # le round en cours
         # pour savoir combien de scores à aller chercher, attention,
         # les joueurs ne sont pas dans le même ordre
-        # print("")
-        # print("Tournoi_round_en_cours : " + str(Tournoi_round_en_cours))
-
         # Ajout des scores précédents à la liste
         # Récupération des scores des précédents matchs.
         joueur_score_class_id = []
@@ -430,7 +448,7 @@ class Class_Round():
         else:
             Tournoi_round_en_cours_temp = Tournoi_round_en_cours
 
-        # print("debut test recherche joueurs déjà affrontés ROUND 2 ET PLUS")
+        # recherche joueurs déjà affrontés ROUND 2 ET PLUS")
         list_j_opp = [[joueur_class_score_croissant[0][0]],
                       [joueur_class_score_croissant[1][0]],
                       [joueur_class_score_croissant[2][0]],
@@ -440,9 +458,8 @@ class Class_Round():
                       [joueur_class_score_croissant[6][0]],
                       [joueur_class_score_croissant[7][0]]]
 
-        # print("list_j_opp - joueurs triés en fonction de leur score en "
-        #         "priorité et de leur classement en second lieu")
-        # print(list_j_opp)
+        # "list_j_opp - joueurs triés en fonction de leur score en "
+        #         "priorité et de leur classement en second lieu"
         while Tournoi_round_en_cours_temp > 0:
             nom_donnees = "ScoreMatchRound" + str(Tournoi_round_en_cours_temp)
 
@@ -471,35 +488,26 @@ class Class_Round():
                     # Recherche si l'id est dans les scores précédents,
                     if list_j_opp[index_id_jy][0] ==\
                             score_matchRx[index_position_impaire][0]:
-                        # print(score_matchRx[index_position_impaire][0])
                         index = index_position_impaire + 1
                         list_jy[index_id_jy].append(score_matchRx[index][0])
-                        # print(score_matchRx[index_position_impaire+1][0])
 
                     if list_j_opp[index_id_jy][0] == \
                             score_matchRx[index_position_paire][0]:
                         index = index_position_paire - 1
                         list_jy[index_id_jy].append(score_matchRx[index][0])
 
-                        # print(score_matchRx[index_position_impaire - 1][0])
-
                     index_position_impaire = index_position_impaire + 2
                     index_position_paire = index_position_paire + 2
                 index_id_jy = index_id_jy + 1
-                # print(list_jy)
 
             Tournoi_round_en_cours_temp = Tournoi_round_en_cours_temp - 1
-            print("list_jy_joueurs deja affrontés dans les rounds précédents : ")
-            print(list_jy)
+            ClassVueAffichage.Affichage1Ligne(self=True, texte1="list_jy_joueurs deja "
+                                                                "affrontés dans les rounds précédents : ")
+            ClassVueAffichage.Affichage1Ligne(self=True, texte1=list_jy)
 
-        # print("Affichage des paires de joueurs par identifiant du round " +
-        #       str(Tournoi_round_en_cours))
         liste_paire_1 = []
         liste_paire_1.append(joueur_class_score_croissant[0])
         liste_paire_1.append(joueur_class_score_croissant[1])
-        # print(liste_paire_1)
-
-        # print("Paire 1, par ordre de classement et score,
         # 1er joueur contre 2ème "
         #       "si pas déjà rencontré le 2ème")
 
@@ -519,14 +527,11 @@ class Class_Round():
         # de la liste
 
         joueur_class_score_croissant_temp = joueur_class_score_croissant
-        list_jy_temp = list_jy
-        # print(list_jy_temp)
 
         # Tant que les paires crées <= 3, la dernière étant constituée
         # des 2 joueurs restants
         list_jy_temp = list_jy
 
-        list_part = []
         list_list_part = []
         nbr_part_rest_a_tester = 8
         while nbr_part_rest_a_tester > 0:
@@ -553,29 +558,15 @@ class Class_Round():
                         test_joueur_affront = test_joueur_affront + 1
                     else:
                         pass
-                        # print()
 
                     # Si tous les joueurs testés et pas trouvé de déjà rencontré,
                     # le partenaire est ok
                     if test_joueur_affront == 0 and index_nbr_part_affront == \
                         (Tournoi_round_en_cours - 1) and \
                             nbr_part_rest_a_tester != 0:
-                        # print("test_joueur_affront  " +
-                        #      str(test_joueur_affront))
-                        # print("index_nbr_part_affront  " +
-                        #      str(index_nbr_part_affront))
-                        # print("Tournoi_round_en_cours  " +
-                        #      str(Tournoi_round_en_cours))
-
                         partenaire_libre = joueur_1_test
                     # Si le partenaire testé est le 7ème, on le donne libre même
                     # s'il est déjà rencontré
-
-                    # print("SI - DERNIER PARTENAIRE TESTE, LE METTRE LIBRE, CAR "
-                    #       "PLUS LE CHOIX, IL FAUT AFFRONTER UN PARTENAIRE "
-                    #       "DEJA AFFRONTE")
-                    # print(index_partenaire)
-                    # print(nbr_part_rest_a_tester)
                     # Si index partenaire = 1, et reste que 2 partenaires à tester
                     if (index_partenaire + 1) == nbr_part_rest_a_tester:
                         partenaire_libre = joueur_1_test
@@ -592,24 +583,18 @@ class Class_Round():
                         else:
                             list_part.append(list_jy_temp[index_partenaire])
 
-                        # print("LISTE DE JOUEURS POUR CETTE PAIRE : ")
-                        # print(list_part)
-
                         list_list_part.append(list_part)
                         list_jy_temp.pop(0)
                         # enlever 1 à l'index, la suppression du joueur ayant
                         # décalé le partenaire à supprimer
                         list_jy_temp.pop(index_partenaire - 1)
-                        # print(list_jy_temp)
                         nbr_part_rest_a_tester = nbr_part_rest_a_tester - 2
-                        # print("nombre de partenaire restant à tester : " +
-                        #       str(nbr_part_rest_a_tester))
                         index_partenaire = 0
                     index_joueur_affront = index_joueur_affront + 1
                     index_nbr_part_affront = index_nbr_part_affront + 1
                 index_partenaire = index_partenaire + 1
 
-        print(list_list_part)
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1=list_list_part)
         list_paire1_round = []
         list_list_paire1_round = []
         list_paire1_round.append(list_list_part[0][0][0])
@@ -640,7 +625,7 @@ class Class_Round():
         char = '.'
         PositChar = str_date_heure_debut.find(char)
         str_date_heure_debut = str_date_heure_debut[0:(PositChar)]
-        print("début heure round : " + str_date_heure_debut)
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1="début heure round : " + str_date_heure_debut)
 
         liste_round_x = []
         liste_round_x.append(str_date_heure_debut)
@@ -648,25 +633,25 @@ class Class_Round():
         liste_round_x.append(list_paire2_round)
         liste_round_x.append(list_paire3_round)
         liste_round_x.append(list_paire4_round)
-        print()
-        print("liste_round" + str(Tournoi_round_en_cours + 1))
-        print(liste_round_x)
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1="")
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1="liste_round" + str(Tournoi_round_en_cours + 1))
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1=liste_round_x)
 
-        print()
-        print("numéro de tournoi")
-        print(int_tournoi_select)
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1="")
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1="numéro de tournoi")
+        ClassVueAffichage.Affichage1Ligne(self=True, texte1=int_tournoi_select)
 
         # Test si dernier round du tournoi
         if Tournoi_round_en_cours < int(nb_r):
             Tournoi_round_en_cours = Tournoi_round_en_cours + 1
         else:
-            print("Nombre maxi de round atteint !")
+            ClassVueAffichage.Affichage1Ligne(self=True, texte1="Nombre maxi de round atteint !")
 
         # update la base de donnée
         if Tournoi_round_en_cours <= int(nb_r):
             update_round = ("round_" + str(Tournoi_round_en_cours) + "+match")
-            print("nouveau round")
-            print(Tournoi_round_en_cours)
+            ClassVueAffichage.Affichage1Ligne(self=True, texte1="nouveau round")
+            ClassVueAffichage.Affichage1Ligne(self=True, texte1=Tournoi_round_en_cours)
 
             # appel du modele tournoi pour enregistrer le nouveau tournoi dans la base de données
             ClassModTournoi.UpdateDonneesTournoi(self=True,

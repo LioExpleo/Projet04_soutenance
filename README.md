@@ -90,9 +90,6 @@ pip intall flake8-html
 flake8 --format=html --htmldir=flake-report --max-line-length=119 --exclude=env,__pycache__,.gitignore,.git,.css
 
 ```
-- la commande qui fonctione a été :
-```
-flake8 --format=html --htmldir=flake-report --max-line-length=119 --ignore=env/
 ```
 - Cela fonctionne, après correction des programmes *.py, plus de trace d'erreur de fichiers du programme.
 - Le rapport généré dans le dossier flake ne contient pas de page générale sans erreur, mais cela fonctionne.

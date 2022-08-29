@@ -4,6 +4,7 @@ class ClassFonctions():
 
     def creat_dict(donnees_db):
         import os
+        from Vue.affichage import ClassVueAffichage
         str_donnees = str(donnees_db)
         str_donnees = str_donnees.replace("[", "")
         str_donnees = str_donnees.replace("]", "")
@@ -13,15 +14,17 @@ class ClassFonctions():
             dict_donnees = ast.literal_eval(str_donnees)
 
         except SyntaxError:
-            print("")
-            print("Le tournoi est déjà chargé avec des rounds, "
-                  "supprimer et recréer ce tournoi pour le recharger")
+            ClassVueAffichage.Affichage2Lignes(self=True,
+                                               texte1="",
+                                               texte2="Le tournoi est déjà chargé avec des rounds, supprimer "
+                                                      "et recréer ce tournoi pour le recharger")
             os._exit(0)
         return (dict_donnees)
 
     def tournoi_exist(id_tournoi_select):
         import os
         from tinydb import TinyDB, where
+        from Vue.affichage import ClassVueAffichage
         # verif si tournoi existe, renvoie le numero du tournoi si existe
         # sinon, sort du prog en affichant un message
         db_tournois = TinyDB('tournois.json')
@@ -33,7 +36,7 @@ class ClassFonctions():
             trouve_tournoi = (db_tournois.search(where('id_tournoi') == int_tournoi_select))
         except KeyError:
             trouve_tournoi = ""
-            print("tournoi introuvable ")
+            ClassVueAffichage.Affichage1Ligne("tournoi introuvable ")
             os._exit(0)
         return (trouve_tournoi)
 
@@ -97,7 +100,8 @@ class ClassFonctions():
                                                           "à sélectionner")
 
             if id_a_charger == "E" or id_a_charger == "e":
-                print("E = commande pour sortir du prog")
+                ClassVueAffichage.Affichage1Ligne(self=True, texte1="E = commande pour sortir du prog")
+
                 os._exit(0)
 
             # Vérification que le tournoi est bien dans la liste des tournois
