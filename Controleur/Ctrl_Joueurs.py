@@ -6,6 +6,7 @@ class ClassJoueurs():
     """appel du modele joueur lors de la création des joueurs"""
     """affichage liste joueurs de la base de donnée, """
     """suppression d'un joueur de la base de donnée, purge de la base de donnée"""
+    #test erreur flake8
 
     def creat_new_joueurs():
         from Vue.affichage import ClassVueAffichage
