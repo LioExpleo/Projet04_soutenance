@@ -1,17 +1,28 @@
 
 class ClassJoueursModel:
-    def __init__(self):
+    # définition des attributs d'instance
+    def __init__(self, id_joueur, nom, prenom, date_naissance, sexe, classement):
+        self.id_joueur = id_joueur
+        self.nom=nom
+        self.prenom = prenom
+        self.date_naissance=date_naissance
+        self.sexe=sexe
+        self.classement=classement
         pass
 
 # Permet la création de tous les joueurs à partir des saisies de Ctrl_Joueurs,
 # ils seront mis dans la bd par le contrôleur ou directement ici
     def CreatJoueur(self, id_joueur, nom, prenom, date_naissance, sexe, classement):
+
+        # Création de l'instance de classe du joueur à partir des attributs de la classe pour création d'un joueur
+        inst_j = ClassJoueursModel(id_joueur, nom, prenom, date_naissance, sexe, classement)
+
         # CREATION DES DONNEES DU JOUEUR DANS LA BASE DE DONNEES
         # Serialize l'instance joueurs
-        joueur = {"id_joueur": id_joueur,
-                  "Nom": nom, "Prenom": prenom,
-                  "date de naissance": date_naissance,
-                  "sexe": sexe, "Classement": classement}
+        joueur = {"id_joueur": inst_j.id_joueur,
+                  "Nom": inst_j.nom, "Prenom": inst_j.prenom,
+                  "date de naissance": inst_j.date_naissance,
+                  "sexe": inst_j.sexe, "Classement": inst_j.classement}
         from tinydb import TinyDB
         db_joueurs = TinyDB('joueurs.json')
         # Ajout du joueur dans la base de données à partir de l'attribut

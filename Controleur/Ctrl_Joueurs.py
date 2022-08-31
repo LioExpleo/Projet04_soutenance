@@ -1,6 +1,7 @@
 
 class ClassJoueurs():
     def __init__(self):
+
         pass
     """création des joueurs """
     """appel du modele joueur lors de la création des joueurs"""
@@ -44,10 +45,10 @@ class ClassJoueurs():
                                                "défaut enregistré est " + nom,
                                         texte2="", texte3="")
 
+        # Appel de la méthode de saisie dans vue pour saisie du prénom
         prenom = ClassVueAffichage.Input(self=True,
                                          texte1="saisie prénom :")
 
-        # Appel de la méthode de saisie dans vue pour saisie du prénom
         if prenom == "":
             prenom = ("Prenom " + str_id_libre)
             ClassVueAffichage.Affichage(self=True, texte1="en absence de prenom, le prenom "

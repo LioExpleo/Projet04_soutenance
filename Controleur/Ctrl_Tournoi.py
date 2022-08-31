@@ -194,8 +194,8 @@ class Class_Tournoi():
             list_joueurs.append(id_joueur)
             joueur_cherche = joueur_cherche + 1
 
-        # Appel de la méthode vue du modèle VMC pour affichage de la
-        # résultante de la base de données
+        # Appel de la méthode vue du modèle VMC pour affichage des joueurs
+        # résultants de la base de données
         ClassVueAffichage.Affichage(self=True,
                                     texte1="liste Id joueurs",
                                     texte2=list_joueurs, texte3="")

@@ -89,6 +89,7 @@ class Class_Round():
         from Modele.Tournoi import ClassModTournoi
         from Modele.Joueurs import ClassJoueursModel
         from Vue.affichage import ClassVueAffichage
+        from Modele.Round import ClassRound
 
         ClassVueAffichage.Affichage1Ligne(self=True, texte1="CreatRound_1")
         liste_liste_class_joueur = []
@@ -253,6 +254,11 @@ class Class_Round():
         ClassVueAffichage.Affichage1Ligne(self=True, texte1="numéro de tournoi")
         ClassVueAffichage.Affichage1Ligne(self=True, texte1=int_tournoi_select)
 
+        # appel du modele round pour enregistrer le nouveau round dans la base de données
+        ClassRound.CreatRound(self=True, id_tournoi=int_tournoi_select , num_round=1,
+                              liste_paire1=liste_paire_1 , liste_paire2=liste_paire_2 ,
+                              liste_paire3=liste_paire_3, liste_paire4=liste_paire_4)
+
         # appel du modele tournoi pour enregistrer le nouveau tournoi dans la base de données
         ClassModTournoi.UpdateDonneesTournoi(self=True,
                                              numero_tournoi=int_tournoi_select,
@@ -274,6 +280,7 @@ class Class_Round():
         from Modele.Joueurs import ClassJoueursModel
         from Vue.affichage import ClassVueAffichage
         from operator import itemgetter
+        from Modele.Round import ClassRound
 
         liste_liste_class_joueur = []
 
@@ -652,6 +659,11 @@ class Class_Round():
             update_round = ("round_" + str(Tournoi_round_en_cours) + "+match")
             ClassVueAffichage.Affichage1Ligne(self=True, texte1="nouveau round")
             ClassVueAffichage.Affichage1Ligne(self=True, texte1=Tournoi_round_en_cours)
+
+            # appel du modele round pour enregistrer le nouveau round dans la base de données
+            ClassRound.CreatRound(self=True, id_tournoi=int_tournoi_select, num_round=Tournoi_round_en_cours,
+                                  liste_paire1=list_paire1_round, liste_paire2=list_paire2_round,
+                                  liste_paire3=list_paire3_round, liste_paire4=list_paire4_round)
 
             # appel du modele tournoi pour enregistrer le nouveau tournoi dans la base de données
             ClassModTournoi.UpdateDonneesTournoi(self=True,

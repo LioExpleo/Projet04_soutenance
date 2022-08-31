@@ -1,28 +1,60 @@
 class ClassModTournoi:
-    def __init__(self):
-        pass
+    def __init__(self, id_tournoi, nom, lieu, date, nbr_rounds,
+                 id_j1, id_j2, id_j3, id_j4, id_j5, id_j6, id_j7, id_j8,
+                 round1, round2, round3, round4, round5, round6, round7, temps, description):
+        self.id_tournoi = id_tournoi
+        self.nom = nom
+        self.lieu = lieu
+        self.date = date
+        self.nbr_rounds = nbr_rounds
+        self.id_j1 = id_j1
+        self.id_j2 = id_j2
+        self.id_j3 = id_j3
+        self.id_j4 = id_j4
+        self.id_j5 = id_j5
+        self.id_j6 = id_j6
+        self.id_j7 = id_j7
+        self.id_j8 = id_j8
+        self.round1 = round1
+        self.round2 = round2
+        self.round3 = round3
+        self.round4 = round4
+        self.round5 = round5
+        self.round6 = round6
+        self.round7 = round7
+        self.temps = temps
+        self.description = description
+
 
     def CreatNewTournois(self, id_tournoi, nom, lieu, date, nbr_rounds,
                          id_j1, id_j2, id_j3, id_j4, id_j5, id_j6, id_j7, id_j8,
                          round_1, round_2, round_3, round_4, round_5, round_6, round_7,
                          temps_matchs, remarque_tournoi):
+
+        # Création de l'instance de classe du tournoi à partir des attributs de la classe pour la création du tournoi
+        inst_t = ClassModTournoi(id_tournoi,nom, lieu, date, nbr_rounds,
+                                   id_j1, id_j2, id_j3, id_j4, id_j5, id_j6, id_j7, id_j8,
+                                   round_1, round_2, round_3, round_4, round_5, round_6, round_7,
+                                   temps_matchs, remarque_tournoi)
+
         # insertion des données de création d'un tournoi
-        # dans la nase de données
+        # dans la base de données
         # Serialize l'instance tournoi
-        tournoi = {"id_tournoi": id_tournoi, "nom": nom, "lieu": lieu,
-                   "date du tournoi": date,
-                   "nombre de rounds": nbr_rounds, "id_j1": id_j1, "id_j2": id_j2,
-                   "id_j3": id_j3, "id_j4": id_j4, "id_j5": id_j5, "id_j6": id_j6,
-                   "id_j7": id_j7, "id_j8": id_j8, "round_1+match": round_1,
-                   "round_2+match": round_2, "round_3+match": round_3,
-                   "round_4+match": round_4, "round_5+match": round_5,
-                   "round_6+match": round_6, "round_7+match": round_7,
-                   "Temps": temps_matchs,
-                   "Remarques de l'organisateur": remarque_tournoi}
+        tournoi = {"id_tournoi": inst_t.id_tournoi, "nom": inst_t.nom, "lieu": inst_t.lieu,
+                   "date du tournoi": inst_t.date,
+                   "nombre de rounds": inst_t.nbr_rounds,
+                   "id_j1": inst_t.id_j1, "id_j2": inst_t.id_j2,
+                   "id_j3": inst_t.id_j3, "id_j4": inst_t.id_j4, "id_j5": inst_t.id_j5, "id_j6": inst_t.id_j6,
+                   "id_j7": inst_t.id_j7, "id_j8": inst_t.id_j8,
+                   "round_1+match": inst_t.round1, "round_2+match": inst_t.round2,
+                   "round_3+match": inst_t.round3, "round_4+match": inst_t.round4,
+                   "round_5+match": inst_t.round5, "round_6+match": inst_t.round6,
+                   "round_7+match": inst_t.round7,
+                   "Temps": inst_t.temps,
+                   "Remarques de l'organisateur": inst_t.description}
 
         from tinydb import TinyDB
         db_tournois = TinyDB('tournois.json')
-
         db_tournois.insert(tournoi)
         return ()
 
