@@ -146,6 +146,7 @@ class Class_Match():
         nom_tuple1 = "IdTournoi" + str(tournoi_select) + "_" + \
                      "Round" + str(round_en_cours) + "_" + \
                      "Match" + "1"
+
         globals()[nom_tuple1] = ((liste_paire1_j1[0],
                                   liste_paire1_j1[1],
                                   liste_paire1_j2[0],
@@ -260,6 +261,7 @@ class Class_Match():
                                   liste_paire4_j1[1],
                                   liste_paire4_j2[0],
                                   liste_paire4_j2[1]))
+
         ClassVueAffichage.Affichage1Ligne(self=True, texte1="")
         ClassVueAffichage.Affichage1Ligne(self=True, texte1="numéro de tournoi")
         ClassVueAffichage.Affichage1Ligne(self=True, texte1=int_tournoi_select)
@@ -277,6 +279,22 @@ class Class_Match():
 
         liste_match4 = []
         liste_match4.append(globals()[nom_tuple4])
+
+        # création des tuples
+        tupl1 = (liste_paire1_j1, liste_paire1_j2)
+        tupl2 = (liste_paire2_j1, liste_paire2_j2)
+        tupl3 = (liste_paire3_j1, liste_paire3_j2)
+        tupl4 = (liste_paire4_j1, liste_paire4_j2)
+
+        from Modele.Match import ClassMatch
+        ClassMatch.CreatMatch(self=True, id_tournoi=tournoi_select, num_round=round_en_cours,
+                              num_paire=1, tuple_match=tupl1)
+        ClassMatch.CreatMatch(self=True, id_tournoi=tournoi_select, num_round=round_en_cours,
+                              num_paire=2, tuple_match=tupl2)
+        ClassMatch.CreatMatch(self=True, id_tournoi=tournoi_select, num_round=round_en_cours,
+                              num_paire=3, tuple_match=tupl3)
+        ClassMatch.CreatMatch(self=True, id_tournoi=tournoi_select, num_round=round_en_cours,
+                              num_paire=4, tuple_match=tupl4)
 
         liste_4matchs = []
         liste_4matchs.append(liste_match1)
@@ -375,6 +393,7 @@ class Class_Match():
                                                                      str_liste_liste_joueur1,
                                                                      str_liste_liste_joueur2,
                                                                      texteJ1, texteJ2)
+
         ClassVueAffichage.Affichage1Ligne(self=True,
                                           texte1='saisie score 1 et 2 du '
                                                  'match 1: ' + (saisie_score1) + " - " + saisie_score2)
@@ -537,6 +556,23 @@ class Class_Match():
         liste_4matchs.append(liste_match2)
         liste_4matchs.append(liste_match3)
         liste_4matchs.append(liste_match4)
+
+        # création des tuples
+        tupl1 = (liste_paire1_j1, liste_paire1_j2)
+        tupl2 = (liste_paire2_j1, liste_paire2_j2)
+        tupl3 = (liste_paire3_j1, liste_paire3_j2)
+        tupl4 = (liste_paire4_j1, liste_paire4_j2)
+
+        from Modele.Match import ClassMatch
+        # appel des modèles de création de matchs
+        ClassMatch.CreatMatch(self=True, id_tournoi=tournoi_select, num_round=round_en_cours,
+                              num_paire=1, tuple_match=tupl1)
+        ClassMatch.CreatMatch(self=True, id_tournoi=tournoi_select, num_round=round_en_cours,
+                              num_paire=2, tuple_match=tupl2)
+        ClassMatch.CreatMatch(self=True, id_tournoi=tournoi_select, num_round=round_en_cours,
+                              num_paire=3, tuple_match=tupl3)
+        ClassMatch.CreatMatch(self=True, id_tournoi=tournoi_select, num_round=round_en_cours,
+                              num_paire=4, tuple_match=tupl4)
 
         # mise de l'heure de fin du match
         # pour la mettre dans la base de donnée du tournoi

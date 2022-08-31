@@ -25,17 +25,16 @@ class ClassModTournoi:
         self.temps = temps
         self.description = description
 
-
     def CreatNewTournois(self, id_tournoi, nom, lieu, date, nbr_rounds,
                          id_j1, id_j2, id_j3, id_j4, id_j5, id_j6, id_j7, id_j8,
                          round_1, round_2, round_3, round_4, round_5, round_6, round_7,
                          temps_matchs, remarque_tournoi):
 
         # Création de l'instance de classe du tournoi à partir des attributs de la classe pour la création du tournoi
-        inst_t = ClassModTournoi(id_tournoi,nom, lieu, date, nbr_rounds,
-                                   id_j1, id_j2, id_j3, id_j4, id_j5, id_j6, id_j7, id_j8,
-                                   round_1, round_2, round_3, round_4, round_5, round_6, round_7,
-                                   temps_matchs, remarque_tournoi)
+        inst_t = ClassModTournoi(id_tournoi, nom, lieu, date, nbr_rounds,
+                                 id_j1, id_j2, id_j3, id_j4, id_j5, id_j6, id_j7, id_j8,
+                                 round_1, round_2, round_3, round_4, round_5, round_6, round_7,
+                                 temps_matchs, remarque_tournoi)
 
         # insertion des données de création d'un tournoi
         # dans la base de données

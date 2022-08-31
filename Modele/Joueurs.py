@@ -3,12 +3,11 @@ class ClassJoueursModel:
     # définition des attributs d'instance
     def __init__(self, id_joueur, nom, prenom, date_naissance, sexe, classement):
         self.id_joueur = id_joueur
-        self.nom=nom
+        self.nom = nom
         self.prenom = prenom
-        self.date_naissance=date_naissance
-        self.sexe=sexe
-        self.classement=classement
-        pass
+        self.date_naissance = date_naissance
+        self.sexe = sexe
+        self.classement = classement
 
 # Permet la création de tous les joueurs à partir des saisies de Ctrl_Joueurs,
 # ils seront mis dans la bd par le contrôleur ou directement ici

@@ -255,8 +255,8 @@ class Class_Round():
         ClassVueAffichage.Affichage1Ligne(self=True, texte1=int_tournoi_select)
 
         # appel du modele round pour enregistrer le nouveau round dans la base de données
-        ClassRound.CreatRound(self=True, id_tournoi=int_tournoi_select , num_round=1,
-                              liste_paire1=liste_paire_1 , liste_paire2=liste_paire_2 ,
+        ClassRound.CreatRound(self=True, id_tournoi=int_tournoi_select, num_round=1,
+                              liste_paire1=liste_paire_1, liste_paire2=liste_paire_2,
                               liste_paire3=liste_paire_3, liste_paire4=liste_paire_4)
 
         # appel du modele tournoi pour enregistrer le nouveau tournoi dans la base de données

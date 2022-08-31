@@ -1,21 +1,22 @@
 class ClassMatch:
-    def __init__(self, id_tournoi="", nom_round="", type="", remarque="",
-                 liste_paire1="", liste_paire2="", liste_paire3="",
-                 liste_paire4=""):
+    def __init__(self, id_tournoi="", num_round="", num_paire="", tuple_match=""):
 
         self.id_tournoi = id_tournoi
-        self.nom_round = nom_round
-        self.type = type
-        self.remarque = remarque
-        self.liste_paire1 = liste_paire1
-        self.liste_paire2 = liste_paire2
-        self.liste_paire3 = liste_paire3
-        self.liste_paire4 = liste_paire4
+        self.num_round = num_round
+        self.num_paire = num_paire
+        self.tuple_match = tuple_match
 
-    def CreatMatch(self):
-        print("CreatMatch")
-        score_Liste_paire1 = input("score : \n")
-        if score_Liste_paire1.isdigit():
-            pass
-        else:
-            print("Error saisie")
+    def CreatMatch(self, id_tournoi, num_round, num_paire, tuple_match):
+
+        # Création de l'instance de match à partir des attributs de la classe pour création d'un match
+        inst_r = ClassMatch(id_tournoi, num_round, num_paire, tuple_match)
+
+        # CREATION DES DONNEES DU match DANS LA BASE DE DONNEES
+        # Serialize l'instance joueurs
+        match = {"ID tournoi ": inst_r.id_tournoi, "numero du round": num_round,
+                 "numero paire": inst_r.num_paire, "tuple paire": inst_r.tuple_match}
+
+        from tinydb import TinyDB
+        db_match = TinyDB('Match.json')
+        # Ajout du joueur dans la base de données à partir de l'attribut
+        db_match.insert(match)
